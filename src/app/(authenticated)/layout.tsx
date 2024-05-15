@@ -12,7 +12,7 @@ export default function AuthenticatedLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="grid min-h-screen w-full grid-cols-[200px_calc(100%-200px)]">
+    <div className="grid min-h-screen w-full grid-cols-[200px_calc(100%-200px)] text-darkgray">
       <Sidebar />
       <div className="bg-blue-900 grid grid-rows-[5rem_calc(100vh-5rem)]">
         <Header />
