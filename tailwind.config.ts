@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#4DA6FF',
+        primaryWithOpacity: 'rgba(77, 166, 255, .3)',
         secondary: '#F6F8FE',
         darkgray: '#212121',
         green: '#4DFF8E',
