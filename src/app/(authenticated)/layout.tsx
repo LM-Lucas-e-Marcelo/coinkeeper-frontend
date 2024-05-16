@@ -14,7 +14,7 @@ export default function AuthenticatedLayout({
   return (
     <div className="grid min-h-screen w-full grid-cols-[200px_calc(100%-200px)] text-darkgray">
       <Sidebar />
-      <div className="bg-blue-900 grid grid-rows-[5rem_calc(100vh-5rem)]">
+      <div className="grid grid-rows-[5rem_calc(100vh-5rem)]">
         <Header />
         <section className="overflow-auto">{children}</section>
       </div>
