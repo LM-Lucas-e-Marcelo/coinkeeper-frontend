@@ -16,7 +16,7 @@ export default function AuthenticatedLayout({
       <Sidebar />
       <div className="grid grid-rows-[5rem_calc(100vh-5rem)]">
         <Header />
-        <section className="overflow-auto">{children}</section>
+        <section className="overflow-auto py-3 px-6">{children}</section>
       </div>
     </div>
   )
