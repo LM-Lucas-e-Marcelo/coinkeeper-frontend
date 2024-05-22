@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { MdLogout } from '@/assets/icons'
-import { Logo } from '../Logo'
-import { NavItem } from './NavItem'
+import { Logo } from '../logo'
+import { NavItem } from './nav-item'
 import { SIDEBAR_ITEMS } from '@/constants/sidebar'
 import { tv } from 'tailwind-variants'
 

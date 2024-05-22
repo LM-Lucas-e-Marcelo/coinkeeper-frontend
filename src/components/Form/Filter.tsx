@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants'
-import { Button } from './Button'
+import { Button } from './button'
 
 const filter = tv({
   slots: {

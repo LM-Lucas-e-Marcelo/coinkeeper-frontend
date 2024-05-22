@@ -1,4 +1,4 @@
-import { Table } from '@/components/Table'
+import { Table } from '@/components/table'
 import { api } from '@/services/api'
 import { IUsers } from '@/types/users'
 

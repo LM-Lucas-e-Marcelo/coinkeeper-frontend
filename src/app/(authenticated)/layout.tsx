@@ -1,5 +1,5 @@
-import { Header } from '@/components/Header'
-import { Sidebar } from '@/components/Sidebar'
+import { Header } from '@/components/header'
+import { Sidebar } from '@/components/sidebar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

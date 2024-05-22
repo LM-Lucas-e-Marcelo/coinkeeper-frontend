@@ -1,9 +1,9 @@
-import { Button } from '@/components/Form/Button'
-import { ButtonGroup } from '@/components/Form/ButtonGroup'
-import { Filter } from '@/components/Form/Filter'
-import { PageHeader } from '@/components/PageHeader'
+import { Button } from '@/components/form/button'
+import { ButtonGroup } from '@/components/form/button-group'
+import { Filter } from '@/components/form/filter'
+import { PageHeader } from '@/components/page-header'
 import { LuFilter } from '@/assets/icons'
-import { UsersTable } from './table'
+import { UsersTable } from './users-table'
 
 export default function Users() {
   return (

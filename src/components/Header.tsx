@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { tv } from 'tailwind-variants'
-import { SearchInput } from './Form/SearchInput'
+import { SearchInput } from './form/search-input'
 import { IoIosNotificationsOutline } from '@/assets/icons'
 
 const header = tv({

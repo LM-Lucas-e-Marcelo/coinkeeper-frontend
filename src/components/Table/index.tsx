@@ -1,8 +1,8 @@
-import { TableRoot } from './TableRoot'
-import { TableHead } from './TableHead'
-import { TableBody } from './TableBody'
-import { TableRow } from './TableRow'
-import { TableCell } from './TableCell'
+import { TableRoot } from './table-root'
+import { TableHead } from './table-head'
+import { TableBody } from './table-body'
+import { TableRow } from './table-row'
+import { TableCell } from './table-cell'
 
 export const Table = {
   Root: TableRoot,
