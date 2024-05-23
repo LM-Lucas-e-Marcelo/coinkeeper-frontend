@@ -1,8 +1,6 @@
 import { Table } from '@/components/table'
-import { getUsers } from '@/hooks/useUsers'
 
 export async function UsersTable() {
-  const users = await getUsers()
   return (
     <Table.Root>
       <Table.Head>
@@ -13,7 +11,7 @@ export async function UsersTable() {
           <Table.Cell>Ações</Table.Cell>
         </Table.Row>
       </Table.Head>
-      <Table.Body>
+      {/* <Table.Body>
         {users?.items.map((user) => (
           <Table.Row key={user.id}>
             <Table.Cell>{user.name}</Table.Cell>
@@ -21,7 +19,7 @@ export async function UsersTable() {
             <Table.Cell>{user.username}</Table.Cell>
           </Table.Row>
         ))}
-      </Table.Body>
+      </Table.Body> */}
     </Table.Root>
   )
 }
