@@ -16,7 +16,6 @@ export async function createUser(
       body: JSON.stringify(data),
     })
     revalidateTag('users')
-
     return {
       status: Success,
       message: 'Usuário cadastrado com sucesso!',

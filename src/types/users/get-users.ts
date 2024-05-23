@@ -14,7 +14,4 @@ export interface IUsers {
   currentPage: number
   lastPage: number
   limit: number
-  sort: string
-  sortDirection: string
-  filter: string | null
 }

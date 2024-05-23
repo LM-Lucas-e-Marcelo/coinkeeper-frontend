@@ -5,5 +5,5 @@ interface TableBodyProps {
 }
 
 export const TableBody = ({ children }: TableBodyProps) => {
-  return <tbody className="text-center">{children}</tbody>
+  return <tbody>{children}</tbody>
 }

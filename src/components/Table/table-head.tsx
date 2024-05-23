@@ -5,5 +5,5 @@ interface TableHeadProps {
 }
 
 export const TableHead = ({ children }: TableHeadProps) => {
-  return <thead className="font-bold text-lg text-center">{children}</thead>
+  return <thead className="font-bold text-lg">{children}</thead>
 }

@@ -6,6 +6,7 @@ import { LuFilter } from '@/assets/icons'
 import { UsersTable } from './users-table'
 import { CreateUserModal } from '@/components/modals/users/create-user-modal'
 import { Suspense } from 'react'
+import Link from 'next/link'
 
 export default function Users() {
   return (
@@ -16,11 +17,14 @@ export default function Users() {
           <Button isIcon>
             <LuFilter size={20} />
           </Button>
-          <CreateUserModal />
+          <Link href="?create_user=true">
+            <Button>Cadastrar</Button>
+          </Link>
         </ButtonGroup>
       </PageHeader>
       <Suspense fallback={<h1>Loading</h1>}>
         <UsersTable />
+        <CreateUserModal />
       </Suspense>
     </>
   )
