@@ -4,6 +4,8 @@ import { Filter } from '@/components/form/filter'
 import { PageHeader } from '@/components/page-header'
 import { LuFilter } from '@/assets/icons'
 import { UsersTable } from './users-table'
+import { CreateUserModal } from '@/components/modals/users/create-user-modal'
+import { Suspense } from 'react'
 
 export default function Users() {
   return (
@@ -14,10 +16,12 @@ export default function Users() {
           <Button isIcon>
             <LuFilter size={20} />
           </Button>
-          <Button>Cadastrar</Button>
+          <CreateUserModal />
         </ButtonGroup>
       </PageHeader>
-      <UsersTable />
+      <Suspense fallback={<h1>Loading</h1>}>
+        <UsersTable />
+      </Suspense>
     </>
   )
 }
