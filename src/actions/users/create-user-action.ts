@@ -1,5 +1,6 @@
 'use server'
 
+import { Status } from '@/constants/status'
 import { api } from '@/services/api'
 import { IActionResponse } from '@/types/action-response'
 import { CreateUserData } from '@/types/users/create-user'
@@ -8,6 +9,7 @@ import { revalidateTag } from 'next/cache'
 export async function createUser(
   data: CreateUserData,
 ): Promise<IActionResponse> {
+  const { Error, Success } = Status
   try {
     await api('/users', {
       method: 'POST',
@@ -15,11 +17,14 @@ export async function createUser(
     })
     revalidateTag('users')
 
-    return { status: 'success', message: 'Usuário cadastrado com sucesso!' }
+    return {
+      status: Success,
+      message: 'Usuário cadastrado com sucesso!',
+    }
   } catch (error) {
     return {
-      status: 'error',
-      message: 'Mensagem do error',
+      status: Error,
+      message: 'Error message',
     }
   }
 }

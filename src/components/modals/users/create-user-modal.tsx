@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createUserSchema } from '@/schemas/users/create-user-schema'
 import { CreateUserData } from '@/types/users/create-user'
 import { toast } from 'react-toastify'
+import { Status } from '@/constants/status'
 
 export const CreateUserModal = () => {
   const [showModal, setShowModal] = useState(false)
@@ -26,9 +27,10 @@ export const CreateUserModal = () => {
   const handleToggleModal = () => setShowModal((prevState) => !prevState)
 
   const onSubmit = handleSubmit(async (data) => {
+    const { Success } = Status
     const response = await createUser(data)
 
-    if (response.status !== 'success') {
+    if (response.status !== Success) {
       return toast(response.message, {
         type: 'error',
       })
