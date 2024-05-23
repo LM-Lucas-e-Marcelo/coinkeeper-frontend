@@ -15,3 +15,11 @@
 ::-webkit-scrollbar-thumb {
   background: #4da6ff;
 }
+
+.Toastify__toast--error svg {
+  fill: #ff4d4d !important;
+}
+
+.Toastify__progress-bar--error {
+  background: #ff4d4d !important;
+}
