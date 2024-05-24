@@ -13,4 +13,8 @@ usersRoute.post('/users', ({ set }) => {
   set.status = 201
 })
 
+usersRoute.patch('/users/:id', ({ set }) => {
+  set.status = 204
+})
+
 export { usersRoute }
