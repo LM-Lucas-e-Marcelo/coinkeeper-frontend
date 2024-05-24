@@ -1,9 +1,9 @@
 import { Table } from '@/components/table'
 import { useUsers } from '@/hooks/users/useUsers'
-import { FiEdit, FiTrash2 } from '@/assets/icons'
-import { ButtonGroup } from '@/components/form/button-group'
-import Link from 'next/link'
+
 import { UpdateUserModal } from '@/components/modals/users/update-user-modal'
+import { DeleteUserModal } from '@/components/modals/users/delete-user-modal'
+import { TableActions } from './users-table-actions'
 
 export async function UsersTable() {
   const { users } = await useUsers()
@@ -26,22 +26,14 @@ export async function UsersTable() {
               <Table.Cell>{user.role.name}</Table.Cell>
               <Table.Cell>{user.username}</Table.Cell>
               <Table.Cell>
-                {
-                  <ButtonGroup>
-                    <Link href={`?update_user=true&user=${user.id}`}>
-                      <FiEdit size={20} className="text-orange" />
-                    </Link>
-                    <Link href={`?delete_user=true&user=${user.name}`}>
-                      <FiTrash2 size={20} className="text-red" />
-                    </Link>
-                  </ButtonGroup>
-                }
+                <TableActions user={user} />
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table.Root>
       <UpdateUserModal users={users} />
+      <DeleteUserModal />
     </>
   )
 }
