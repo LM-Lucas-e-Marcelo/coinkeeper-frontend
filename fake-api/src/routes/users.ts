@@ -17,4 +17,8 @@ usersRoute.patch('/users/:id', ({ set }) => {
   set.status = 204
 })
 
+usersRoute.delete('/users/:id', ({ set }) => {
+  set.status = 204
+})
+
 export { usersRoute }
