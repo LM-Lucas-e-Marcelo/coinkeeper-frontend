@@ -8,21 +8,20 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
 import { Status } from '@/constants/status'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+
 import { UpdateUserData } from '@/types/users/update-user'
 import { updateUserSchema } from '@/schemas/users/update-user-schema'
 import { updateUser } from '@/actions/users/update-user-action'
 import { IUsers } from '@/types/users/get-users'
 import { useCallback, useEffect } from 'react'
+import { useUrlParams } from '@/hooks/useParams'
 
 interface UpdateUserModalProps {
   users: IUsers
 }
 
 export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
-  const pathname = usePathname()
-  const params = useSearchParams()
-  const router = useRouter()
+  const { removeParams, params } = useUrlParams()
 
   const isOpen = params.has('update_user')
   const userId = params.get('user')
@@ -38,8 +37,8 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
   })
 
   const handleCloseModal = useCallback(
-    () => router.push(pathname),
-    [pathname, router],
+    () => removeParams(['update_user', 'user']),
+    [removeParams],
   )
 
   const onSubmit = handleSubmit(async (data) => {
