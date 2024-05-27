@@ -1,6 +1,6 @@
 import { Table } from '../table'
 
-const numberOfRows = 10
+const numberOfRows = 20
 
 const rows = Array.from({ length: numberOfRows })
 
@@ -19,22 +19,16 @@ export const TableLoading = () => {
         {rows.map((_, index) => (
           <Table.Row key={index}>
             <Table.Cell>
-              {
-                <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-400 w-[90%] animate-pulse" />
-              }
+              <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-300 w-[90%] animate-pulse" />
             </Table.Cell>
             <Table.Cell>
-              {
-                <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-400 w-[80%] animate-pulse" />
-              }
+              <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-300 w-[80%] animate-pulse" />
             </Table.Cell>
             <Table.Cell>
-              {
-                <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-400 w-[90%] animate-pulse" />
-              }
+              <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-300 w-[90%] animate-pulse" />
             </Table.Cell>
             <Table.Cell>
-              <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-400 w-[60%] animate-pulse" />
+              <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-300 w-[60%] animate-pulse" />
             </Table.Cell>
           </Table.Row>
         ))}

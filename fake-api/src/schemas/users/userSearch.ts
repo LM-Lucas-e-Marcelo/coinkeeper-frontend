@@ -15,7 +15,7 @@ export function createRandomUser(): IUser {
 }
 
 const usersList = faker.helpers.multiple(createRandomUser, {
-  count: 10,
+  count: 20,
 })
 
 export const Users = formatGenericPayload<IUser[]>({ data: usersList })
