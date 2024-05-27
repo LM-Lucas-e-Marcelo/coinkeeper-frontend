@@ -1,13 +1,19 @@
 import { Table } from '@/components/table'
-import { useUsers } from '@/hooks/users/useUsers'
 
 import { UpdateUserModal } from '@/components/modals/users/update-user-modal'
 import { DeleteUserModal } from '@/components/modals/users/delete-user-modal'
 import { TableActions } from './users-table-actions'
+import { useUsers } from '@/hooks/users/useUsers'
 
-export async function UsersTable() {
-  const { users } = await useUsers()
+interface UsersTableProps {
+  searchParams: {
+    per?: string
+    content?: string
+  }
+}
 
+export async function UsersTable({ searchParams }: UsersTableProps) {
+  const { users } = await useUsers(searchParams)
   return (
     <>
       <Table.Root>
