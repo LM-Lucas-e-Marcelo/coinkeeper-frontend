@@ -11,12 +11,10 @@ import { createUserSchema } from '@/schemas/users/create-user-schema'
 import { CreateUserData } from '@/types/users/create-user'
 import { toast } from 'react-toastify'
 import { Status } from '@/constants/status'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { useUrlParams } from '@/hooks/useParams'
 
 export const CreateUserModal = () => {
-  const pathname = usePathname()
-  const params = useSearchParams()
-  const router = useRouter()
+  const { removeParams, params } = useUrlParams()
   const isOpen = params.has('create_user')
 
   const {
@@ -28,7 +26,7 @@ export const CreateUserModal = () => {
     resolver: zodResolver(createUserSchema),
   })
 
-  const handleCloseModal = () => router.push(pathname)
+  const handleCloseModal = () => removeParams(['create_user'])
 
   const onSubmit = handleSubmit(async (data) => {
     const { Success } = Status
