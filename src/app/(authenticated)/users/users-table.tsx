@@ -3,7 +3,7 @@ import { Table } from '@/components/table'
 import { UpdateUserModal } from '@/components/modals/users/update-user-modal'
 import { DeleteUserModal } from '@/components/modals/users/delete-user-modal'
 import { TableActions } from './users-table-actions'
-import { useUsers } from '@/hooks/users/useUsers'
+import { useUsers } from '@/hooks/useUsers'
 
 interface UsersTableProps {
   searchParams: {
