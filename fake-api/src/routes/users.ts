@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { Users } from '../schemas/users/userSearch'
+import { Users } from '../schemas/userSearch'
 
 const usersRoute = new Elysia()
 
