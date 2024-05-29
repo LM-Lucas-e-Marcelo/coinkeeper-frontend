@@ -1,4 +1,4 @@
-import { LuUsers, MdOutlineDashboard } from '@/assets/icons'
+import { LuUsers, MdOutlineDashboard, RiUserSettingsLine } from '@/assets/icons'
 
 export const SIDEBAR_ITEMS = {
   Dashboard: {
@@ -8,5 +8,9 @@ export const SIDEBAR_ITEMS = {
   Usuários: {
     path: '/users',
     icon: <LuUsers size={20} />,
+  },
+  Grupos: {
+    path: '/roles',
+    icon: <RiUserSettingsLine size={20} />,
   },
 }
