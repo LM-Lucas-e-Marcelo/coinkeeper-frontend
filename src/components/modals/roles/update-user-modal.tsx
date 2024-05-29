@@ -5,32 +5,46 @@ import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
 import { useForm } from 'react-hook-form'
-import { createUser } from '@/actions/users/create-user-action'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createUserSchema } from '@/schemas/users/create-user-schema'
-import { CreateUserData } from '@/types/users/create-user'
 import { toast } from 'react-toastify'
 import { Status } from '@/constants/status'
+
+import { UpdateUserData } from '@/types/users/update-user'
+import { updateUserSchema } from '@/schemas/users/update-user-schema'
+import { updateUser } from '@/actions/users/update-user-action'
+import { IUsers } from '@/types/users/get-users'
+import { useCallback, useEffect } from 'react'
 import { useUrlParams } from '@/hooks/useParams'
 
-export const CreateUserModal = () => {
+interface UpdateUserModalProps {
+  users: IUsers
+}
+
+export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
   const { removeParams, params } = useUrlParams()
-  const isOpen = params.has('create_user')
+
+  const isOpen = params.has('update_user')
+  const userId = params.get('user')
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { isSubmitting, errors },
-  } = useForm<CreateUserData>({
-    resolver: zodResolver(createUserSchema),
+  } = useForm<UpdateUserData>({
+    resolver: zodResolver(updateUserSchema),
   })
 
-  const handleCloseModal = () => removeParams(['create_user'])
+  const handleCloseModal = useCallback(
+    () => removeParams(['update_user', 'user']),
+    [removeParams],
+  )
 
   const onSubmit = handleSubmit(async (data) => {
     const { Success } = Status
-    const response = await createUser(data)
+
+    const response = await updateUser({ ...data, id: userId })
 
     if (response.status !== Success) {
       return toast(response.message, {
@@ -45,9 +59,22 @@ export const CreateUserModal = () => {
     reset()
   })
 
+  useEffect(() => {
+    if (userId && isOpen) {
+      const user = users?.items.find((user) => user.id === +userId)
+
+      if (!user) {
+        return handleCloseModal()
+      }
+
+      setValue('name', user?.name)
+      setValue('username', user?.username)
+    }
+  }, [handleCloseModal, isOpen, setValue, userId, users])
+
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
-      <Modal.Header>Cadastrar Usuário</Modal.Header>
+      <Modal.Header>Editar Usuário</Modal.Header>
       <form onSubmit={onSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
@@ -79,7 +106,7 @@ export const CreateUserModal = () => {
             </Button>
 
             <Button type="submit" disabled={isSubmitting}>
-              Cadastrar
+              Editar
             </Button>
           </ButtonGroup>
         </Modal.Actions>
