@@ -1,6 +1,6 @@
-import { IUser } from '../../../../src/types/users/get-users'
+import { IUser } from '../../../src/types/users/get-users'
 import { faker } from '@faker-js/faker'
-import { formatGenericPayload } from '../../utils/format-generic-payload'
+import { formatGenericPayload } from '../utils/format-generic-payload'
 
 export function createRandomUser(): IUser {
   return {
