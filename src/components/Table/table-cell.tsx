@@ -5,5 +5,5 @@ interface TableCellProps {
 }
 
 export const TableCell = ({ children }: TableCellProps) => {
-  return <td className="py-2">{children}</td>
+  return <td className="py-2 last:w-[100px] ">{children}</td>
 }
