@@ -1,5 +1,4 @@
 import { ComponentProps } from 'react'
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 import { tv } from 'tailwind-variants'
 
 const input = tv({
@@ -12,31 +11,17 @@ const input = tv({
 
 const { inputStyles, labelStyles, errorStyles } = input()
 
-interface InputProps<TFormValues extends FieldValues>
-  extends ComponentProps<'input'> {
+interface InputProps extends ComponentProps<'input'> {
   label: string
-  register?: UseFormRegister<TFormValues>
-  name: Path<TFormValues>
-  error?: string
+  error?: string[]
 }
 
-export function Input<TFormValues extends FieldValues>({
-  label,
-  name,
-  register,
-  error,
-  ...rest
-}: InputProps<TFormValues>) {
+export function Input({ label, error, ...rest }: InputProps) {
   return (
-    <label htmlFor={name} className={labelStyles()}>
+    <label htmlFor={label} className={labelStyles()}>
       {label}
-      <input
-        className={inputStyles()}
-        id={name}
-        {...(register && register(name))}
-        {...rest}
-      />
-      {!!error && <span className={errorStyles()}>{error}</span>}
+      <input className={inputStyles()} id={label} {...rest} />
+      {!!error && <span className={errorStyles()}>{error[0]}</span>}
     </label>
   )
 }
