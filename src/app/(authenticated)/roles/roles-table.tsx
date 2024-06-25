@@ -1,6 +1,6 @@
 import { Table } from '@/components/table'
 import { TableActions } from './roles-table-actions'
-import { useRoles } from '@/hooks/useRoles'
+import { useRoles } from '@/hooks/use-roles'
 import { DeleteRoleModal } from '@/components/modals/roles/delete-role-modal'
 
 interface UsersTableProps {
