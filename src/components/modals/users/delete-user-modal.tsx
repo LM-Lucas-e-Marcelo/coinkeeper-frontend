@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react'
 import { deleteUser } from '@/actions/users/delete-user-action'
 import { Status } from '@/constants/status'
 import { toast } from 'react-toastify'
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 
 export const DeleteUserModal = () => {
   const [isLoading, setIsLoading] = useState(false)

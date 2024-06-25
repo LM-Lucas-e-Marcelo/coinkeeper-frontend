@@ -11,7 +11,7 @@ import { createUserSchema } from '@/schemas/users/create-user-schema'
 import { CreateUserData } from '@/types/users/create-user'
 import { toast } from 'react-toastify'
 import { Status } from '@/constants/status'
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 
 export const CreateUserModal = () => {
   const { removeParams, params } = useUrlParams()

@@ -1,6 +1,6 @@
 'use client'
 
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 import { ComponentProps } from 'react'
 
 interface ModalButtonProps extends ComponentProps<'span'> {

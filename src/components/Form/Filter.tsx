@@ -2,7 +2,7 @@
 import { tv } from 'tailwind-variants'
 import { Button } from './button'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 
 const filter = tv({
   slots: {

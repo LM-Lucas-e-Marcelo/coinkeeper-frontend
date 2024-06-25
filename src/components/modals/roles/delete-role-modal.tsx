@@ -7,7 +7,7 @@ import { Message } from '@/components/message'
 import { useCallback, useState } from 'react'
 import { Status } from '@/constants/status'
 import { toast } from 'react-toastify'
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 import { deleteRole } from '@/actions/roles/delete-role-action'
 
 export const DeleteRoleModal = () => {

@@ -14,7 +14,7 @@ import { updateUserSchema } from '@/schemas/users/update-user-schema'
 import { updateUser } from '@/actions/users/update-user-action'
 import { IUsers } from '@/types/users/get-users'
 import { useCallback, useEffect } from 'react'
-import { useUrlParams } from '@/hooks/useParams'
+import { useUrlParams } from '@/hooks/use-params'
 
 interface UpdateUserModalProps {
   users: IUsers
