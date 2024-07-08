@@ -3,7 +3,8 @@ import { Table } from '@/components/table'
 import { UpdateUserModal } from '@/components/modals/users/update-user-modal'
 import { DeleteUserModal } from '@/components/modals/users/delete-user-modal'
 import { TableActions } from './users-table-actions'
-import { useUsers } from '@/hooks/use-users'
+
+import { getUsers } from '@/http/users/get-users'
 
 interface UsersTableProps {
   searchParams: {
@@ -13,7 +14,7 @@ interface UsersTableProps {
 }
 
 export async function UsersTable({ searchParams }: UsersTableProps) {
-  const { users } = await useUsers(searchParams)
+  const { users } = await getUsers(searchParams)
   return (
     <>
       <Table.Root>
