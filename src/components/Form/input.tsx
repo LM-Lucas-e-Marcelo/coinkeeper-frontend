@@ -12,7 +12,7 @@ const input = tv({
 const { inputStyles, labelStyles, errorStyles } = input()
 
 interface InputProps extends ComponentProps<'input'> {
-  label: string
+  label?: string
   error?: string[]
 }
 
