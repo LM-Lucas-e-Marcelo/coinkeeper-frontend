@@ -4,59 +4,40 @@ import { ButtonGroup } from '@/components/form/button-group'
 import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { Status } from '@/constants/status'
-
-import { UpdateUserData } from '@/types/users/update-user'
-import { updateUserSchema } from '@/schemas/users/update-user-schema'
-import { updateUser } from '@/actions/users/update-user-action'
-import { IUsers } from '@/types/users/get-users'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
+import { useFormState } from '@/hooks/use-form-state'
+import { updateUserAction } from '@/actions/users/update-user-action'
+import { IUser, IUsers } from '@/http/users/get-users'
 
 interface UpdateUserModalProps {
   users: IUsers
 }
 
 export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
   const { removeParams, params } = useUrlParams()
-
   const isOpen = params.has('update_user')
   const userId = params.get('user')
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { isSubmitting, errors },
-  } = useForm<UpdateUserData>({
-    resolver: zodResolver(updateUserSchema),
-  })
+  const handleCloseModal = useCallback(() => {
+    removeParams(['update_user', 'user'])
+    setSelectedUser(null)
+  }, [removeParams])
 
-  const handleCloseModal = useCallback(
-    () => removeParams(['update_user', 'user']),
-    [removeParams],
-  )
-
-  const onSubmit = handleSubmit(async (data) => {
-    const { Success } = Status
-
-    const response = await updateUser({ ...data, id: userId })
-
-    if (response.status !== Success) {
-      return toast(response.message, {
-        type: 'error',
-      })
-    }
-
-    toast(response.message, {
-      type: 'success',
-    })
+  const onSuccess = (message: string | null) => {
+    toast(message, { type: 'success' })
     handleCloseModal()
-    reset()
+  }
+  const onError = (message: string | null) => {
+    toast(message, { type: 'error' })
+  }
+
+  const [{ errors }, handleSubmit, isPending] = useFormState({
+    action: updateUserAction,
+    onError,
+    onSuccess,
   })
 
   useEffect(() => {
@@ -67,36 +48,38 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
         return handleCloseModal()
       }
 
-      setValue('name', user?.name)
-      setValue('username', user?.username)
+      setSelectedUser(user)
     }
-  }, [handleCloseModal, isOpen, setValue, userId, users])
+  }, [handleCloseModal, isOpen, userId, users])
+
+  if (!selectedUser) return
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Editar Usuário</Modal.Header>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
             <Input
               label="Nome"
               name="name"
-              register={register}
-              error={errors?.name?.message}
+              error={errors?.name}
+              defaultValue={selectedUser?.name}
             />
             <Input
               label="Usuário"
               name="username"
-              register={register}
-              error={errors?.username?.message}
+              error={errors?.username}
+              defaultValue={selectedUser?.username}
             />
             <Input
               label="Senha"
               name="password"
-              register={register}
               type="password"
-              error={errors?.password?.message}
+              error={errors?.password}
             />
+
+            <Input name="id" type="hidden" defaultValue={selectedUser.id} />
           </div>
         </Modal.Content>
         <Modal.Actions>
@@ -105,7 +88,7 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
               Fechar
             </Button>
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isPending}>
               Editar
             </Button>
           </ButtonGroup>
