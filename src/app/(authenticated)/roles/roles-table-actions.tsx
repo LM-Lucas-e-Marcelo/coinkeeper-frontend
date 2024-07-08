@@ -1,7 +1,7 @@
 import { ButtonGroup } from '@/components/form/button-group'
 import { ModalButon } from '@/components/modal-button'
 import { FiEdit, FiTrash2 } from '@/assets/icons'
-import { IRole } from '@/types/roles/get-roles'
+import { IRole } from '@/http/roles/get-roles'
 
 export const TableActions = ({ role }: { role: IRole }) => {
   return (
@@ -12,7 +12,7 @@ export const TableActions = ({ role }: { role: IRole }) => {
       <ModalButon
         params={{
           delete_role: true,
-          user: role.id,
+          role: role.id,
           name: role.name,
         }}
       >

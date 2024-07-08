@@ -1,7 +1,8 @@
 import { Table } from '@/components/table'
 import { TableActions } from './roles-table-actions'
-import { useRoles } from '@/hooks/use-roles'
+
 import { DeleteRoleModal } from '@/components/modals/roles/delete-role-modal'
+import { getRoles } from '@/http/roles/get-roles'
 
 interface UsersTableProps {
   searchParams: {
@@ -11,7 +12,7 @@ interface UsersTableProps {
 }
 
 export async function RolesTable({ searchParams }: UsersTableProps) {
-  const { roles } = await useRoles(searchParams)
+  const { roles } = await getRoles(searchParams)
   return (
     <>
       <Table.Root>
