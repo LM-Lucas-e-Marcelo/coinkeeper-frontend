@@ -4,58 +4,36 @@ import { ButtonGroup } from '@/components/form/button-group'
 import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { Status } from '@/constants/status'
 import { useUrlParams } from '@/hooks/use-params'
-import { createRoleSchema } from '@/schemas/roles/create-role-schema'
-import { CreateRoleData } from '@/types/roles/create-role'
-import { createRole } from '@/actions/roles/create-role-action'
+import { createRoleAction } from '@/actions/roles/create-role-action'
+import { useFormState } from '@/hooks/use-form-state'
 
 export const CreateRoleModal = () => {
   const { removeParams, params } = useUrlParams()
   const isOpen = params.has('create_role')
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting, errors },
-  } = useForm<CreateRoleData>({
-    resolver: zodResolver(createRoleSchema),
-  })
-
   const handleCloseModal = () => removeParams(['create_role'])
 
-  const onSubmit = handleSubmit(async (data) => {
-    const { Success } = Status
-    const response = await createRole(data)
-
-    if (response.status !== Success) {
-      return toast(response.message, {
-        type: 'error',
-      })
-    }
-
-    toast(response.message, {
-      type: 'success',
-    })
+  const onSuccess = (message: string | null) => {
+    toast(message, { type: 'success' })
     handleCloseModal()
-    reset()
+  }
+  const onError = (message: string | null) => {
+    toast(message, { type: 'error' })
+  }
+  const [{ errors }, handleSubmit, isPending] = useFormState({
+    action: createRoleAction,
+    onError,
+    onSuccess,
   })
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Cadastrar Grupo</Modal.Header>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <Modal.Content>
-          <Input
-            label="Nome"
-            name="name"
-            register={register}
-            error={errors?.name?.message}
-          />
+          <Input label="Nome" name="name" error={errors?.name} />
         </Modal.Content>
         <Modal.Actions>
           <ButtonGroup>
@@ -63,7 +41,7 @@ export const CreateRoleModal = () => {
               Fechar
             </Button>
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isPending}>
               Cadastrar
             </Button>
           </ButtonGroup>
