@@ -8,9 +8,9 @@ interface FormState {
 
 interface UseFormState {
   action: (data: FormData) => Promise<FormState>
-  onSuccess?: () => Promise<void> | void
+  onSuccess?: (message: string | null) => Promise<void> | void
   initialState?: FormState
-  onError?: () => Promise<void> | void
+  onError?: (message: string | null) => Promise<void> | void
 }
 
 export function useFormState({
@@ -35,11 +35,11 @@ export function useFormState({
       const state = await action(data)
 
       if (state.success && onSuccess) {
-        await onSuccess()
+        await onSuccess(state.message)
       }
 
       if (!state.success && onError) {
-        await onError()
+        await onError(state.message)
       }
 
       setFormState(state)
