@@ -1,33 +1,47 @@
 'use server'
 
-import { Status } from '@/constants/status'
-import { api } from '@/services/api'
-import { IActionResponse } from '@/types/action-response'
+import { deleteUser } from '@/http/users/delete-user'
+import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
+import { z } from 'zod'
 
-interface DeleteUserProps {
-  id: string | null
-}
+const deleteUserSchema = z.object({
+  id: z.string(),
+})
 
-export async function deleteUser({
-  id,
-}: DeleteUserProps): Promise<IActionResponse> {
-  const { Error, Success } = Status
+export async function deleteUserAction(data: FormData) {
+  const result = deleteUserSchema.safeParse(Object.fromEntries(data))
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors
+
+    return { success: false, message: null, errors }
+  }
+
+  const { id } = result.data
 
   try {
-    await api(`/users/${id}`, {
-      method: 'DELETE',
-    })
-
+    await deleteUser({ id })
     revalidateTag('users')
-    return {
-      status: Success,
-      message: 'Usuário excluido com sucesso!',
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      const { message } = await err.response.json()
+
+      return { success: false, message, errors: null }
     }
-  } catch (error) {
+
+    console.error(err)
+
     return {
-      status: Error,
-      message: 'Error message',
+      success: false,
+      message: 'Unexpected error, try again in a few minutes',
+      errors: null,
     }
+  }
+
+  return {
+    success: true,
+    message: 'Usuário excluido com sucesso',
+    errors: null,
   }
 }
