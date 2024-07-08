@@ -4,71 +4,43 @@ import { ButtonGroup } from '@/components/form/button-group'
 import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
-import { useForm } from 'react-hook-form'
-import { createUser } from '@/actions/users/create-user-action'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createUserSchema } from '@/schemas/users/create-user-schema'
-import { CreateUserData } from '@/types/users/create-user'
+import { createUserAction } from '@/actions/users/create-user-action'
 import { toast } from 'react-toastify'
-import { Status } from '@/constants/status'
 import { useUrlParams } from '@/hooks/use-params'
+import { useFormState } from '@/hooks/use-form-state'
 
 export const CreateUserModal = () => {
   const { removeParams, params } = useUrlParams()
-  const isOpen = params.has('create_user')
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting, errors },
-  } = useForm<CreateUserData>({
-    resolver: zodResolver(createUserSchema),
-  })
-
   const handleCloseModal = () => removeParams(['create_user'])
 
-  const onSubmit = handleSubmit(async (data) => {
-    const { Success } = Status
-    const response = await createUser(data)
-
-    if (response.status !== Success) {
-      return toast(response.message, {
-        type: 'error',
-      })
-    }
-
-    toast(response.message, {
-      type: 'success',
-    })
+  const onSuccess = (message: string | null) => {
+    toast(message, { type: 'success' })
     handleCloseModal()
-    reset()
+  }
+  const onError = (message: string | null) => {
+    toast(message, { type: 'error' })
+  }
+  const [{ errors }, handleSubmit, isPending] = useFormState({
+    action: createUserAction,
+    onError,
+    onSuccess,
   })
+
+  const isOpen = params.has('create_user')
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Cadastrar Usuário</Modal.Header>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
-            <Input
-              label="Nome"
-              name="name"
-              register={register}
-              error={errors?.name?.message}
-            />
-            <Input
-              label="Usuário"
-              name="username"
-              register={register}
-              error={errors?.username?.message}
-            />
+            <Input label="Nome" name="name" error={errors?.name} />
+            <Input label="Usuário" name="username" error={errors?.username} />
             <Input
               label="Senha"
               name="password"
-              register={register}
               type="password"
-              error={errors?.password?.message}
+              error={errors?.password}
             />
           </div>
         </Modal.Content>
@@ -78,7 +50,7 @@ export const CreateUserModal = () => {
               Fechar
             </Button>
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isPending}>
               Cadastrar
             </Button>
           </ButtonGroup>

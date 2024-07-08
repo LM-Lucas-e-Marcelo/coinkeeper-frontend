@@ -1,29 +1,43 @@
 'use server'
 
-import { Status } from '@/constants/status'
-import { api } from '@/services/api'
-import { IActionResponse } from '@/types/action-response'
-import { CreateRoleData } from '@/types/roles/create-role'
+import { createRole } from '@/http/roles/create-role'
+import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
+import { z } from 'zod'
 
-export async function createRole(
-  data: CreateRoleData,
-): Promise<IActionResponse> {
-  const { Error, Success } = Status
+const createRoleSchema = z.object({
+  name: z.string().min(1, { message: 'Nome é obrigatório' }),
+})
+
+export async function createRoleAction(data: FormData) {
+  const result = createRoleSchema.safeParse(Object.fromEntries(data))
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors
+
+    return { success: false, message: null, errors }
+  }
+
+  const { name } = result.data
+
   try {
-    await api('/roles', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
+    await createRole({ name })
     revalidateTag('roles')
-    return {
-      status: Success,
-      message: 'Grupo cadastrado com sucesso!',
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      const { message } = await err.response.json()
+
+      return { success: false, message, errors: null }
     }
-  } catch (error) {
+
+    console.error(err)
+
     return {
-      status: Error,
-      message: 'Error message',
+      success: false,
+      message: 'Unexpected error, try again in a few minutes',
+      errors: null,
     }
   }
+
+  return { success: true, message: 'Grupo criado com sucesso', errors: null }
 }
