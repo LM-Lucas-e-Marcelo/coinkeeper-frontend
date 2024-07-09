@@ -5,24 +5,37 @@ import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
 import { toast } from 'react-toastify'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { updateUserAction } from '@/actions/users/update-user-action'
 import { IUser, IUsers } from '@/http/users/get-users'
+import { IRoles } from '@/http/roles/get-roles'
+import { Select } from '@/components/form/select'
+import { createUserAction } from '@/actions/users/create-user-action'
 
 interface UpdateUserModalProps {
   users: IUsers
+  roles: IRoles
 }
 
-export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
+export const ManagementUserModal = ({ users, roles }: UpdateUserModalProps) => {
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
   const { removeParams, params } = useUrlParams()
-  const isOpen = params.has('update_user')
+  const isOpen = params.has('management_user')
   const userId = params.get('user')
 
+  const rolesOptions = useMemo(
+    () =>
+      roles.items.map((role) => ({
+        label: role.name,
+        value: role.id,
+      })),
+    [roles.items],
+  )
+
   const handleCloseModal = useCallback(() => {
-    removeParams(['update_user', 'user'])
+    removeParams(['management_user', 'user'])
     setSelectedUser(null)
   }, [removeParams])
 
@@ -35,7 +48,7 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
   }
 
   const [{ errors }, handleSubmit, isPending] = useFormState({
-    action: updateUserAction,
+    action: userId ? updateUserAction : createUserAction,
     onError,
     onSuccess,
   })
@@ -52,11 +65,11 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
     }
   }, [handleCloseModal, isOpen, userId, users])
 
-  if (!selectedUser) return
+  if (userId && !selectedUser) return
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
-      <Modal.Header>Editar Usuário</Modal.Header>
+      <Modal.Header>{userId ? 'Editar' : 'Cadastrar'} Usuário</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
@@ -72,6 +85,8 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
               error={errors?.username}
               defaultValue={selectedUser?.username}
             />
+
+            <Select label="Grupo" name="roleId" options={rolesOptions} />
             <Input
               label="Senha"
               name="password"
@@ -79,7 +94,7 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
               error={errors?.password}
             />
 
-            <Input name="id" type="hidden" defaultValue={selectedUser.id} />
+            <Input name="id" type="hidden" defaultValue={selectedUser?.id} />
           </div>
         </Modal.Content>
         <Modal.Actions>
@@ -89,7 +104,7 @@ export const UpdateUserModal = ({ users }: UpdateUserModalProps) => {
             </Button>
 
             <Button type="submit" disabled={isPending}>
-              Editar
+              {userId ? 'Editar' : 'Criar'}
             </Button>
           </ButtonGroup>
         </Modal.Actions>
