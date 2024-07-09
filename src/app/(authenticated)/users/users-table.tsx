@@ -1,10 +1,11 @@
 import { Table } from '@/components/table'
 
-import { UpdateUserModal } from '@/components/modals/users/update-user-modal'
+import { ManagementUserModal } from '@/components/modals/users/management-user-modal'
 import { DeleteUserModal } from '@/components/modals/users/delete-user-modal'
 import { TableActions } from './users-table-actions'
 
 import { getUsers } from '@/http/users/get-users'
+import { getRoles } from '@/http/roles/get-roles'
 
 interface UsersTableProps {
   searchParams: {
@@ -15,6 +16,8 @@ interface UsersTableProps {
 
 export async function UsersTable({ searchParams }: UsersTableProps) {
   const { users } = await getUsers(searchParams)
+  const { roles } = await getRoles({ per: '', content: '' })
+
   return (
     <>
       <Table.Root>
@@ -39,7 +42,7 @@ export async function UsersTable({ searchParams }: UsersTableProps) {
           ))}
         </Table.Body>
       </Table.Root>
-      <UpdateUserModal users={users} />
+      <ManagementUserModal users={users} roles={roles} />
       <DeleteUserModal />
     </>
   )

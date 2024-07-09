@@ -9,6 +9,7 @@ const createUserSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
   username: z.string().min(1, { message: 'Usuário é obrigatório' }),
   password: z.string().min(1, { message: 'Senha é obrigatório' }),
+  roleId: z.coerce.number(),
 })
 
 export async function createUserAction(data: FormData) {
@@ -20,10 +21,10 @@ export async function createUserAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { name, password, username } = result.data
+  const { name, password, username, roleId } = result.data
 
   try {
-    await createUser({ name, password, username })
+    await createUser({ name, password, username, roleId })
     revalidateTag('users')
   } catch (err) {
     if (err instanceof HTTPError) {

@@ -4,7 +4,6 @@ import { Filter } from '@/components/form/filter'
 import { PageHeader } from '@/components/page-header'
 import { LuFilter } from '@/assets/icons'
 import { UsersTable } from './users-table'
-import { CreateUserModal } from '@/components/modals/users/create-user-modal'
 import { Suspense } from 'react'
 import { ModalButon } from '@/components/modal-button'
 import { TableLoading } from '@/components/loadings/table-loading'
@@ -30,14 +29,13 @@ export default async function Users({ searchParams }: UsersProps) {
           <Button isIcon>
             <LuFilter size={20} />
           </Button>
-          <ModalButon params={{ create_user: true }}>
+          <ModalButon params={{ management_user: true }}>
             <Button>Cadastrar</Button>
           </ModalButon>
         </ButtonGroup>
       </PageHeader>
       <Suspense fallback={<TableLoading />}>
         <UsersTable searchParams={searchParams} />
-        <CreateUserModal />
       </Suspense>
     </>
   )
