@@ -5,7 +5,7 @@ interface DeleteUserRequest {
 }
 
 export async function deleteUser({ id }: DeleteUserRequest) {
-  const result = api.delete(`users/${id}`).json()
+  const result = await api.delete(`users/${id}`).json()
 
   return result
 }

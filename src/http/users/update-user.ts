@@ -13,7 +13,7 @@ export async function updateUser({
   name,
   id,
 }: UpdateUserRequest) {
-  const result = api
+  const result = await api
     .patch(`users/${id}`, {
       json: {
         username,

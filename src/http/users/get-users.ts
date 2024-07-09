@@ -33,7 +33,7 @@ export async function getUsers({
     queryParams.append(per, content)
   }
 
-  const result = api.get(`users/search?${queryParams.toString()}`, {
+  const result = await api.get(`users/search?${queryParams.toString()}`, {
     next: {
       tags: ['users'],
     },
