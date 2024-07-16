@@ -13,4 +13,8 @@ export const SIDEBAR_ITEMS = {
     path: '/roles',
     icon: <RiUserSettingsLine size={20} />,
   },
+  Clientes: {
+    path: '/customers',
+    icon: <LuUsers size={20} />,
+  },
 }
