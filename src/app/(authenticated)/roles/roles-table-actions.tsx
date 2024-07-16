@@ -1,15 +1,15 @@
 import { ButtonGroup } from '@/components/form/button-group'
-import { ModalButon } from '@/components/modal-button'
+import { ModalButton } from '@/components/modal-button'
 import { FiEdit, FiTrash2 } from '@/assets/icons'
 import { IRole } from '@/http/roles/get-roles'
 
 export const TableActions = ({ role }: { role: IRole }) => {
   return (
     <ButtonGroup>
-      <ModalButon params={{ update_role: true, role: role.id }}>
+      <ModalButton params={{ update_role: true, role: role.id }}>
         <FiEdit size={20} className="text-orange" />
-      </ModalButon>
-      <ModalButon
+      </ModalButton>
+      <ModalButton
         params={{
           delete_role: true,
           role: role.id,
@@ -17,7 +17,7 @@ export const TableActions = ({ role }: { role: IRole }) => {
         }}
       >
         <FiTrash2 size={20} className="text-red" />
-      </ModalButon>
+      </ModalButton>
     </ButtonGroup>
   )
 }
