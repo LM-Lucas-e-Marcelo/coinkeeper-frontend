@@ -1,4 +1,4 @@
-import { IUser } from '../../../src/types/users/get-users'
+import { IUser } from '../../../src/http/users/get-users'
 import { faker } from '@faker-js/faker'
 import { formatGenericPayload } from '../utils/format-generic-payload'
 
