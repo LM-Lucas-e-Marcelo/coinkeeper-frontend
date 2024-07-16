@@ -3,6 +3,7 @@ import { tv } from 'tailwind-variants'
 import { FiEye, FiTrash2 } from '@/assets/icons'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
+import { formatDate } from '@/utils/format-date'
 
 const transactionCard = tv({
   slots: {
@@ -31,7 +32,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
         </span>
         <span>
           <strong>Data</strong>
-          <p>{transaction.paymentDate}</p>
+          <p>{formatDate(transaction?.paymentDate)}</p>
         </span>
         <span>
           <strong>Valor empréstimo</strong>
