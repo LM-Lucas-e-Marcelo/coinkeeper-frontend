@@ -1,15 +1,15 @@
 import { ButtonGroup } from '@/components/form/button-group'
-import { ModalButon } from '@/components/modal-button'
+import { ModalButton } from '@/components/modal-button'
 import { FiEdit, FiTrash2 } from '@/assets/icons'
 import { IUser } from '@/http/users/get-users'
 
 export const TableActions = ({ user }: { user: IUser }) => {
   return (
     <ButtonGroup>
-      <ModalButon params={{ management_user: true, user: user.id }}>
+      <ModalButton params={{ management_user: true, user: user.id }}>
         <FiEdit size={20} className="text-orange" />
-      </ModalButon>
-      <ModalButon
+      </ModalButton>
+      <ModalButton
         params={{
           delete_user: true,
           user: user.id,
@@ -17,7 +17,7 @@ export const TableActions = ({ user }: { user: IUser }) => {
         }}
       >
         <FiTrash2 size={20} className="text-red" />
-      </ModalButon>
+      </ModalButton>
     </ButtonGroup>
   )
 }
