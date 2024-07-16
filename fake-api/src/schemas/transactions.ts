@@ -26,7 +26,7 @@ export function createRandomTransaction(): ITransactions {
     differenceBetweenParcels: faker.number.int({ min: 1, max: 10000 }),
     description: faker.lorem.words(),
     value: faker.number.int({ min: 1, max: 10000 }),
-    paymentDate: null,
+    paymentDate: '2024/01/09',
     parcels,
   }
 }
