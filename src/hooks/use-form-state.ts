@@ -27,7 +27,6 @@ export function useFormState({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
     const form = event.currentTarget
     const data = new FormData(form)
 
@@ -36,6 +35,7 @@ export function useFormState({
 
       if (state.success && onSuccess) {
         await onSuccess(state.message)
+        form.reset()
       }
 
       if (!state.success && onError) {
