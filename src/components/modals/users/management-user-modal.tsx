@@ -104,7 +104,7 @@ export const ManagementUserModal = ({ users, roles }: UpdateUserModalProps) => {
             </Button>
 
             <Button type="submit" disabled={isPending}>
-              {userId ? 'Editar' : 'Criar'}
+              {userId ? 'Editar' : 'Cadastrar'}
             </Button>
           </ButtonGroup>
         </Modal.Actions>
