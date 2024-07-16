@@ -1,6 +1,6 @@
-import { IRole } from '../../../src/types/roles/get-roles'
 import { faker } from '@faker-js/faker'
 import { formatGenericPayload } from '../utils/format-generic-payload'
+import { IRole } from '../../../src/http/roles/get-roles'
 
 export function createRandomRole(): IRole {
   return {
