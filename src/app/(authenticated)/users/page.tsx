@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header'
 import { LuFilter } from '@/assets/icons'
 import { UsersTable } from './users-table'
 import { Suspense } from 'react'
-import { ModalButon } from '@/components/modal-button'
+import { ModalButton } from '@/components/modal-button'
 import { TableLoading } from '@/components/loadings/table-loading'
 
 export interface UsersProps {
@@ -29,9 +29,9 @@ export default async function Users({ searchParams }: UsersProps) {
           <Button isIcon>
             <LuFilter size={20} />
           </Button>
-          <ModalButon params={{ management_user: true }}>
+          <ModalButton params={{ management_user: true }}>
             <Button>Cadastrar</Button>
-          </ModalButon>
+          </ModalButton>
         </ButtonGroup>
       </PageHeader>
       <Suspense fallback={<TableLoading />}>
