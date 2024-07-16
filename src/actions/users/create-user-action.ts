@@ -42,5 +42,9 @@ export async function createUserAction(data: FormData) {
     }
   }
 
-  return { success: true, message: 'Usuário criado com sucesso', errors: null }
+  return {
+    success: true,
+    message: 'Usuário cadastrado com sucesso',
+    errors: null,
+  }
 }
