@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/page-header'
 import { LuFilter } from '@/assets/icons'
 import { RolesTable } from './roles-table'
 import { Suspense } from 'react'
-import { ModalButon } from '@/components/modal-button'
+import { ModalButton } from '@/components/modal-button'
 import { TableLoading } from '@/components/loadings/table-loading'
 import { CreateRoleModal } from '@/components/modals/roles/create-role-modal'
 
@@ -27,9 +27,9 @@ export default async function Roles({ searchParams }: RolesProps) {
           <Button isIcon>
             <LuFilter size={20} />
           </Button>
-          <ModalButon params={{ create_role: true }}>
+          <ModalButton params={{ create_role: true }}>
             <Button>Cadastrar</Button>
-          </ModalButon>
+          </ModalButton>
         </ButtonGroup>
       </PageHeader>
       <Suspense fallback={<TableLoading />}>
