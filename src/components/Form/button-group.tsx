@@ -1,10 +1,23 @@
 import { ComponentProps } from 'react'
-import { tv } from 'tailwind-variants'
+import { VariantProps, tv } from 'tailwind-variants'
 
 const buttonGroup = tv({
   base: 'flex items-center gap-3',
+  variants: {
+    align: {
+      end: 'ml-auto',
+    },
+  },
 })
 
-export const ButtonGroup = ({ children }: ComponentProps<'div'>) => {
-  return <div className={buttonGroup()}>{children}</div>
+interface ButtonGroupProps
+  extends VariantProps<typeof buttonGroup>,
+    ComponentProps<'div'> {}
+
+export const ButtonGroup = ({ children, align, ...rest }: ButtonGroupProps) => {
+  return (
+    <div className={buttonGroup({ align })} {...rest}>
+      {children}
+    </div>
+  )
 }
