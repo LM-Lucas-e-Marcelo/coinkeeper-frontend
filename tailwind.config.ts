@@ -13,7 +13,6 @@ const config: Config = {
         primaryWithOpacity: 'rgba(77, 166, 255, .3)',
         secondary: '#F6F8FE',
         darkgray: '#212121',
-        green: '#4DFF8E',
         orange: '#FFC14D',
         red: '#FF4D4D',
       },
