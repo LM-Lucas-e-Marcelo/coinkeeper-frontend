@@ -9,7 +9,7 @@ interface ModalButtonProps extends ComponentProps<'span'> {
   }
 }
 
-export const ModalButon = ({ params, ...rest }: ModalButtonProps) => {
+export const ModalButton = ({ params, ...rest }: ModalButtonProps) => {
   const { addParams } = useUrlParams()
 
   const handleOpenModal = () => addParams(params)
