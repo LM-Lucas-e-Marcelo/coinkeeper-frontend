@@ -4,9 +4,10 @@ import { VariantProps, tv } from 'tailwind-variants'
 
 const modalRoot = tv({
   slots: {
-    overlay: 'fixed inset-0 flex justify-center items-center transition-colors',
+    overlay:
+      'fixed inset-0 flex justify-center items-center transition-colors z-10',
     modal:
-      'bg-white rounded-md overflow-hidden shadow transition-all min-w-[500px]',
+      'bg-white rounded-md overflow-hidden shadow transition-all min-w-[550px] max-h-[90vh] overflow-auto',
   },
   variants: {
     isOpen: {

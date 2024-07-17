@@ -6,6 +6,8 @@ interface ModalHeaderProps {
 
 export const ModalHeader = ({ children }: ModalHeaderProps) => {
   return (
-    <header className="w-full bg-primary p-3 text-white">{children}</header>
+    <header className="w-full bg-primary p-3 text-white sticky top-0">
+      {children}
+    </header>
   )
 }
