@@ -18,7 +18,7 @@ export const PayParcelModal = () => {
   const transactionId = params.get('transaction_id')
 
   const handleCloseModal = () =>
-    removeParams(['pay_parcel', 'parcel', 'parcel_number'])
+    removeParams(['pay_parcel', 'parcel', 'parcel_number', 'transaction_id'])
 
   const onSuccess = (message: string | null) => {
     toast(message, { type: 'success' })
@@ -40,21 +40,23 @@ export const PayParcelModal = () => {
       <Modal.Header>Pagar parcela {parcelNumber}</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
-          <Input
-            label="Data do pagamento"
-            name="paymentDate"
-            type="date"
-            defaultValue={new Date().toISOString().split('T')[0]}
-            error={errors?.paymentDate}
-          />
+          <div className="flex gap-3 flex-col">
+            <Input
+              label="Data do pagamento"
+              name="paymentDate"
+              type="date"
+              defaultValue={new Date().toISOString().split('T')[0]}
+              error={errors?.paymentDate}
+            />
 
-          <Textarea label="Observação" name="observation" />
-          <Input name="id" type="hidden" defaultValue={parcelId} />
-          <Input
-            name="transactionId"
-            type="hidden"
-            defaultValue={transactionId}
-          />
+            <Textarea label="Observação" name="observation" />
+            <Input name="id" type="hidden" defaultValue={parcelId} />
+            <Input
+              name="transactionId"
+              type="hidden"
+              defaultValue={transactionId}
+            />
+          </div>
         </Modal.Content>
         <Modal.Actions>
           <ButtonGroup>
