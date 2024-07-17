@@ -17,7 +17,12 @@ export const RollbackParcelModal = () => {
   const transactionId = params.get('transaction_id')
 
   const handleCloseModal = () =>
-    removeParams(['rollback_parcel', 'parcel', 'parcel_number'])
+    removeParams([
+      'rollback_parcel',
+      'parcel',
+      'parcel_number',
+      'transaction_id',
+    ])
 
   const onSuccess = (message: string | null) => {
     toast(message, { type: 'success' })
