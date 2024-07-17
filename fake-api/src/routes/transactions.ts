@@ -3,6 +3,10 @@ import { transactionList } from '../schemas/transactions'
 
 const transactionsRoute = new Elysia()
 
+transactionsRoute.post('/customer-transactions', ({ set }) => {
+  set.status = 201
+})
+
 transactionsRoute.patch(
   '/customer-transactions/:id/pay-parcel/:parcelId',
   ({ set }) => {
