@@ -17,7 +17,7 @@ export const DeleteTransactionModal = () => {
   const transactionId = params.get('transaction')
 
   const handleCloseModal = useCallback(() => {
-    removeParams(['delete_transaction'])
+    removeParams(['delete_transaction', 'transaction'])
   }, [removeParams])
 
   const onSuccess = (message: string | null) => {
@@ -38,7 +38,7 @@ export const DeleteTransactionModal = () => {
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
-      <Modal.Header>Cadastrar Cliente</Modal.Header>
+      <Modal.Header>Excluir transação</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex flex-col gap-4">
