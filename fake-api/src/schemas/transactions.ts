@@ -9,8 +9,8 @@ function createRandomParcel(): IParcel {
   return {
     id: 26,
     dueDate: '2024-01-09',
-    observation: null,
-    parcel: 1,
+    observation: faker.lorem.words(),
+    parcel: faker.number.int({ min: 1, max: 10 }),
     value: 1000,
     paymentDate: '2024/01/09',
   }
