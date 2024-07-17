@@ -3,6 +3,8 @@ import { TransactionCard } from './transaction-card'
 import { DeleteTransactionModal } from '@/components/modals/transactions/delete-transaction-modal'
 import { getTransactions } from '@/http/transactions/get-transactions'
 import { CustomerDetailsPageProps } from './page'
+import { PayParcelModal } from '@/components/modals/transactions/pay-parcel-modal'
+import { RollbackParcelModal } from '@/components/modals/transactions/rollback-parcel-modal'
 
 const customerTransactions = tv({
   slots: {
@@ -24,7 +26,7 @@ export async function CustomerTransactions({
   return (
     <div className={container()}>
       <section className={section()}>
-        <strong className={headerTitle()}>Pagamentos</strong>
+        <strong className={headerTitle()}>Empréstimos</strong>
         {transactions?.map((transaction) => {
           return (
             <TransactionCard key={transaction.id} transaction={transaction} />
@@ -33,10 +35,12 @@ export async function CustomerTransactions({
       </section>
       <div className={divider()} />
       <section className={section()}>
-        <strong className={headerTitle()}>Parcelas</strong>
+        <strong className={headerTitle()}>Próximas Parcelas</strong>
         <h1>Ver com o CCE o que colocar</h1>
       </section>
       <DeleteTransactionModal />
+      <PayParcelModal />
+      <RollbackParcelModal />
     </div>
   )
 }
