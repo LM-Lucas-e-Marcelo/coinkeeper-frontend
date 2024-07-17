@@ -12,7 +12,7 @@ const select = tv({
 const { selectStyles, labelStyles, errorStyles } = select()
 
 interface OptionProps {
-  label: string
+  label: string | number
   value: string | number
 }
 
