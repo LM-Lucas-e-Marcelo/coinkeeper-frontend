@@ -4,6 +4,7 @@ import { FiEye, FiTrash2 } from '@/assets/icons'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
 import { formatDate } from '@/utils/format-date'
+import { ParcelsDetailsModal } from '@/components/modals/transactions/parcels-details-modal'
 
 const transactionCard = tv({
   slots: {
@@ -53,7 +54,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           </p>
         </span>
         <span className={cardActions()}>
-          <ModalButton params={{ xuxu: true }}>
+          <ModalButton params={{ [`parcels_details_${transaction.id}`]: true }}>
             <FiEye size={24} className="text-primary" />
           </ModalButton>
           <ModalButton
@@ -62,6 +63,10 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             <FiTrash2 size={24} className="text-red" />
           </ModalButton>
         </span>
+        <ParcelsDetailsModal
+          parcels={transaction.parcels}
+          transactionId={transaction.id}
+        />
       </div>
     </div>
   )
