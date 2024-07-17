@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/page-header'
 import { ButtonGroup } from '@/components/form/button-group'
 import { ModalButton } from '@/components/modal-button'
 import { Button } from '@/components/form/button'
+import { CreateTransactionModal } from '@/components/modals/transactions/create-transaction-modal'
 
 const customerDeatils = tv({
   slots: {
@@ -27,7 +28,7 @@ export default function CustomerDetailsPage({
     <>
       <PageHeader>
         <ButtonGroup align="end">
-          <ModalButton params={{ create_customer: true }}>
+          <ModalButton params={{ create_transaction: true }}>
             <Button>Cadastrar</Button>
           </ModalButton>
         </ButtonGroup>
@@ -35,6 +36,7 @@ export default function CustomerDetailsPage({
       <div className={container()}>
         <CustomerDetails params={params} />
         <CustomerTransactions params={params} />
+        <CreateTransactionModal params={params} />
       </div>
     </>
   )
