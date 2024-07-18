@@ -37,7 +37,7 @@ export const CreateTransactionModal = ({
     onSuccess,
   })
 
-  const parcelsQuantity = Array.from({ length: 24 })
+  const parcelsQuantity = Array.from({ length: 60 })
   const parcelOptions = parcelsQuantity.map((_, index) => ({
     label: index + 1,
     value: index + 1,
@@ -45,7 +45,7 @@ export const CreateTransactionModal = ({
 
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
-      <Modal.Header>Cadastrar empréstimo</Modal.Header>
+      <Modal.Header>Cadastrar transação</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
@@ -55,27 +55,26 @@ export const CreateTransactionModal = ({
               defaultValue={customerParams?.id}
             />
             <Input
-              label="Primeira parcela"
+              label="Data da primeira parcela"
               name="firstDueDate"
               type="date"
               defaultValue={new Date().toISOString().split('T')[0]}
               error={errors?.firstDueDate}
             />
 
-            <Input
-              label="Data para pagamento"
-              name="paymentDate"
-              type="date"
-              error={errors?.paymentDate}
-            />
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-start">
               <Select
                 label="Total de parcelas"
                 name="totalParcels"
                 options={parcelOptions}
                 error={errors?.totalParcels}
               />
-              <Input label="Valor" name="value" error={errors?.value} />
+              <Input
+                label="Valor"
+                name="value"
+                type="number"
+                error={errors?.value}
+              />
             </div>
 
             <Input
@@ -97,7 +96,7 @@ export const CreateTransactionModal = ({
             </Button>
 
             <Button type="submit" disabled={isPending}>
-              Cadastrar
+              Cadastrar transação
             </Button>
           </ButtonGroup>
         </Modal.Actions>

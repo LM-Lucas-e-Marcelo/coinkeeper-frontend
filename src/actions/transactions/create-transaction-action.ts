@@ -16,7 +16,6 @@ const createTransactionSchema = z.object({
   description: z.string().min(1, { message: 'Descrição é obrigatório' }),
   value: z.coerce.number().min(1, { message: 'Informe um valor válido' }),
   differenceBetweenParcels: z.coerce.number().nullish(),
-  paymentDate: z.string().nullish(),
 })
 
 export async function createTransactionAction(data: FormData) {
@@ -35,7 +34,6 @@ export async function createTransactionAction(data: FormData) {
     description,
     value,
     differenceBetweenParcels,
-    paymentDate,
   } = result.data
 
   try {
@@ -46,7 +44,6 @@ export async function createTransactionAction(data: FormData) {
       description,
       value,
       differenceBetweenParcels,
-      paymentDate,
     })
 
     revalidateTag('transactions')
@@ -68,7 +65,7 @@ export async function createTransactionAction(data: FormData) {
 
   return {
     success: true,
-    message: 'Empréstimo cadastrado com sucesso',
+    message: 'Transação cadastrado com sucesso',
     errors: null,
   }
 }

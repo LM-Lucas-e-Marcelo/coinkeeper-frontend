@@ -36,7 +36,7 @@ export async function CustomerTransactions({
       <div className={divider()} />
       <section className={section()}>
         <strong className={headerTitle()}>Próximas Parcelas</strong>
-        <h1>Ver com o CCE o que colocar</h1>
+        <h1>Validar Calendário</h1>
       </section>
       <DeleteTransactionModal />
       <PayParcelModal />

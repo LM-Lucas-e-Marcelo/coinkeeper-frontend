@@ -20,18 +20,18 @@ export default async function Customers({ searchParams }: CustomersProps) {
 
   return (
     <>
-      <PageHeader>
-        <Filter options={filterOptions} />
-        <ButtonGroup>
-          <Button isIcon>
-            <LuFilter size={20} />
-          </Button>
-          <ModalButton params={{ create_customer: true }}>
-            <Button>Cadastrar</Button>
-          </ModalButton>
-        </ButtonGroup>
-      </PageHeader>
       <Suspense fallback={<TableLoading />}>
+        <PageHeader>
+          <Filter options={filterOptions} />
+          <ButtonGroup>
+            <Button isIcon>
+              <LuFilter size={20} />
+            </Button>
+            <ModalButton params={{ create_customer: true }}>
+              <Button>Cadastrar</Button>
+            </ModalButton>
+          </ButtonGroup>
+        </PageHeader>
         <CustomersTable searchParams={searchParams} />
       </Suspense>
     </>

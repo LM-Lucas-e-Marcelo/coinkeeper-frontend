@@ -29,7 +29,7 @@ export default function CustomerDetailsPage({
       <PageHeader>
         <ButtonGroup align="end">
           <ModalButton params={{ create_transaction: true }}>
-            <Button>Cadastrar</Button>
+            <Button>Cadastrar transação</Button>
           </ModalButton>
         </ButtonGroup>
       </PageHeader>

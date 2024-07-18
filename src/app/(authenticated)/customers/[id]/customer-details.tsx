@@ -39,6 +39,10 @@ export async function CustomerDetails({ params }: CustomerDetailsPageProps) {
           <strong>Telefone</strong>
           <p>{customer?.phone ?? '-'}</p>
         </section>
+        <section>
+          <strong>E-mail</strong>
+          <p>{customer?.email ?? '-'}</p>
+        </section>
       </div>
       <address className={card()}>
         <p className={cardTitle()}>Endereço</p>

@@ -7,7 +7,6 @@ interface CreateTransactionRequest {
   description: string
   value: number
   differenceBetweenParcels?: number | null | undefined
-  paymentDate?: string | null | undefined
 }
 
 export async function createTransaction({
@@ -17,7 +16,6 @@ export async function createTransaction({
   description,
   value,
   differenceBetweenParcels,
-  paymentDate,
 }: CreateTransactionRequest) {
   const result = await api
     .post('customer-transactions', {
@@ -28,7 +26,6 @@ export async function createTransaction({
         description,
         value,
         differenceBetweenParcels,
-        paymentDate,
       },
     })
     .json()

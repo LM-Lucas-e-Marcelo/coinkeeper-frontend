@@ -8,11 +8,19 @@ import { ParcelsDetailsModal } from '@/components/modals/transactions/parcels-de
 
 const transactionCard = tv({
   slots: {
-    card: 'flex justify-between p-4  w-full rounded-md bg-secondary',
+    card: 'flex justify-between p-4  w-full rounded-md bg-secondary border-l-4 border-red',
     cardSection: 'flex flex-col gap-4',
     secondCardSection: 'flex flex-col gap-4 items-end justify-around',
     cardSpan: 'text-center',
     cardActions: 'flex gap-4',
+  },
+
+  variants: {
+    paid: {
+      true: {
+        card: 'border-green-500',
+      },
+    },
   },
 })
 
@@ -25,7 +33,7 @@ const { card, cardSection, secondCardSection, cardSpan, cardActions } =
 
 export function TransactionCard({ transaction }: TransactionCardProps) {
   return (
-    <div className={card()}>
+    <div className={card({ paid: transaction.paymentDate !== null })}>
       <div className={cardSection()}>
         <span>
           <strong>Descrição</strong>
@@ -33,16 +41,16 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
         </span>
         <span>
           <strong>Data</strong>
-          <p>{formatDate(transaction?.paymentDate)}</p>
+          <p>{formatDate(transaction?.createdAt)}</p>
         </span>
         <span>
-          <strong>Valor empréstimo</strong>
-          <p className="text-green-500">{formatCurrency(transaction.value)}</p>
+          <strong>Valor da transação</strong>
+          <p className="text-red">{formatCurrency(transaction.value)}</p>
         </span>
         <span>
-          <strong>Valor devido</strong>
-          <p className="text-red">
-            {formatCurrency(transaction.differenceBetweenParcels)}
+          <strong>Valor pago</strong>
+          <p className="text-green-500">
+            {formatCurrency(transaction.valuePaid)}
           </p>
         </span>
       </div>
@@ -52,6 +60,10 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <p>
             {transaction.totalParcelsPaid}/{transaction.totalParcels}
           </p>
+        </span>
+        <span className={cardSpan()}>
+          <strong>Data da quitação</strong>
+          <p>{formatDate(transaction.paymentDate) || '-'}</p>
         </span>
         <span className={cardActions()}>
           <ModalButton params={{ [`parcels_details_${transaction.id}`]: true }}>

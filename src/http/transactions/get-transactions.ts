@@ -17,7 +17,9 @@ export interface ITransactions {
   description: string | null
   value: number
   paymentDate: string | null
+  valuePaid: number
   parcels: IParcel[]
+  createdAt: string
 }
 
 export interface IGetTransactions {

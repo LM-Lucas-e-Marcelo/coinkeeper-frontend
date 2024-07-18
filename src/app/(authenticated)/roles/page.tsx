@@ -21,18 +21,18 @@ export default async function Roles({ searchParams }: RolesProps) {
 
   return (
     <>
-      <PageHeader>
-        <Filter options={filterOptions} />
-        <ButtonGroup>
-          <Button isIcon>
-            <LuFilter size={20} />
-          </Button>
-          <ModalButton params={{ create_role: true }}>
-            <Button>Cadastrar</Button>
-          </ModalButton>
-        </ButtonGroup>
-      </PageHeader>
       <Suspense fallback={<TableLoading />}>
+        <PageHeader>
+          <Filter options={filterOptions} />
+          <ButtonGroup>
+            <Button isIcon>
+              <LuFilter size={20} />
+            </Button>
+            <ModalButton params={{ create_role: true }}>
+              <Button>Cadastrar</Button>
+            </ModalButton>
+          </ButtonGroup>
+        </PageHeader>
         <RolesTable searchParams={searchParams} />
         <CreateRoleModal />
       </Suspense>

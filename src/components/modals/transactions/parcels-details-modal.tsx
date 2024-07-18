@@ -6,26 +6,24 @@ import { useCallback } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
 import { IParcel } from '@/http/transactions/get-transactions'
 import { formatDate } from '@/utils/format-date'
-import { FiX, FiCheck } from '@/assets/icons'
 import { tv } from 'tailwind-variants'
 import { ModalButton } from '@/components/modal-button'
 import { formatCurrency } from '@/utils/format-currency'
+import { ButtonGroup } from '@/components/form/button-group'
 
 const parcelsDetailsModal = tv({
   slots: {
     container:
-      'flex justify-between border-b border-primary px-4 py-2 items-center',
+      'flex flex-col px-4 p-2 gap-2 mb-4 border-l-4 border-red bg-secondary rounded-md last:mb-0',
+    wrapper: 'flex justify-between gap-2',
     parcelSection: 'flex flex-col gap-2',
     statusSpan: 'flex items-center gap-2',
-    status: 'w-4 h-4 bg-red rounded-full',
-    section: 'flex flex-col gap-6 justify-around',
-    actions: 'flex justify-center gap-2',
-    observation: 'w-[200px] break-words',
+    section: 'flex flex-col gap-6 justify-start',
   },
   variants: {
     paid: {
       true: {
-        status: 'bg-green-500',
+        container: 'border-green-500',
       },
     },
   },
@@ -36,15 +34,8 @@ interface ParcelsDetailsModalProps {
   transactionId: number
 }
 
-const {
-  container,
-  parcelSection,
-  statusSpan,
-  status,
-  section,
-  actions,
-  observation,
-} = parcelsDetailsModal()
+const { container, wrapper, parcelSection, statusSpan, section } =
+  parcelsDetailsModal()
 
 export const ParcelsDetailsModal = ({
   parcels,
@@ -64,63 +55,67 @@ export const ParcelsDetailsModal = ({
       <Modal.Content>
         {parcels.map((parcel) => {
           return (
-            <div key={parcel.id} className={container()}>
-              <section className={parcelSection()}>
-                <span className={statusSpan()}>
-                  <strong>Parcela:</strong>
-                  <p>{parcel.parcel}</p>
-                </span>
-                <span className={statusSpan()}>
-                  <strong>Valor:</strong>
-                  <p>{formatCurrency(parcel.value)}</p>
-                </span>
-                <span className={statusSpan()}>
-                  <strong>Status</strong>
-                  <div
-                    className={status({ paid: parcel.paymentDate !== null })}
-                  />
-                </span>
-              </section>
-              <section className={section()}>
-                <span>
-                  <strong>Observação</strong>
-                  <p className={observation()}>{parcel.observation}</p>
-                </span>
-                <span className={section()}>
+            <div
+              key={parcel.id}
+              className={container({ paid: parcel.paymentDate !== null })}
+            >
+              <div className={wrapper()}>
+                <section className={parcelSection()}>
+                  <span className={statusSpan()}>
+                    <strong>Parcela:</strong>
+                    <p>{parcel.parcel}</p>
+                  </span>
+                  <span className={statusSpan()}>
+                    <strong>Valor:</strong>
+                    <p>{formatCurrency(parcel.value)}</p>
+                  </span>
+                </section>
+                <section>
                   <span>
                     <strong>Vencimento</strong>
                     <p>{formatDate(parcel.dueDate)}</p>
                   </span>
-                </span>
-              </section>
-              <section className={section()}>
-                <span>
-                  <strong>Pago em</strong>
-                  <p>{formatDate(parcel.paymentDate) ?? '-'}</p>
-                </span>
-                <span className={actions()}>
-                  <ModalButton
-                    params={{
-                      pay_parcel: true,
-                      parcel: parcel.id,
-                      parcel_number: parcel.parcel,
-                      transaction_id: transactionId,
-                    }}
-                  >
-                    <FiCheck size={30} className="text-green-500" />
-                  </ModalButton>
-                  <ModalButton
-                    params={{
-                      rollback_parcel: true,
-                      parcel: parcel.id,
-                      parcel_number: parcel.parcel,
-                      transaction_id: transactionId,
-                    }}
-                  >
-                    <FiX size={30} className="text-red" />
-                  </ModalButton>
-                </span>
-              </section>
+                </section>
+                <section className={section()}>
+                  <span>
+                    <strong>Pago em</strong>
+                    <p>{formatDate(parcel.paymentDate) ?? '-'}</p>
+                  </span>
+                </section>
+              </div>
+              <span>
+                <strong>Observação</strong>
+                <p>{parcel.observation || '-'}</p>
+              </span>
+              <ButtonGroup align="end">
+                {parcel.paymentDate !== null ? (
+                  <Button type="button" variant="danger">
+                    <ModalButton
+                      params={{
+                        rollback_parcel: true,
+                        parcel: parcel.id,
+                        parcel_number: parcel.parcel,
+                        transaction_id: transactionId,
+                      }}
+                    >
+                      Cancelar pagamento
+                    </ModalButton>
+                  </Button>
+                ) : (
+                  <Button type="button">
+                    <ModalButton
+                      params={{
+                        pay_parcel: true,
+                        parcel: parcel.id,
+                        parcel_number: parcel.parcel,
+                        transaction_id: transactionId,
+                      }}
+                    >
+                      Pagar parcela
+                    </ModalButton>
+                  </Button>
+                )}
+              </ButtonGroup>
             </div>
           )
         })}
