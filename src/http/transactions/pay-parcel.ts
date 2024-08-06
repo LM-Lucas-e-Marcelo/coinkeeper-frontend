@@ -5,6 +5,7 @@ interface PayParcelRequest {
   id: string
   transactionId: string
   observation?: string | null
+  proofFile?: File
 }
 
 export async function payParcel({
@@ -12,12 +13,14 @@ export async function payParcel({
   transactionId,
   observation,
   paymentDate,
+  proofFile,
 }: PayParcelRequest) {
   const result = api
     .patch(`customer-transactions/${transactionId}/pay-parcel/${id}`, {
       json: {
         paymentDate,
         observation,
+        proofFile,
       },
     })
     .json()

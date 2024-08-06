@@ -7,6 +7,8 @@ export interface IParcel {
   parcel: number
   value: number
   paymentDate: string | null
+  proofFile: Blob
+  proofFileUrl: string
 }
 
 export interface ITransactions {
@@ -20,6 +22,9 @@ export interface ITransactions {
   valuePaid: number
   parcels: IParcel[]
   createdAt: string
+  companyExpense: number
+  contractFile: Blob
+  contractFileUrl: string
 }
 
 export interface IGetTransactions {
