@@ -8,8 +8,13 @@ export interface ICustomerById {
   document: string
   phone: string
   phoneWhatsapp: string
-  address: string
   email: string
+  businessAddress: string
+  residentialAddress: string
+  proofAddressFile: Blob
+  proofAddressFileUrl: string
+  documentFile: Blob
+  documentFileUrl: string
 }
 
 export interface IGetCustomerById {
