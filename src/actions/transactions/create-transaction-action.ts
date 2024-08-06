@@ -1,5 +1,6 @@
 'use server'
 
+import { SUPPORTED_SIZE } from '@/constants/files'
 import { createTransaction } from '@/http/transactions/create-transaction'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
@@ -16,6 +17,10 @@ const createTransactionSchema = z.object({
   description: z.string().min(1, { message: 'Descrição é obrigatório' }),
   value: z.coerce.number().min(1, { message: 'Informe um valor válido' }),
   differenceBetweenParcels: z.coerce.number().nullish(),
+  contractFile: z.any().refine((file) => {
+    return !file || file?.size <= SUPPORTED_SIZE
+  }, 'O arquivo deve ser menor que 25mb'),
+  companyExpense: z.coerce.number().nullish(),
 })
 
 export async function createTransactionAction(data: FormData) {
@@ -34,6 +39,8 @@ export async function createTransactionAction(data: FormData) {
     description,
     value,
     differenceBetweenParcels,
+    companyExpense,
+    contractFile,
   } = result.data
 
   try {
@@ -44,6 +51,8 @@ export async function createTransactionAction(data: FormData) {
       description,
       value,
       differenceBetweenParcels,
+      companyExpense,
+      contractFile,
     })
 
     revalidateTag('transactions')

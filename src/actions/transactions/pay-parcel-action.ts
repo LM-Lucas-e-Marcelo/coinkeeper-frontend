@@ -1,5 +1,6 @@
 'use server'
 
+import { SUPPORTED_SIZE } from '@/constants/files'
 import { payParcel } from '@/http/transactions/pay-parcel'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
@@ -10,6 +11,9 @@ const payParcelSchema = z.object({
   id: z.string(),
   transactionId: z.string(),
   observation: z.string().nullish(),
+  proofFile: z.any().refine((file) => {
+    return !file || file?.size <= SUPPORTED_SIZE
+  }, 'O arquivo deve ser menor que 25mb'),
 })
 
 export async function payParcelAction(data: FormData) {
@@ -21,10 +25,10 @@ export async function payParcelAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { id, transactionId, paymentDate, observation } = result.data
+  const { id, transactionId, paymentDate, observation, proofFile } = result.data
 
   try {
-    await payParcel({ id, transactionId, paymentDate, observation })
+    await payParcel({ id, transactionId, paymentDate, observation, proofFile })
     revalidateTag('transactions')
   } catch (err) {
     if (err instanceof HTTPError) {
