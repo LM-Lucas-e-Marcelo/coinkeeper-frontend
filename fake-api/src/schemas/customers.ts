@@ -20,8 +20,15 @@ function createCustomerById(): ICustomerById {
     document: '999.999.999-99',
     phone: faker.phone.number(),
     phoneWhatsapp: faker.phone.number(),
-    address: 'Rua Manoel Mariano Ferreira, 123 - Biguaçu - SC',
     email: faker.internet.email(),
+    businessAddress: 'Rua Manoel Mariano Ferreira, 123 - Biguaçu - SC',
+    residentialAddress: 'Rua Manoel Mariano Ferreira, 123 - Biguaçu - SC',
+    proofAddressFile: new Blob(),
+    proofAddressFileUrl:
+      'https://www.gov.br/servidor/pt-br/acesso-a-informacao/faq/sou-gov.br/comprovante-de-rendimentos/comprovantes-de-rendimentos-imagens/6-tela-b-5-1passo-downloadrendimentopdf.jpg/@@images/image',
+    documentFile: new Blob(),
+    documentFileUrl:
+      'https://www.gov.br/servidor/pt-br/acesso-a-informacao/faq/sou-gov.br/comprovante-de-rendimentos/comprovantes-de-rendimentos-imagens/6-tela-b-5-1passo-downloadrendimentopdf.jpg/@@images/image',
   }
 }
 
