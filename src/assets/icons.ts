@@ -11,3 +11,4 @@ export {
   FiX,
 } from 'react-icons/fi'
 export { RiUserSettingsLine } from 'react-icons/ri'
+export { LiaFileContractSolid } from 'react-icons/lia'
