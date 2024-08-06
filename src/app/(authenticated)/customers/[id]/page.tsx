@@ -28,6 +28,9 @@ export default function CustomerDetailsPage({
     <>
       <PageHeader>
         <ButtonGroup align="end">
+          <ModalButton params={{ customer_documents: true }}>
+            <Button>Documentos</Button>
+          </ModalButton>
           <ModalButton params={{ create_transaction: true }}>
             <Button>Cadastrar transação</Button>
           </ModalButton>
