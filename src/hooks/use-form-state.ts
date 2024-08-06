@@ -1,24 +1,24 @@
 import { FormEvent, useState, useTransition } from 'react'
 
-interface FormState {
+interface FormState<T> {
   success: boolean
   message: string | null
-  errors: Record<string, string[]> | null
+  errors: T | null
 }
 
-interface UseFormState {
-  action: (data: FormData) => Promise<FormState>
+interface UseFormState<T> {
+  action: (data: FormData) => Promise<FormState<T>>
   onSuccess?: (message: string | null) => Promise<void> | void
-  initialState?: FormState
+  initialState?: FormState<T>
   onError?: (message: string | null) => Promise<void> | void
 }
 
-export function useFormState({
+export function useFormState<T>({
   action,
   initialState,
   onError,
   onSuccess,
-}: UseFormState) {
+}: UseFormState<T>) {
   const [isPending, startTransition] = useTransition()
 
   const [formState, setFormState] = useState(
