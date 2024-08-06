@@ -4,7 +4,7 @@ import { getCustomers } from '@/http/customers/get-customers'
 import { formatCurrency } from '@/utils/format-currency'
 import { TableActions } from './customers-table-actions'
 
-import { CreateCustomerModal } from '@/components/modals/create-customer-modal'
+import { CreateCustomerModal } from '@/components/modals/customers/create-customer-modal'
 
 interface CustomersTableProps {
   searchParams: {
