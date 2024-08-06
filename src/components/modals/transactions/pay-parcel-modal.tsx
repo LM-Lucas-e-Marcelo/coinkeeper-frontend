@@ -9,6 +9,7 @@ import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { Textarea } from '@/components/form/textarea'
 import { payParcelAction } from '@/actions/transactions/pay-parcel-action'
+import { SUPPORTED_FILES } from '@/constants/files'
 
 export const PayParcelModal = () => {
   const { removeParams, params } = useUrlParams()
@@ -49,6 +50,14 @@ export const PayParcelModal = () => {
               error={errors?.paymentDate}
             />
 
+            <Input
+              label="Comprovante"
+              name="proofFile"
+              type="file"
+              defaultValue={parcelId}
+              accept={SUPPORTED_FILES.toString()}
+              error={errors?.proofFile}
+            />
             <Textarea label="Observação" name="observation" />
             <Input name="id" type="hidden" defaultValue={parcelId} />
             <Input

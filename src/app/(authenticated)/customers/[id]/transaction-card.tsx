@@ -1,6 +1,6 @@
 import { ModalButton } from '@/components/modal-button'
 import { tv } from 'tailwind-variants'
-import { FiEye, FiTrash2 } from '@/assets/icons'
+import { FiEye, FiTrash2, LiaFileContractSolid } from '@/assets/icons'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
 import { formatDate } from '@/utils/format-date'
@@ -12,7 +12,7 @@ const transactionCard = tv({
     cardSection: 'flex flex-col gap-4',
     secondCardSection: 'flex flex-col gap-4 items-end justify-around',
     cardSpan: 'text-center',
-    cardActions: 'flex gap-4',
+    cardActions: 'flex gap-2 items-center',
   },
 
   variants: {
@@ -66,6 +66,11 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <p>{formatDate(transaction.paymentDate) || '-'}</p>
         </span>
         <span className={cardActions()}>
+          {transaction.contractFileUrl && (
+            <a href={transaction.contractFileUrl} target="_blank">
+              <LiaFileContractSolid size={26} className="text-orange" />
+            </a>
+          )}
           <ModalButton params={{ [`parcels_details_${transaction.id}`]: true }}>
             <FiEye size={24} className="text-primary" />
           </ModalButton>

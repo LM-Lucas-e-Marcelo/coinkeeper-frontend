@@ -78,6 +78,7 @@ export const CreateCustomerModal = () => {
               label="Comprovante de residencia"
               name="proofAddressFile"
               error={errors?.proofAddressFile}
+              accept={SUPPORTED_FILES.toString()}
             />
           </div>
         </Modal.Content>

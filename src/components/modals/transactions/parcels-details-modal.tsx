@@ -48,6 +48,10 @@ export const ParcelsDetailsModal = ({
     removeParams([`parcels_details_${transactionId}`])
   }, [removeParams, transactionId])
 
+  const handleSeeProofPayment = (url: string) => {
+    window.open(url, '_blank')
+  }
+
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Parcelas</Modal.Header>
@@ -88,6 +92,14 @@ export const ParcelsDetailsModal = ({
                 <p>{parcel.observation || '-'}</p>
               </span>
               <ButtonGroup align="end">
+                {parcel.proofFileUrl && (
+                  <Button
+                    onClick={() => handleSeeProofPayment(parcel.proofFileUrl)}
+                    variant="secondary"
+                  >
+                    Ver comprovante
+                  </Button>
+                )}
                 {parcel.paymentDate !== null ? (
                   <Button type="button" variant="danger">
                     <ModalButton

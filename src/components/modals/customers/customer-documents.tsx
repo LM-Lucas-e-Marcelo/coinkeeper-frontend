@@ -74,7 +74,7 @@ export const CustomerDocumentsModal = ({
         </div>
       </Modal.Content>
       <Modal.Actions>
-        <Button type="button" onClick={handleCloseModal} variant="danger">
+        <Button type="button" onClick={handleCloseModal}>
           Fechar
         </Button>
       </Modal.Actions>

@@ -12,6 +12,7 @@ import { Select } from '@/components/form/select'
 import { Textarea } from '@/components/form/textarea'
 import { createTransactionAction } from '@/actions/transactions/create-transaction-action'
 import { CustomerDetailsPageProps } from '@/app/(authenticated)/customers/[id]/page'
+import { SUPPORTED_FILES } from '@/constants/files'
 
 export const CreateTransactionModal = ({
   params: customerParams,
@@ -76,11 +77,24 @@ export const CreateTransactionModal = ({
                 error={errors?.value}
               />
             </div>
-
+            <div className="flex gap-3 items-start">
+              <Input
+                label="Intervalo em dias entre os pagamentos"
+                name="differenceBetweenParcels"
+                error={errors?.differenceBetweenParcels}
+              />
+              <Input
+                label="Despesas"
+                name="companyExpense"
+                error={errors?.companyExpense}
+              />
+            </div>
             <Input
-              label="Intervalo em dias entre os pagamentos"
-              name="differenceBetweenParcels"
-              error={errors?.differenceBetweenParcels}
+              type="file"
+              label="Contrato"
+              name="contractFile"
+              error={errors?.contractFile}
+              accept={SUPPORTED_FILES.toString()}
             />
             <Textarea
               label="Descrição"
