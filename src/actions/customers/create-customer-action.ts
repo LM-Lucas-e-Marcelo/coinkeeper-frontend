@@ -1,5 +1,6 @@
 'use server'
 
+import { SUPPORTED_SIZE } from '@/constants/files'
 import { createCustomer } from '@/http/customers/create-customer'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
@@ -12,6 +13,14 @@ const createCustomerSchema = z.object({
   phoneWhatsapp: z.string().nullish(),
   address: z.string().nullish(),
   email: z.string().nullish(),
+  businessAddress: z.string().nullish(),
+  residentialAddress: z.string().nullish(),
+  documentFile: z.any().refine((file) => {
+    return !file || file?.size <= SUPPORTED_SIZE
+  }, 'O arquivo deve ser menor que 25mb'),
+  proofAddressFile: z.any().refine((file) => {
+    return file && file?.size <= SUPPORTED_SIZE
+  }, 'O arquivo deve ser menor que 25mb'),
 })
 
 export async function createCustomerAction(data: FormData) {
@@ -23,7 +32,18 @@ export async function createCustomerAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { name, email, address, document, phone, phoneWhatsapp } = result.data
+  const {
+    name,
+    email,
+    address,
+    document,
+    phone,
+    phoneWhatsapp,
+    businessAddress,
+    documentFile,
+    proofAddressFile,
+    residentialAddress,
+  } = result.data
 
   try {
     await createCustomer({
@@ -33,6 +53,10 @@ export async function createCustomerAction(data: FormData) {
       document,
       phone,
       phoneWhatsapp,
+      businessAddress,
+      documentFile,
+      proofAddressFile,
+      residentialAddress,
     })
 
     revalidateTag('customers')
