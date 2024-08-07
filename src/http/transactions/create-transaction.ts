@@ -11,28 +11,14 @@ interface CreateTransactionRequest {
   contractFile?: File
 }
 
-export async function createTransaction({
-  customerId,
-  firstDueDate,
-  totalParcels,
-  description,
-  value,
-  differenceBetweenParcels,
-  companyExpense,
-  contractFile,
-}: CreateTransactionRequest) {
+export async function createTransaction(props: CreateTransactionRequest) {
+  const formData = new FormData()
+
+  Object.entries(props).map(([key, values]) => formData.append(key, values))
+
   const result = await api
     .post('customer-transactions', {
-      json: {
-        customerId,
-        firstDueDate,
-        totalParcels,
-        description,
-        value,
-        differenceBetweenParcels,
-        companyExpense,
-        contractFile,
-      },
+      body: formData,
     })
     .json()
 

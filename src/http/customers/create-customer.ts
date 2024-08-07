@@ -13,24 +13,14 @@ interface CreateCustomerRequest {
   proofAddressFile?: File
 }
 
-export async function createCustomer({
-  name,
-  address,
-  document,
-  email,
-  phone,
-  phoneWhatsapp,
-}: CreateCustomerRequest) {
+export async function createCustomer(props: CreateCustomerRequest) {
+  const formData = new FormData()
+
+  Object.entries(props).map(([key, value]) => formData.append(key, value))
+
   const result = await api
     .post('customers', {
-      json: {
-        name,
-        address,
-        document,
-        email,
-        phone,
-        phoneWhatsapp,
-      },
+      body: formData,
     })
     .json()
 

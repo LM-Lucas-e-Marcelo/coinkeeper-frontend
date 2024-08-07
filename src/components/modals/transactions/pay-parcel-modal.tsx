@@ -54,7 +54,6 @@ export const PayParcelModal = () => {
               label="Comprovante"
               name="proofFile"
               type="file"
-              defaultValue={parcelId}
               accept={SUPPORTED_FILES.toString()}
               error={errors?.proofFile}
             />

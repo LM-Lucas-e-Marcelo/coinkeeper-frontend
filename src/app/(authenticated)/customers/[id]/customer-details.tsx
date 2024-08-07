@@ -53,14 +53,14 @@ export async function CustomerDetails({ params }: CustomerDetailsPageProps) {
             <p>{customer?.residentialAddress ?? '-'}</p>
           </section>
           <section>
-            <strong>mpresarial</strong>
+            <strong>Empresarial</strong>
             <p>{customer?.businessAddress ?? '-'}</p>
           </section>
         </address>
       </aside>
       <CustomerDocumentsModal
-      // documentUrl={customer?.documentFileUrl}
-      // proofAddressUrl={customer?.proofAddressFileUrl}
+        documentUrl={customer?.documentFileUrl}
+        proofAddressUrl={customer?.proofAddressFileUrl}
       />
     </>
   )
