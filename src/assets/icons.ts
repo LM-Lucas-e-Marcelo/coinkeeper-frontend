@@ -12,3 +12,4 @@ export {
 } from 'react-icons/fi'
 export { RiUserSettingsLine } from 'react-icons/ri'
 export { LiaFileContractSolid } from 'react-icons/lia'
+export { BsBox2 } from 'react-icons/bs'
