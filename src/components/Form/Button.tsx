@@ -8,7 +8,7 @@ const button = tv({
       true: 'p-2',
     },
     variant: {
-      danger: 'bg-red',
+      danger: 'bg-red border-red',
       secondary:
         'bg-transparent text-primary hover:enabled:bg-primary hover:enabled:text-white hover:enabled:opacity-1',
     },
