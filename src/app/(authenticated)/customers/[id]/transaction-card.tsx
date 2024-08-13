@@ -65,6 +65,10 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <strong>Data da quitação</strong>
           <p>{formatDate(transaction.paymentDate) || '-'}</p>
         </span>
+        <span className={cardSpan()}>
+          <strong>Despesas</strong>
+          <p>{formatCurrency(transaction.companyExpense) || '-'}</p>
+        </span>
         <span className={cardActions()}>
           {transaction.contractFileUrl && (
             <a href={transaction.contractFileUrl} target="_blank">
