@@ -4,12 +4,11 @@ import { getCustomers } from '@/http/customers/get-customers'
 import { formatCurrency } from '@/utils/format-currency'
 import { TableActions } from './customers-table-actions'
 
-import { CreateCustomerModal } from '@/components/modals/customers/create-customer-modal'
+import { ManagementCustomerModal } from '@/components/modals/customers/management-customer-modal'
 
 interface CustomersTableProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 
@@ -21,7 +20,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
       <Table.Root>
         <Table.Head>
           <Table.Row>
-            <Table.Cell>Nome</Table.Cell>
+            <Table.Cell sortBy="customer.name">Nome</Table.Cell>
             <Table.Cell>Débito</Table.Cell>
             <Table.Cell>Ações</Table.Cell>
           </Table.Row>
@@ -38,7 +37,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
           ))}
         </Table.Body>
       </Table.Root>
-      <CreateCustomerModal />
+      <ManagementCustomerModal />
     </>
   )
 }

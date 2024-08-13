@@ -10,8 +10,7 @@ import { ModalButton } from '@/components/modal-button'
 
 export interface CustomersProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 
@@ -27,7 +26,7 @@ export default async function Customers({ searchParams }: CustomersProps) {
             <Button isIcon>
               <LuFilter size={20} />
             </Button>
-            <ModalButton params={{ create_customer: true }}>
+            <ModalButton params={{ management_customer: true }}>
               <Button>Cadastrar</Button>
             </ModalButton>
           </ButtonGroup>
