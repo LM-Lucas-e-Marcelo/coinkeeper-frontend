@@ -19,18 +19,14 @@ export interface IUsers {
 }
 
 export interface IGetUsers {
-  per?: string
-  content?: string
+  [key: string]: string
 }
 
-export async function getUsers({
-  content = '',
-  per = '',
-}: IGetUsers): Promise<{ users: IUsers }> {
+export async function getUsers(props: IGetUsers): Promise<{ users: IUsers }> {
   const queryParams = new URLSearchParams()
 
-  if (content) {
-    queryParams.append(per, content)
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
   const result = await api.get(`users/search?${queryParams.toString()}`, {

@@ -14,18 +14,14 @@ export interface IRoles {
 }
 
 export interface IGetRoles {
-  per?: string
-  content?: string
+  [key: string]: string
 }
 
-export async function getRoles({
-  content = '',
-  per = '',
-}: IGetRoles): Promise<{ roles: IRoles }> {
+export async function getRoles(props: IGetRoles): Promise<{ roles: IRoles }> {
   const queryParams = new URLSearchParams()
 
-  if (content) {
-    queryParams.append(per, content)
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
   const result = api.get(`roles/search?${queryParams.toString()}`, {
