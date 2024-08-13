@@ -10,8 +10,7 @@ import { ModalButton } from '@/components/modal-button'
 
 export interface ProductsProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 

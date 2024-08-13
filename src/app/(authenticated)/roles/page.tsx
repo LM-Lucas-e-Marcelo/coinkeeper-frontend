@@ -11,8 +11,7 @@ import { CreateRoleModal } from '@/components/modals/roles/create-role-modal'
 
 export interface RolesProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 

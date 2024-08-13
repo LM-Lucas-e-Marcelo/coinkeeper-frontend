@@ -7,8 +7,7 @@ import { DeleteProductModal } from '@/components/modals/products/delete-product-
 
 interface ProductsTableProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 
@@ -20,7 +19,7 @@ export async function ProductsTable({ searchParams }: ProductsTableProps) {
       <Table.Root>
         <Table.Head>
           <Table.Row>
-            <Table.Cell>Nome</Table.Cell>
+            <Table.Cell sortBy="products.name">Nome</Table.Cell>
             <Table.Cell>Parcelas</Table.Cell>
             <Table.Cell>Valor</Table.Cell>
             <Table.Cell>Ações</Table.Cell>
