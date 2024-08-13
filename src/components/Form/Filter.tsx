@@ -1,8 +1,9 @@
 'use client'
 import { tv } from 'tailwind-variants'
 import { Button } from './button'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { useUrlParams } from '@/hooks/use-params'
+import { FormEvent } from 'react'
+import { z } from 'zod'
 
 const filter = tv({
   slots: {
@@ -10,6 +11,11 @@ const filter = tv({
     select: 'border border-zinc-300 p-2 rounded-md',
     input: 'border border-zinc-300 p-[6px] rounded-md',
   },
+})
+
+const filterSchema = z.object({
+  per: z.string(),
+  content: z.string().nullish(),
 })
 
 const { base, select, input } = filter()
@@ -21,40 +27,38 @@ interface FilterProps {
   }>
 }
 
-interface IForm {
-  per: string
-  content: string
-}
-
 export const Filter = ({ options }: FilterProps) => {
   const { addParams, removeParams } = useUrlParams()
-  const { register, handleSubmit } = useForm<IForm>()
 
-  const onSubmit: SubmitHandler<IForm> = ({ content, per }): void => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const result = filterSchema.safeParse(Object.fromEntries(data))
+
+    if (!result.success) return
+
+    const { per, content } = result.data
+
     if (!content) {
-      return removeParams(['per', 'content'])
+      return removeParams([per])
     }
 
     addParams({
-      per,
-      content,
+      [per]: content,
     })
   }
 
   return (
-    <form className={base()} onSubmit={handleSubmit(onSubmit)}>
-      <select className={select()} {...register('per')}>
+    <form className={base()} onSubmit={onSubmit}>
+      <select className={select()} name="per">
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.name}
           </option>
         ))}
       </select>
-      <input
-        placeholder="Buscar"
-        className={input()}
-        {...register('content')}
-      />
+      <input placeholder="Buscar" className={input()} name="content" />
       <Button>Filtrar</Button>
     </form>
   )
