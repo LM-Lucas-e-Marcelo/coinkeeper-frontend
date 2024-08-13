@@ -16,18 +16,16 @@ export interface IProducts {
 }
 
 export interface IGetProducts {
-  per?: string
-  content?: string
+  [key: string]: string
 }
 
-export async function getProducts({
-  content = '',
-  per = '',
-}: IGetProducts): Promise<{ products: IProducts }> {
+export async function getProducts(
+  props: IGetProducts,
+): Promise<{ products: IProducts }> {
   const queryParams = new URLSearchParams()
 
-  if (content) {
-    queryParams.append(per, content)
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
   const result = await api.get(`products/search?${queryParams.toString()}`, {
