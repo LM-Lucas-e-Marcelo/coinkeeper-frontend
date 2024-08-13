@@ -9,14 +9,13 @@ import { getRoles } from '@/http/roles/get-roles'
 
 interface UsersTableProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 
 export async function UsersTable({ searchParams }: UsersTableProps) {
   const { users } = await getUsers(searchParams)
-  const { roles } = await getRoles({ per: '', content: '' })
+  const { roles } = await getRoles({})
 
   return (
     <>

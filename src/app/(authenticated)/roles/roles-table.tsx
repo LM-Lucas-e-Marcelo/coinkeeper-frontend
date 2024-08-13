@@ -6,8 +6,7 @@ import { getRoles } from '@/http/roles/get-roles'
 
 interface UsersTableProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 

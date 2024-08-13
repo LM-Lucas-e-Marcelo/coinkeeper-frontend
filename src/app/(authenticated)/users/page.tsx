@@ -10,8 +10,7 @@ import { TableLoading } from '@/components/loadings/table-loading'
 
 export interface UsersProps {
   searchParams: {
-    per?: string
-    content?: string
+    [key: string]: string
   }
 }
 
