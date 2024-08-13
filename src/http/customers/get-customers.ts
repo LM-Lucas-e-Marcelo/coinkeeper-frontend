@@ -15,18 +15,16 @@ export interface ICustomers {
 }
 
 export interface IGetCustomers {
-  per?: string
-  content?: string
+  [key: string]: string
 }
 
-export async function getCustomers({
-  content = '',
-  per = '',
-}: IGetCustomers): Promise<{ customers: ICustomers }> {
+export async function getCustomers(
+  props: IGetCustomers,
+): Promise<{ customers: ICustomers }> {
   const queryParams = new URLSearchParams()
 
-  if (content) {
-    queryParams.append(per, content)
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
   const result = await api.get(`customers/search?${queryParams.toString()}`, {

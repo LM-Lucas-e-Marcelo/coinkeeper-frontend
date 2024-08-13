@@ -18,6 +18,7 @@ export async function signInWithPassword({
       json: {
         username,
         password,
+        organizationId: 1,
       },
     })
     .json<SignInWithPasswordResponse>()
