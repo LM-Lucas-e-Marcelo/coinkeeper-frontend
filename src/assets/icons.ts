@@ -15,5 +15,8 @@ export {
   FiX,
 } from 'react-icons/fi'
 export { RiUserSettingsLine } from 'react-icons/ri'
-export { LiaFileContractSolid } from 'react-icons/lia'
+export {
+  LiaFileContractSolid,
+  LiaFileInvoiceDollarSolid,
+} from 'react-icons/lia'
 export { BsBox2 } from 'react-icons/bs'
