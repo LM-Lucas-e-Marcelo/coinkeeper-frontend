@@ -3,6 +3,7 @@ import {
   MdOutlineDashboard,
   RiUserSettingsLine,
   BsBox2,
+  LiaFileInvoiceDollarSolid,
 } from '@/assets/icons'
 
 export const SIDEBAR_ITEMS = {
@@ -25,5 +26,9 @@ export const SIDEBAR_ITEMS = {
   Produtos: {
     path: '/products',
     icon: <BsBox2 size={18} />,
+  },
+  Despesas: {
+    path: '/expenses',
+    icon: <LiaFileInvoiceDollarSolid size={20} />,
   },
 }
