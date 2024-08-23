@@ -7,6 +7,9 @@ authRoute.post('/auth/sign-in', ({ set }) => {
 
   return {
     token: 'some token',
+    user: {
+      name: 'Marcelo Rebelo',
+    },
   }
 })
 

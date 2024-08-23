@@ -6,6 +6,7 @@ import { customersRoute } from './routes/customers'
 import { transactionsRoute } from './routes/transactions'
 import { productsRoute } from './routes/products'
 import { organizationExpensesRoute } from './routes/organization-expenses'
+import { pendingCustomersRoute } from './routes/pendings/customers'
 
 const app = new Elysia()
 
@@ -16,5 +17,6 @@ app.use(customersRoute)
 app.use(transactionsRoute)
 app.use(productsRoute)
 app.use(organizationExpensesRoute)
+app.use(pendingCustomersRoute)
 
 export { app }

@@ -40,8 +40,11 @@ organizationExpensesRoute.patch(
   },
 )
 
-// customersRoute.delete('/customers/:id', ({ set }) => {
-//   set.status = 204
-// })
+organizationExpensesRoute.delete(
+  '/organization-expense-transactions/:id',
+  ({ set }) => {
+    set.status = 204
+  },
+)
 
 export { organizationExpensesRoute }
