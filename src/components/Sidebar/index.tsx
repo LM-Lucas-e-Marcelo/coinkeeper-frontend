@@ -1,20 +1,21 @@
 /* eslint-disable prettier/prettier */
-import { MdLogout } from '@/assets/icons'
+
 import { Logo } from '../logo'
 import { NavItem } from './nav-item'
 import { SIDEBAR_ITEMS } from '@/constants/sidebar'
 import { tv } from 'tailwind-variants'
+
+import { SignOutButton } from './signout-button'
 
 const sidebar = tv({
   slots: {
     base: 'bg-secondary h-screen flex flex-col items-center',
     nav: 'w-full p-1 flex flex-col h-full justify-between mt-10',
     ul: 'flex flex-col gap-3',
-    logoutButton: 'flex w-full p-3 gap-3 items-center',
   },
 })
 
-const { base, nav, ul, logoutButton } = sidebar()
+const { base, nav, ul } = sidebar()
 
 export const Sidebar = () => {
   return (
@@ -27,13 +28,10 @@ export const Sidebar = () => {
               <NavItem key={index} href={path} icon={icon}>
                 {name}
               </NavItem>
-            )
+            ),
           )}
         </ul>
-        <button className={logoutButton()}>
-          <MdLogout size={20} />
-          Sair
-        </button>
+        <SignOutButton />
       </nav>
     </div>
   )

@@ -7,6 +7,9 @@ interface SignInWithPasswordRequest {
 
 export interface SignInWithPasswordResponse {
   token: string
+  user: {
+    name: string
+  }
 }
 
 export async function signInWithPassword({
