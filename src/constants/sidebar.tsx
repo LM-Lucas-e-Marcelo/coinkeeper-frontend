@@ -4,6 +4,7 @@ import {
   RiUserSettingsLine,
   BsBox2,
   LiaFileInvoiceDollarSolid,
+  GoBell,
 } from '@/assets/icons'
 
 export const SIDEBAR_ITEMS = {
@@ -30,5 +31,9 @@ export const SIDEBAR_ITEMS = {
   Despesas: {
     path: '/expenses',
     icon: <LiaFileInvoiceDollarSolid size={20} />,
+  },
+  Pendências: {
+    path: '/pending',
+    icon: <GoBell size={20} />,
   },
 }

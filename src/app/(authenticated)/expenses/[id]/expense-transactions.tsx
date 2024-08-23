@@ -1,9 +1,10 @@
 import { tv } from 'tailwind-variants'
 import { TransactionCard } from './transaction-card'
-import { DeleteTransactionModal } from '@/components/modals/transactions/delete-transaction-modal'
 import { ExpenseDetailsPageProps } from './page'
 import { getExpenseById } from '@/http/expenses/get-expense-by-id'
 import { ManagementExpenseTransactionModal } from '@/components/modals/expenses/management-expense-transactions-modal'
+import { ManagementExpenseModal } from '@/components/modals/expenses/management-expenses-modal'
+import { DeleteExpenseTransactionModal } from '@/components/modals/expenses/delete-expense-transaction-modal'
 
 const expenseTransactions = tv({
   slots: {
@@ -22,7 +23,7 @@ export async function ExpenseTransactions({ params }: ExpenseDetailsPageProps) {
   return (
     <div className={container()}>
       <section className={section()}>
-        <strong className={headerTitle()}>Despesas</strong>
+        <strong className={headerTitle()}>{expenseById.name}</strong>
         {expenseById?.transactions?.map((transaction) => {
           return (
             <TransactionCard key={transaction.id} transaction={transaction} />
@@ -34,7 +35,8 @@ export async function ExpenseTransactions({ params }: ExpenseDetailsPageProps) {
         id={params.id}
         transactions={expenseById.transactions}
       />
-      <DeleteTransactionModal />
+      <DeleteExpenseTransactionModal />
+      <ManagementExpenseModal expense={expenseById} />
     </div>
   )
 }

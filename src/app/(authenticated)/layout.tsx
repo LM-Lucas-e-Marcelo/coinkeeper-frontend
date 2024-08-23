@@ -1,6 +1,8 @@
+import { isAuthenticated } from '@/auth/auth'
 import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'CoinKeeper',
@@ -11,6 +13,10 @@ export default function AuthenticatedLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  if (!isAuthenticated()) {
+    redirect('/')
+  }
+
   return (
     <div className="grid min-h-screen w-full grid-cols-[200px_calc(100%-200px)] text-darkgray">
       <Sidebar />

@@ -7,6 +7,7 @@ import { formatGenericPayload } from '../../utils/format-generic-payload'
 
 export function createRandomExpense(): IExpense {
   return {
+    id: faker.number.int({ max: 1000, min: 1 }),
     name: faker.person.fullName(),
     totalDebt: faker.number.int({ max: 1000, min: 1 }),
   }

@@ -27,6 +27,9 @@ export default function ExpenseDetailsPage({
     <>
       <PageHeader>
         <ButtonGroup align="end">
+          <ModalButton params={{ management_expense: true, update: true }}>
+            <Button>Editar transação</Button>
+          </ModalButton>
           <ModalButton params={{ management_expense_transaction: true }}>
             <Button>Cadastrar despesa</Button>
           </ModalButton>

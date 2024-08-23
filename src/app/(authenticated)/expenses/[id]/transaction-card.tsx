@@ -62,7 +62,10 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             <FiEdit size={24} className="text-orange" />
           </ModalButton>
           <ModalButton
-            params={{ delete_transaction: true, transaction: transaction.id }}
+            params={{
+              delete_expense_transaction: true,
+              transaction: transaction.id,
+            }}
           >
             <FiTrash2 size={24} className="text-red" />
           </ModalButton>

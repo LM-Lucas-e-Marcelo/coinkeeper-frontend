@@ -11,6 +11,9 @@ const orderIcon = tv({
       true: 'rotate-180 ',
       false: 'rotate-0',
     },
+    isActive: {
+      true: 'text-primary',
+    },
   },
 })
 
@@ -23,6 +26,7 @@ export const TableCell = ({ children, sortBy }: TableCellProps) => {
   const { addParams, params } = useUrlParams()
 
   const sortDirection = params.get('sortDirection')
+  const sortByParam = params.get('sortBy')
 
   const handleOrderBy = () => {
     addParams({
@@ -37,7 +41,10 @@ export const TableCell = ({ children, sortBy }: TableCellProps) => {
         <button onClick={handleOrderBy} className="flex items-center gap-2">
           {children}
           <IoIosArrowDown
-            className={orderIcon({ isAsc: sortDirection === 'asc' })}
+            className={orderIcon({
+              isAsc: sortDirection === 'asc',
+              isActive: sortByParam === sortBy,
+            })}
           />
         </button>
       ) : (

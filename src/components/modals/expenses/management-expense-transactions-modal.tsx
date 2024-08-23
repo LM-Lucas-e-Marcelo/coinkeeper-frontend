@@ -23,13 +23,14 @@ export const ManagementExpenseTransactionModal = ({
   transactions,
 }: ManagementExpenseTransactionModalProps) => {
   const [selectedTransaction, setSelectedTransaction] =
-    useState<IExpenseTransaction>()
+    useState<IExpenseTransaction | null>()
   const { removeParams, params } = useUrlParams()
   const isOpen = params.has('management_expense_transaction')
   const transactionId = params.get('transaction')
 
   const handleCloseModal = useCallback(() => {
     removeParams(['management_expense_transaction', 'transaction'])
+    setSelectedTransaction(null)
   }, [removeParams])
 
   const onSuccess = (message: string | null) => {

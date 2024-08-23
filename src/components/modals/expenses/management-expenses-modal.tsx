@@ -56,6 +56,9 @@ export const ManagementExpenseModal = ({
       <Modal.Header>{isUpdate ? 'Editar' : 'Cadastrar'} Despesa</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
+          {isUpdate && (
+            <Input name="id" defaultValue={expense?.id} type="hidden" />
+          )}
           <Input
             label="Nome"
             name="name"

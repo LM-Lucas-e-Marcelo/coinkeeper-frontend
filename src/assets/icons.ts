@@ -1,3 +1,4 @@
+export { GoBell } from 'react-icons/go'
 export { CgDanger } from 'react-icons/cg'
 export { MdOutlineDashboard, MdLogout } from 'react-icons/md'
 export { LuUsers, LuFilter } from 'react-icons/lu'

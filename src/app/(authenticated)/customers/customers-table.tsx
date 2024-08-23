@@ -20,7 +20,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
       <Table.Root>
         <Table.Head>
           <Table.Row>
-            <Table.Cell sortBy="customer.name">Nome</Table.Cell>
+            <Table.Cell sortBy="customers.name">Nome</Table.Cell>
             <Table.Cell>Débito</Table.Cell>
             <Table.Cell>Ações</Table.Cell>
           </Table.Row>
