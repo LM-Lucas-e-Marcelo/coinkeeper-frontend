@@ -2,6 +2,7 @@
 import { tv } from 'tailwind-variants'
 import { SearchInput } from './form/search-input'
 import { IoIosNotificationsOutline } from '@/assets/icons'
+import { getUser } from '@/auth/auth'
 
 const header = tv({
   slots: {
@@ -30,7 +31,7 @@ export const Header = () => {
   return (
     <header className={base()}>
       <div className={profile()}>
-        <strong className={userName()}>Olá, John doe</strong>
+        <strong className={userName()}>Olá, {getUser()}</strong>
         <time className={time()}>{new Date().toLocaleDateString()}</time>
       </div>
       <div className={actions()}>
