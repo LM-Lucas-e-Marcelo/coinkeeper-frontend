@@ -1,6 +1,11 @@
 export { GoBell } from 'react-icons/go'
-export { CgDanger } from 'react-icons/cg'
-export { MdOutlineDashboard, MdLogout } from 'react-icons/md'
+export { CgDanger, CgSpinner } from 'react-icons/cg'
+export {
+  MdOutlineDashboard,
+  MdLogout,
+  MdOutlineArrowBackIosNew,
+  MdOutlineArrowForwardIos,
+} from 'react-icons/md'
 export { LuUsers, LuFilter } from 'react-icons/lu'
 export {
   IoIosSearch,
@@ -21,3 +26,5 @@ export {
   LiaFileInvoiceDollarSolid,
 } from 'react-icons/lia'
 export { BsBox2 } from 'react-icons/bs'
+
+export { GoOrganization } from 'react-icons/go'

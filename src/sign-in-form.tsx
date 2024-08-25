@@ -24,7 +24,7 @@ export function SignInForm() {
       toast(message, { type: 'error' })
     },
     onSuccess() {
-      router.push('/dashboard')
+      router.push('/companies')
     },
   })
   return (

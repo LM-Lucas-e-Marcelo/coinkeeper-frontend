@@ -6,6 +6,8 @@ import { SIDEBAR_ITEMS } from '@/constants/sidebar'
 import { tv } from 'tailwind-variants'
 
 import { SignOutButton } from './signout-button'
+import { SignOutCompanyButton } from './signout-company-button'
+import { isAuthenticatedWithCompany } from '@/auth/auth'
 
 const sidebar = tv({
   slots: {
@@ -23,15 +25,19 @@ export const Sidebar = () => {
       <Logo />
       <nav className={nav()}>
         <ul className={ul()}>
-          {Object.entries(SIDEBAR_ITEMS).map(
-            ([name, { icon, path }], index) => (
-              <NavItem key={index} href={path} icon={icon}>
-                {name}
-              </NavItem>
-            ),
-          )}
+          {isAuthenticatedWithCompany() &&
+            Object.entries(SIDEBAR_ITEMS).map(
+              ([name, { icon, path }], index) => (
+                <NavItem key={index} href={path} icon={icon}>
+                  {name}
+                </NavItem>
+              ),
+            )}
         </ul>
-        <SignOutButton />
+        <div>
+          <SignOutCompanyButton />
+          <SignOutButton />
+        </div>
       </nav>
     </div>
   )

@@ -5,7 +5,7 @@ import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
 import { toast } from 'react-toastify'
-import { useCallback } from 'react'
+import { FormEvent, useCallback, useRef } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { Select } from '@/components/form/select'
@@ -13,16 +13,47 @@ import { Textarea } from '@/components/form/textarea'
 import { createTransactionAction } from '@/actions/transactions/create-transaction-action'
 import { CustomerDetailsPageProps } from '@/app/(authenticated)/customers/[id]/page'
 import { SUPPORTED_FILES } from '@/constants/files'
+import { IProducts } from '@/http/products/get-products'
+
+interface CreateTransactionModalProps extends CustomerDetailsPageProps {
+  products: IProducts
+}
 
 export const CreateTransactionModal = ({
   params: customerParams,
-}: CustomerDetailsPageProps) => {
+  products,
+}: CreateTransactionModalProps) => {
   const { removeParams, params } = useUrlParams()
   const isOpen = params.has('create_transaction')
+  const formRef = useRef<HTMLFormElement>(null)
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = useCallback((): void => {
     removeParams(['create_transaction'])
   }, [removeParams])
+
+  const handleChange = useCallback(
+    (event: FormEvent<HTMLInputElement>): void => {
+      const { value: inputValue } = event.currentTarget
+      const form = formRef.current
+
+      const selectedProduct = products.items.find(
+        (product) => product.id === +inputValue,
+      )
+
+      const formValue = form?.elements.namedItem('value') as HTMLInputElement
+      const parcel = form?.elements.namedItem(
+        'totalParcels',
+      ) as HTMLSelectElement
+      const product = form?.elements.namedItem('products') as HTMLInputElement
+
+      if (selectedProduct && formValue && parcel && product) {
+        formValue.value = String(selectedProduct.value)
+        parcel.value = String(selectedProduct.parcels)
+        product.value = selectedProduct.name
+      }
+    },
+    [products.items],
+  )
 
   const onSuccess = (message: string | null) => {
     toast(message, { type: 'success' })
@@ -47,7 +78,7 @@ export const CreateTransactionModal = ({
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Cadastrar transação</Modal.Header>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
             <Input
@@ -55,6 +86,19 @@ export const CreateTransactionModal = ({
               type="hidden"
               defaultValue={customerParams?.id}
             />
+            <Input
+              label="Produtos"
+              name="products"
+              list="products"
+              onChange={handleChange}
+            />
+            <datalist id="products">
+              {products.items.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.name}
+                </option>
+              ))}
+            </datalist>
             <Input
               label="Data da primeira parcela"
               name="firstDueDate"

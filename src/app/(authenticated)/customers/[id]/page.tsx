@@ -6,6 +6,8 @@ import { ButtonGroup } from '@/components/form/button-group'
 import { ModalButton } from '@/components/modal-button'
 import { Button } from '@/components/form/button'
 import { CreateTransactionModal } from '@/components/modals/transactions/create-transaction-modal'
+import { getProducts } from '@/http/products/get-products'
+import { getCustomerById } from '@/http/customers/get-customer-by-id'
 
 const customerDeatils = tv({
   slots: {
@@ -21,9 +23,11 @@ export interface CustomerDetailsPageProps {
 
 const { container } = customerDeatils()
 
-export default function CustomerDetailsPage({
+export default async function CustomerDetailsPage({
   params,
 }: CustomerDetailsPageProps) {
+  const { products } = await getProducts({ limit: 0 })
+  const { customer } = await getCustomerById({ id: params?.id })
   return (
     <>
       <PageHeader>
@@ -32,14 +36,14 @@ export default function CustomerDetailsPage({
             <Button>Documentos</Button>
           </ModalButton>
           <ModalButton params={{ create_transaction: true }}>
-            <Button>Cadastrar transação</Button>
+            <Button>Cadastrar Transação</Button>
           </ModalButton>
         </ButtonGroup>
       </PageHeader>
       <div className={container()}>
-        <CustomerDetails params={params} />
-        <CustomerTransactions params={params} />
-        <CreateTransactionModal params={params} />
+        <CustomerDetails customer={customer} />
+        <CustomerTransactions params={params} customerScore={customer?.score} />
+        <CreateTransactionModal params={params} products={products} />
       </div>
     </>
   )

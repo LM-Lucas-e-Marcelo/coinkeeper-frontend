@@ -16,7 +16,7 @@ export interface IProducts {
 }
 
 export interface IGetProducts {
-  [key: string]: string
+  [key: string]: string | number
 }
 
 export async function getProducts(
@@ -25,7 +25,9 @@ export async function getProducts(
   const queryParams = new URLSearchParams()
 
   if (props) {
-    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
+    Object.entries(props).map(([key, value]) =>
+      queryParams.append(key, String(value)),
+    )
   }
 
   const result = await api.get(`products/search?${queryParams.toString()}`, {

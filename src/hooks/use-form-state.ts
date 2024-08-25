@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, useState, useTransition } from 'react'
 
 interface FormState<T> {
@@ -7,10 +8,11 @@ interface FormState<T> {
 }
 
 interface UseFormState<T> {
-  action: (data: FormData) => Promise<FormState<T>>
+  action: (data: any) => Promise<FormState<T>>
   onSuccess?: (message: string | null) => Promise<void> | void
   initialState?: FormState<T>
   onError?: (message: string | null) => Promise<void> | void
+  payload?: unknown
 }
 
 export function useFormState<T>({
@@ -18,6 +20,7 @@ export function useFormState<T>({
   initialState,
   onError,
   onSuccess,
+  payload,
 }: UseFormState<T>) {
   const [isPending, startTransition] = useTransition()
 
@@ -31,7 +34,7 @@ export function useFormState<T>({
     const data = new FormData(form)
 
     startTransition(async () => {
-      const state = await action(data)
+      const state = await action(payload ?? data)
 
       if (state.success && onSuccess) {
         await onSuccess(state.message)

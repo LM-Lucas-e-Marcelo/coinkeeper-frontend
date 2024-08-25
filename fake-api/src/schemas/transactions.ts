@@ -26,6 +26,7 @@ export function createRandomTransaction(): ITransactions {
     id: faker.number.int({ min: 1, max: 1000 }),
     totalParcels: 10,
     totalParcelsPaid: faker.number.int({ min: 1, max: 9 }),
+    score: faker.number.int({ min: 1, max: 1000 }),
     differenceBetweenParcels: faker.number.int({ min: 1, max: 10000 }),
     description: faker.lorem.words(),
     value: faker.number.int({ min: 1, max: 10000 }),

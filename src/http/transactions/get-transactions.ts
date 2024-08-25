@@ -14,6 +14,7 @@ export interface IParcel {
 export interface ITransactions {
   id: number
   totalParcels: number
+  score: number
   totalParcelsPaid: number
   differenceBetweenParcels: number
   description: string | null

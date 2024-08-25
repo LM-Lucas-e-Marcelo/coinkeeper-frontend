@@ -2,14 +2,14 @@
 import { tv } from 'tailwind-variants'
 import { SearchInput } from './form/search-input'
 import { IoIosNotificationsOutline } from '@/assets/icons'
-import { getUser } from '@/auth/auth'
+import { getCompanyName, getUser } from '@/auth/auth'
 
 const header = tv({
   slots: {
     base: 'flex justify-between bg-white items-center px-6',
-    profile: 'flex flex-col',
+    profile: 'flex flex-col mt-5',
     userName: 'text-2xl',
-    time: 'text-zinc-300 mt-[-4px]',
+    time: 'text-zinc-300 mt-[0px]',
     actions: 'flex gap-4 items-center',
     notificationButton:
       'size-10 rounded-full flex items-center justify-center bg-secondary',
@@ -32,6 +32,7 @@ export const Header = () => {
     <header className={base()}>
       <div className={profile()}>
         <strong className={userName()}>Olá, {getUser()}</strong>
+        <p>{getCompanyName()}</p>
         <time className={time()}>{new Date().toLocaleDateString()}</time>
       </div>
       <div className={actions()}>

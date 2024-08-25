@@ -4,6 +4,7 @@ export interface ICustomerById {
   id: number
   isActive: boolean
   name: string
+  score: number
   totalDebt: number
   document: string
   phone: string

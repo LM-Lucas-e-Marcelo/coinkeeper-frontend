@@ -4,7 +4,7 @@ import { DeleteTransactionModal } from '@/components/modals/transactions/delete-
 import { getTransactions } from '@/http/transactions/get-transactions'
 import { CustomerDetailsPageProps } from './page'
 import { PayParcelModal } from '@/components/modals/transactions/pay-parcel-modal'
-import { RollbackParcelModal } from '@/components/modals/transactions/rollback-parcel-modal'
+import { CustomerScore } from './customer-score'
 
 const customerTransactions = tv({
   slots: {
@@ -14,13 +14,31 @@ const customerTransactions = tv({
     headerTitle: 'sticky top-0 bg-white w-full py-2',
     divider: 'w-1 bg-primary h-full',
   },
+
+  variants: {
+    isSmall: {
+      true: {
+        section: 'w-[400px] justify-center items-center',
+      },
+    },
+    isAbsolute: {
+      true: {
+        headerTitle: 'absolute',
+      },
+    },
+  },
 })
 
 const { container, section, headerTitle, divider } = customerTransactions()
 
+interface CustomerTransactionsProps extends CustomerDetailsPageProps {
+  customerScore?: number
+}
+
 export async function CustomerTransactions({
   params,
-}: CustomerDetailsPageProps) {
+  customerScore,
+}: CustomerTransactionsProps) {
   const { transactions } = await getTransactions({ customerId: params.id })
 
   return (
@@ -34,13 +52,12 @@ export async function CustomerTransactions({
         })}
       </section>
       <div className={divider()} />
-      <section className={section()}>
-        <strong className={headerTitle()}>Próximas Parcelas</strong>
-        <h1>Validar Calendário</h1>
+      <section className={section({ isSmall: true })}>
+        <strong className={headerTitle({ isAbsolute: true })}>Pontuação</strong>
+        <CustomerScore customerScore={customerScore} />
       </section>
       <DeleteTransactionModal />
       <PayParcelModal />
-      <RollbackParcelModal />
     </div>
   )
 }

@@ -20,6 +20,11 @@ const modalRoot = tv({
         modal: 'mt-[-400px] opacity-0',
       },
     },
+    size: {
+      lg: {
+        modal: 'min-w-[700px]',
+      },
+    },
   },
 })
 
@@ -30,7 +35,12 @@ interface ModalRootProps extends ModalRootVariants {
   children: ReactNode
 }
 
-export const ModalRoot = ({ isOpen, onClose, children }: ModalRootProps) => {
+export const ModalRoot = ({
+  isOpen,
+  onClose,
+  children,
+  size,
+}: ModalRootProps) => {
   const { modal, overlay } = modalRoot({ isOpen })
 
   useEffect(() => {
@@ -46,7 +56,7 @@ export const ModalRoot = ({ isOpen, onClose, children }: ModalRootProps) => {
 
   return (
     <div className={overlay()} onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()} className={modal()}>
+      <div onClick={(e) => e.stopPropagation()} className={modal({ size })}>
         {children}
       </div>
     </div>

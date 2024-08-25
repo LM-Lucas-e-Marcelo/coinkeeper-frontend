@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
-import { CustomerDetailsPageProps } from './page'
-import { getCustomerById } from '@/http/customers/get-customer-by-id'
+
+import { ICustomerById } from '@/http/customers/get-customer-by-id'
 import { formatCurrency } from '@/utils/format-currency'
 import { CustomerDocumentsModal } from '@/components/modals/customers/customer-documents'
 import { ManagementCustomerModal } from '@/components/modals/customers/management-customer-modal'
@@ -19,9 +19,11 @@ const customerDeatils = tv({
 
 const { aside, card, cardTitle, updateIcon } = customerDeatils()
 
-export async function CustomerDetails({ params }: CustomerDetailsPageProps) {
-  const { customer } = await getCustomerById({ id: params?.id })
+interface CustomerDetailsProps {
+  customer: ICustomerById | null
+}
 
+export async function CustomerDetails({ customer }: CustomerDetailsProps) {
   return (
     <>
       <aside className={aside()}>

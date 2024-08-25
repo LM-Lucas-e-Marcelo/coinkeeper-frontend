@@ -17,6 +17,7 @@ function createCustomerById(): ICustomerById {
     isActive: faker.datatype.boolean(),
     name: faker.person.fullName(),
     totalDebt: faker.number.int({ min: 1, max: 10000 }),
+    score: faker.number.int({ min: 1, max: 1000 }),
     document: '999.999.999-99',
     phone: faker.phone.number(),
     phoneWhatsapp: faker.phone.number(),
@@ -32,9 +33,25 @@ function createCustomerById(): ICustomerById {
   }
 }
 
+export function createCustomerWithDebt() {
+  return {
+    id: faker.number.int({ min: 1, max: 10000 }),
+    name: faker.person.fullName(),
+    totalDebt: faker.number.int({ min: 1, max: 10000 }),
+    totalParcels: faker.number.int({ min: 1, max: 10000 }),
+  }
+}
+
 const customersList = faker.helpers.multiple(createRandomCustomer, {
   count: 20,
 })
+
+export const customersWithDebtList = faker.helpers.multiple(
+  createCustomerWithDebt,
+  {
+    count: 20,
+  },
+)
 
 export const Customers = formatGenericPayload<ICustomer[]>({
   data: customersList,
