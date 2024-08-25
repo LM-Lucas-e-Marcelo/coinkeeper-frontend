@@ -2,7 +2,7 @@ import { api } from '../api-client'
 
 export interface ICompany {
   token: string
-  company: {
+  organization: {
     name: string
   }
 }

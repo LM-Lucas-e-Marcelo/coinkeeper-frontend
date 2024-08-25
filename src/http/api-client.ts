@@ -15,7 +15,7 @@ export const api = ky.create({
         }
 
         const token = getCookie('token', { cookies: cookieStore })
-        const organizationTokenToken = getCookie('organization-token', {
+        const organizationToken = getCookie('organization-token', {
           cookies: cookieStore,
         })
 
@@ -23,11 +23,8 @@ export const api = ky.create({
           request.headers.set('tokenaccess', token)
         }
 
-        if (organizationTokenToken) {
-          request.headers.set(
-            'tokenaccess-organization',
-            organizationTokenToken,
-          )
+        if (organizationToken) {
+          request.headers.set('tokenaccess-organization', organizationToken)
         }
       },
     ],

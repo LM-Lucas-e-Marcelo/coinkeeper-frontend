@@ -6,11 +6,11 @@ import { companyAuth } from '@/http/companies/company-auth'
 
 export async function signInCompany(id: number) {
   try {
-    const { token, company } = await companyAuth({
+    const { token, organization } = await companyAuth({
       organizationId: id,
     })
 
-    cookies().set('organization-name', company.name, {
+    cookies().set('organization-name', organization.name, {
       path: '/',
       maxAge: 60 * 60 * 24, // 24hours
     })
