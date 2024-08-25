@@ -54,8 +54,8 @@ export async function createCustomerAction(data: FormData) {
       phone,
       phoneWhatsapp,
       businessAddress,
-      documentFile,
-      proofAddressFile,
+      ...(documentFile?.name !== 'undefined' && { documentFile }),
+      ...(proofAddressFile?.name !== 'undefined' && { proofAddressFile }),
       residentialAddress,
     })
 

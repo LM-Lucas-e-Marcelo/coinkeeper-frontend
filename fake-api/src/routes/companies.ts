@@ -14,7 +14,7 @@ companiesRoute.post('/auth/sign-in/organization', ({ set }) => {
 
   return {
     token: 'company-token',
-    company: {
+    organization: {
       name: 'Loja do relampago Marquinhos',
     },
   }

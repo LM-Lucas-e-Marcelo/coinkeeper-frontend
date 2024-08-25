@@ -28,7 +28,13 @@ export async function payParcelAction(data: FormData) {
   const { id, transactionId, paymentDate, observation, proofFile } = result.data
 
   try {
-    await payParcel({ id, transactionId, paymentDate, observation, proofFile })
+    await payParcel({
+      id,
+      transactionId,
+      paymentDate,
+      observation,
+      ...(proofFile?.name !== 'undefined' && { proofFile }),
+    })
     revalidateTag('transactions')
   } catch (err) {
     if (err instanceof HTTPError) {

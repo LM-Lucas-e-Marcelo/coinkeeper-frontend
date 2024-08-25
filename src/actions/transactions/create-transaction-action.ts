@@ -43,6 +43,8 @@ export async function createTransactionAction(data: FormData) {
     contractFile,
   } = result.data
 
+  console.log(contractFile)
+
   try {
     await createTransaction({
       customerId,
@@ -52,7 +54,7 @@ export async function createTransactionAction(data: FormData) {
       value,
       differenceBetweenParcels,
       companyExpense,
-      contractFile,
+      ...(contractFile?.name !== 'undefined' && { contractFile }),
     })
 
     revalidateTag('transactions')

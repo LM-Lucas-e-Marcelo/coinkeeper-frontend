@@ -57,8 +57,8 @@ export async function updateCustomerAction(data: FormData) {
       phone,
       phoneWhatsapp,
       businessAddress,
-      documentFile,
-      proofAddressFile,
+      ...(proofAddressFile?.name !== 'undefined' && { proofAddressFile }),
+      ...(documentFile?.name !== 'undefined' && { documentFile }),
       residentialAddress,
     })
 
