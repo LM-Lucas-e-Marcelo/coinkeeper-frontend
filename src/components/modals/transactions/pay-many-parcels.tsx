@@ -17,7 +17,7 @@ interface PayManyParcelsProps {
 }
 
 export const PayManyParcels = ({ customers }: PayManyParcelsProps) => {
-  const [customerFilter, setCustomerFilter] = useState(' ')
+  const [customerFilter, setCustomerFilter] = useState('')
   const [selectedCustomers, setSelectedCustomers] = useState<number[]>([])
   const [customerParcelValues, setCustomerParcelValues] = useState<
     Record<number, number>

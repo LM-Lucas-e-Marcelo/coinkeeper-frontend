@@ -25,6 +25,8 @@ export default async function Customers({ searchParams }: CustomersProps) {
   const { qrcode } = await getConnectBot()
   const filterOptions = [{ name: 'Nome', value: 'name' }]
 
+  console.log(customers)
+
   return (
     <>
       <Suspense fallback={<TableLoading />}>
