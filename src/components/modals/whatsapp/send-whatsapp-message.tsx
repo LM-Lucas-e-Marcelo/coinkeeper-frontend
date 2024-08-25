@@ -34,7 +34,7 @@ export const SendWhatsappMessage = ({
   customers,
   status,
 }: PayManyParcelsProps) => {
-  const [customerFilter, setCustomerFilter] = useState(' ')
+  const [customerFilter, setCustomerFilter] = useState('')
   const [selectedCustomers, setSelectedCustomers] = useState<number[]>([])
 
   const { removeParams, params } = useUrlParams()
