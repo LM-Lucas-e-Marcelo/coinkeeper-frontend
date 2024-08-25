@@ -1,5 +1,5 @@
 import { isAuthenticated } from '@/auth/auth'
-import { Header } from '@/components/Header'
+import { Header } from '@/components/header'
 import { Sidebar } from '@/components/sidebar'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'

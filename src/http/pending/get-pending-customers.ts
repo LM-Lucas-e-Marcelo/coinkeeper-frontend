@@ -6,18 +6,10 @@ export interface ICustomer {
   totalDebt: number
 }
 
-export interface IItem {
+export interface IPendingCustomers {
   totalClientsInDebt: number
   totalReceiver: number
   customers: ICustomer[]
-}
-
-export interface IPendingCustomers {
-  items: IItem
-  total: number
-  currentPage: number
-  lastPage: number
-  limit: number
 }
 
 export interface IGetPendingCustomers {
@@ -33,14 +25,11 @@ export async function getPendingCustomers(
     Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
-  const result = await api.get(
-    `pendings/customers/search?${queryParams.toString()}`,
-    {
-      next: {
-        tags: ['pending-customers'],
-      },
+  const result = await api.get(`pendings/customers?${queryParams.toString()}`, {
+    next: {
+      tags: ['pending-customers'],
     },
-  )
+  })
 
   const pendingCustomers = await result.json<IPendingCustomers>()
 

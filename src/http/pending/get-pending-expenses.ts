@@ -6,18 +6,10 @@ export interface IExpense {
   totalDebt: number
 }
 
-export interface IItem {
+export interface IPendingExpenses {
   totalExpensesInDebt: number
   totalDue: number
   expenses: IExpense[]
-}
-
-export interface IPendingExpenses {
-  items: IItem
-  total: number
-  currentPage: number
-  lastPage: number
-  limit: number
 }
 
 export interface IGetPendingExpenses {
@@ -34,7 +26,7 @@ export async function getPendingExpenses(
   }
 
   const result = await api.get(
-    `pendings/organization-expenses/search?${queryParams.toString()}`,
+    `pendings/organization-expenses?${queryParams.toString()}`,
     {
       next: {
         tags: ['pending-expenses'],

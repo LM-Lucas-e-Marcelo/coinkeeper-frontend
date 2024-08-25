@@ -28,7 +28,7 @@ export async function PendingExpensesTable({
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {pendingExpenses?.items.expenses.map((expense) => (
+          {pendingExpenses?.expenses.map((expense) => (
             <Table.Row key={expense.id}>
               <Table.Cell>{expense.name}</Table.Cell>
               <Table.Cell>{formatCurrency(expense.totalDebt)}</Table.Cell>

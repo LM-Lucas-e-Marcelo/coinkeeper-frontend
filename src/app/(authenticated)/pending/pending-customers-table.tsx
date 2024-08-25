@@ -27,7 +27,7 @@ export async function PendingCustomersTable({
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {pendingCustomers?.items.customers.map((customer) => (
+          {pendingCustomers?.customers.map((customer) => (
             <Table.Row key={customer.id}>
               <Table.Cell>{customer.id}</Table.Cell>
               <Table.Cell>{customer.name}</Table.Cell>
