@@ -20,9 +20,10 @@ export interface IGetMonthData {
 export async function getMonthData({
   date,
 }: IGetMonthData): Promise<{ data: IMonthData | null }> {
-  const month = date.getMonth()
+  const month = date.getMonth() + 1
   const year = date.getFullYear()
-  const result = await api.get(`dashboard/month?${year}-${month}`, {
+
+  const result = await api.get(`dashboard/month?date=${year}-${month}`, {
     next: {
       tags: ['get-month-data'],
     },

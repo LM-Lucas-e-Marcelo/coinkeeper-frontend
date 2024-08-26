@@ -1,30 +1,25 @@
-'use client'
-
-import { DashboardAction } from '@/actions/dashboard-action'
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from '@/assets/icons'
-import { useUrlParams } from '@/hooks/use-params'
+
 import { formatDateDashboard } from '@/utils/format-date-dashboard'
-import { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
-export function MonthCardHeader() {
-  const [date, setDate] = useState<Date>(new Date())
-  const { addParams } = useUrlParams()
+interface MonthCardHeaderProps {
+  date: Date
+  setDate: Dispatch<SetStateAction<Date>>
+}
 
+export function MonthCardHeader({ date, setDate }: MonthCardHeaderProps) {
   const handlePrevDate = () => {
     const prevDate = date.setMonth(date.getMonth() - 1)
     setDate(new Date(prevDate))
-    addParams({ date: new Date(prevDate).toLocaleString() })
-    DashboardAction()
   }
 
   const handleNextDate = () => {
     const nextDate = date.setMonth(date.getMonth() + 1)
     setDate(new Date(nextDate))
-    addParams({ date: new Date(nextDate).toLocaleString() })
-    DashboardAction()
   }
 
   return (

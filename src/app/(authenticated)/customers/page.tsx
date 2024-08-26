@@ -45,7 +45,7 @@ export default async function Customers({ searchParams }: CustomersProps) {
         <CustomersTable searchParams={searchParams} />
         <PayManyParcels customers={customers} />
         <SendWhatsappMessage customers={customers} status={status} />
-        <ConnectBotModal qrCode={qrcode.base64} />
+        <ConnectBotModal qrCode={qrcode.token} />
       </Suspense>
     </>
   )

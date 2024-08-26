@@ -1,7 +1,7 @@
 import { api } from '../api-client'
 
 export interface IConnectBot {
-  base64: string
+  token: string
 }
 
 export async function getConnectBot(): Promise<{ qrcode: IConnectBot }> {
