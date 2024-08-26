@@ -33,7 +33,7 @@ export async function updateExpenseTransactionAction(data: FormData) {
       value,
       transactionId,
       dueDate,
-      paymentDate,
+      ...(!!paymentDate?.length && { paymentDate }),
     })
 
     revalidateTag('expense-by-id')

@@ -1,5 +1,6 @@
 'use client'
 
+import { DashboardAction } from '@/actions/dashboard-action'
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
@@ -16,12 +17,14 @@ export function MonthCardHeader() {
     const prevDate = date.setMonth(date.getMonth() - 1)
     setDate(new Date(prevDate))
     addParams({ date: new Date(prevDate).toLocaleString() })
+    DashboardAction()
   }
 
   const handleNextDate = () => {
     const nextDate = date.setMonth(date.getMonth() + 1)
     setDate(new Date(nextDate))
     addParams({ date: new Date(nextDate).toLocaleString() })
+    DashboardAction()
   }
 
   return (

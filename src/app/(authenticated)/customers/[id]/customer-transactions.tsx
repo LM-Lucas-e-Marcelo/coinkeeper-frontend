@@ -5,6 +5,7 @@ import { getTransactions } from '@/http/transactions/get-transactions'
 import { CustomerDetailsPageProps } from './page'
 import { PayParcelModal } from '@/components/modals/transactions/pay-parcel-modal'
 import { CustomerScore } from './customer-score'
+import { RollbackParcelModal } from '@/components/modals/transactions/rollback-parcel-modal'
 
 const customerTransactions = tv({
   slots: {
@@ -58,6 +59,7 @@ export async function CustomerTransactions({
       </section>
       <DeleteTransactionModal />
       <PayParcelModal />
+      <RollbackParcelModal />
     </div>
   )
 }

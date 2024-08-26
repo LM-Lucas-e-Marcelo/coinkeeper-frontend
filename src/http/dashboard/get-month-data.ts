@@ -22,7 +22,11 @@ export async function getMonthData({
 }: IGetMonthData): Promise<{ data: IMonthData | null }> {
   const month = date.getMonth()
   const year = date.getFullYear()
-  const result = await api.get(`dashboard/month?${year}-${month}`)
+  const result = await api.get(`dashboard/month?${year}-${month}`, {
+    next: {
+      tags: ['get-month-data'],
+    },
+  })
 
   const data = await result.json<IMonthData>()
 

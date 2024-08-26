@@ -68,7 +68,7 @@ export const ManagementExpenseTransactionModal = ({
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>
-        {transactionId ? 'Editar' : 'Cadastrar'} depesa
+        {transactionId ? 'Editar' : 'Cadastrar'} despesa
       </Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
@@ -123,7 +123,7 @@ export const ManagementExpenseTransactionModal = ({
             </Button>
 
             <Button type="submit" disabled={isPending}>
-              {transactionId ? 'Editar' : 'Cadastrar'} depesa
+              {transactionId ? 'Editar' : 'Cadastrar'} despesa
             </Button>
           </ButtonGroup>
         </Modal.Actions>
