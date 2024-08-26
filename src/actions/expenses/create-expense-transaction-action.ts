@@ -31,8 +31,8 @@ export async function createExpenseTransactionAction(data: FormData) {
       description,
       value,
       expenseId,
-      dueDate,
       ...(!!paymentDate?.length && { paymentDate }),
+      ...(!!dueDate?.length && { dueDate }),
     })
 
     revalidateTag('expense-by-id')
