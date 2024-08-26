@@ -42,12 +42,14 @@ export async function MonthCard({ searchParams }: DashboardProps) {
         <span className="flex justify-between">
           <div>
             <p>Saldo do Período</p>
-            <strong className="text-2xl text-primary">100,00</strong>
+            <strong className="text-2xl text-primary">
+              {formatCurrency(data?.totalPeriod)}
+            </strong>
           </div>
           <div>
             <p>Despesas da empresa</p>
             <strong className="text-2xl text-primary">
-              {formatCurrency(data?.expense.companyExpenses)}
+              {formatCurrency(data?.expense.totalCompanyExpense)}
             </strong>
           </div>
         </span>

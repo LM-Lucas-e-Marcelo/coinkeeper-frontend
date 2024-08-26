@@ -1,6 +1,7 @@
 import { api } from '../api-client'
 
 export interface IMonthData {
+  totalPeriod: number
   sold: {
     totalSold: number
     totalReceived: number
@@ -8,7 +9,7 @@ export interface IMonthData {
   expense: {
     totalExpense: number
     totalPaid: number
-    companyExpenses: number
+    totalCompanyExpense: number
   }
 }
 
