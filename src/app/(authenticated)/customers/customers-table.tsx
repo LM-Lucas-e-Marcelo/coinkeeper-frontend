@@ -22,6 +22,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
           <Table.Row>
             <Table.Cell sortBy="customers.name">Nome</Table.Cell>
             <Table.Cell>Débito</Table.Cell>
+            <Table.Cell>Score</Table.Cell>
             <Table.Cell>Ações</Table.Cell>
           </Table.Row>
         </Table.Head>
@@ -30,6 +31,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
             <Table.Row key={customer.id}>
               <Table.Cell>{customer.name}</Table.Cell>
               <Table.Cell>{formatCurrency(customer.totalDebt)}</Table.Cell>
+              <Table.Cell>{customer.score}</Table.Cell>
               <Table.Cell>
                 <TableActions customerId={customer.id} />
               </Table.Cell>

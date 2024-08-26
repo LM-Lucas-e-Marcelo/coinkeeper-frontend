@@ -4,6 +4,7 @@ export interface ICustomer {
   id: number
   name: string
   totalDebt: number
+  score: number
 }
 
 export interface ICustomers {
