@@ -11,6 +11,7 @@ import { formatCurrency } from '@/utils/format-currency'
 import { FormEvent, useCallback, useMemo, useState } from 'react'
 import { payManyParcelAction } from '@/actions/transactions/pay-many-parcel-action'
 import { Input } from '@/components/form/input'
+import { FiX } from '@/assets/icons'
 
 interface PayManyParcelsProps {
   customers: ICustomerWithDebt[]
@@ -130,15 +131,24 @@ export const PayManyParcels = ({ customers }: PayManyParcelsProps) => {
                   <p onClick={() => handleRemoveCustomer(customer.id)}>
                     {customer.name}
                   </p>
-                  <input
-                    type="number"
-                    defaultValue={1}
-                    className="w-[50px] border border-primary rounded-md px-2 text-center"
-                    min={1}
-                    onChange={(e) =>
-                      handleChange(customer.id, parseInt(e.target.value))
-                    }
-                  />
+                  <div className="flex gap-3 items-center">
+                    <input
+                      type="number"
+                      defaultValue={1}
+                      className="w-[50px] border border-primary rounded-md px-2 text-center"
+                      min={1}
+                      onChange={(e) =>
+                        handleChange(customer.id, parseInt(e.target.value))
+                      }
+                    />
+                    <button
+                      type="button"
+                      className="text-red"
+                      onClick={() => handleRemoveCustomer(customer.id)}
+                    >
+                      <FiX size={20} />
+                    </button>
+                  </div>
                 </button>
               ))}
             </div>

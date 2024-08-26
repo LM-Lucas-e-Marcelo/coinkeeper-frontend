@@ -8,7 +8,7 @@ import { Button } from '@/components/form/button'
 import { toast } from 'react-toastify'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
-import { reloadQrcodeAction } from '@/actions/whatsapp/pay-many-parcel-action'
+import { reloadQrcodeAction } from '@/actions/whatsapp/reload-qrcode-action'
 
 interface ConnectBotModalProps {
   qrCode: string

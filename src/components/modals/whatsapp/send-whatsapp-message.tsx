@@ -15,6 +15,8 @@ import { IStatus } from '@/http/whatsapp/get-bot-status'
 import { tv } from 'tailwind-variants'
 import { ModalButton } from '@/components/modal-button'
 import { sendMessageAction } from '@/actions/whatsapp/send-message-action'
+import { ImSpinner11, FiX } from '@/assets/icons'
+import { reloadStatusAction } from '@/actions/whatsapp/reload-status-action'
 
 const statusStyles = tv({
   base: 'h-3 w-3 bg-red rounded-full',
@@ -105,6 +107,9 @@ export const SendWhatsappMessage = ({
                   open: status.connectionStatus === 'open',
                 })}
               />
+              <button type="button" onClick={() => reloadStatusAction()}>
+                <ImSpinner11 size={16} />
+              </button>
             </div>
             <ModalButton params={{ connect_bot: true }}>
               <Button type="button">Conectar Whatsapp</Button>
@@ -141,6 +146,13 @@ export const SendWhatsappMessage = ({
                   <p onClick={() => handleRemoveCustomer(customer.id)}>
                     {customer.name}
                   </p>
+                  <button
+                    type="button"
+                    className="text-red"
+                    onClick={() => handleRemoveCustomer(customer.id)}
+                  >
+                    <FiX size={20} />
+                  </button>
                 </button>
               ))}
             </div>
