@@ -47,29 +47,52 @@ export const CustomerDocumentsModal = ({
       <Modal.Content>
         <div className={container()}>
           {documentUrl && (
-            <button
-              onClick={() => handleRedirectToDocumentUrl(documentUrl)}
-              className={button()}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              <img
-                className={image()}
-                src={documentUrl}
-                alt="customer document"
-              />
-            </button>
+              <p style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+                Documento
+              </p>
+              <button
+                onClick={() => handleRedirectToDocumentUrl(documentUrl)}
+                className={button()}
+              >
+                <img
+                  className={image()}
+                  src={documentUrl}
+                  alt="customer document"
+                />
+              </button>
+            </div>
           )}
-
+        </div>
+        <div className={container()}>
           {proofAddressUrl && (
-            <button
-              onClick={() => handleRedirectToDocumentUrl(proofAddressUrl)}
-              className={button()}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              <img
-                className={image()}
-                src={proofAddressUrl}
-                alt="proof address document"
-              />
-            </button>
+              <p style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+                Comprovante de residencia
+              </p>
+              <button
+                onClick={() => handleRedirectToDocumentUrl(proofAddressUrl)}
+                className={button()}
+              >
+                <img
+                  className={image()}
+                  src={proofAddressUrl}
+                  alt="proof address document"
+                />
+              </button>
+            </div>
           )}
         </div>
       </Modal.Content>
