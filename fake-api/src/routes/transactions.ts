@@ -34,4 +34,8 @@ transactionsRoute.get(
   },
 )
 
+transactionsRoute.patch('/customer-transactions/:id/pay-off', ({ set }) => {
+  set.status = 200
+})
+
 export { transactionsRoute }

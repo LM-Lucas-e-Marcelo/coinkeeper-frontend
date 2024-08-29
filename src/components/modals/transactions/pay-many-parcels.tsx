@@ -96,6 +96,15 @@ export const PayManyParcels = ({ customers }: PayManyParcelsProps) => {
     setCustomerFilter(value)
   }
 
+  const handleSelectAllCustomers = useCallback(() => {
+    const customersWithDebt = customers.map((customer) => customer.id)
+    setSelectedCustomers(customersWithDebt)
+  }, [customers])
+
+  const handleRemoveAllSelectedCustomers = () => {
+    setSelectedCustomers([])
+  }
+
   return (
     <Modal.Root size="lg" isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Pagar parcelas</Modal.Header>
@@ -103,7 +112,12 @@ export const PayManyParcels = ({ customers }: PayManyParcelsProps) => {
         <Modal.Content>
           <div className="flex gap-3 py-5 px-2 ">
             <div className="border border-zinc-200 bg-zinc-50 p-3 flex-1 rounded-md flex flex-col gap-3  max-h-[70vh] overflow-auto">
-              <p className="text-xl">Clientes</p>
+              <span className="flex flex-col">
+                <p className="text-xl">Clientes</p>
+                <Button type="button" onClick={handleSelectAllCustomers}>
+                  Selecionar todos
+                </Button>
+              </span>
               <Input onChange={handleChangeFilter} placeholder="Buscar" />
               {customersWithDebt.map((customer) => (
                 <button
@@ -121,7 +135,15 @@ export const PayManyParcels = ({ customers }: PayManyParcelsProps) => {
               ))}
             </div>
             <div className="border border-zinc-200 bg-zinc-50 p-3 flex-1 rounded-md flex flex-col gap-3  max-h-[70vh] overflow-auto">
-              <p className="text-xl">Clientes Selecionados</p>
+              <span className="flex flex-col">
+                <p className="text-xl">Clientes Selecionados</p>
+                <Button
+                  type="button"
+                  onClick={handleRemoveAllSelectedCustomers}
+                >
+                  Remover todos
+                </Button>
+              </span>
               {filterSelectedCustomers.map((customer) => (
                 <button
                   className="flex justify-between items-center border border-primary bg-white px-2 py-1 rounded-md"

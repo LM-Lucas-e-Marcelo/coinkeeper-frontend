@@ -1,9 +1,5 @@
-import {
-  ICustomer,
-  IItem,
-} from '../../../../src/http/pending/get-pending-customers'
+import { ICustomer } from '../../../../src/http/pending/get-pending-customers'
 import { faker } from '@faker-js/faker'
-import { formatGenericPayload } from '../../utils/format-generic-payload'
 
 export function createRandomCustomer(): ICustomer {
   return {
@@ -20,10 +16,8 @@ const customersList: ICustomer[] = faker.helpers.multiple(
   },
 )
 
-export const PendingCustomers = formatGenericPayload<IItem>({
-  data: {
-    totalReceiver: faker.number.int({ max: 1000, min: 1 }),
-    totalClientsInDebt: faker.number.int({ max: 1000, min: 1 }),
-    customers: customersList,
-  },
-})
+export const PendingCustomers = {
+  totalReceiver: faker.number.int({ max: 1000, min: 1 }),
+  totalClientsInDebt: faker.number.int({ max: 1000, min: 1 }),
+  customers: customersList,
+}

@@ -1,10 +1,11 @@
 import { ModalButton } from '@/components/modal-button'
 import { tv } from 'tailwind-variants'
-import { FiEye, FiTrash2, LiaFileContractSolid } from '@/assets/icons'
+import { FiEye, FiTrash2, LiaFileContractSolid, FiCheck } from '@/assets/icons'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
 import { formatDate } from '@/utils/format-date'
 import { ParcelsDetailsModal } from '@/components/modals/transactions/parcels-details-modal'
+import { PayOffTransactionModal } from '@/components/modals/transactions/pay-off-transaction-modal'
 
 const transactionCard = tv({
   slots: {
@@ -70,6 +71,11 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <p>{formatCurrency(transaction.companyExpense) || '-'}</p>
         </span>
         <span className={cardActions()}>
+          <ModalButton
+            params={{ [`pay_off_transaction_${transaction.id}`]: true }}
+          >
+            <FiCheck size={24} className="text-green-500" />
+          </ModalButton>
           {transaction.contractFileUrl && (
             <a href={transaction.contractFileUrl} target="_blank">
               <LiaFileContractSolid size={26} className="text-orange" />
@@ -88,6 +94,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           parcels={transaction.parcels}
           transactionId={transaction.id}
         />
+        <PayOffTransactionModal transaction={transaction} />
       </div>
     </div>
   )

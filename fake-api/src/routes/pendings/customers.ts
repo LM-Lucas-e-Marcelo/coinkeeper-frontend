@@ -3,7 +3,7 @@ import { PendingCustomers } from '../../schemas/pending/pending-customers'
 
 const pendingCustomersRoute = new Elysia()
 
-pendingCustomersRoute.get('/pendings/customers/search', ({ set }) => {
+pendingCustomersRoute.get('/pendings/customers', ({ set }) => {
   set.status = 200
 
   return PendingCustomers
