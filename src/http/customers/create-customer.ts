@@ -11,6 +11,7 @@ interface CreateCustomerRequest {
   residentialAddress?: string | null
   documentFile?: File
   proofAddressFile?: File
+  regionId?: string | null
 }
 
 export async function createCustomer(props: CreateCustomerRequest) {

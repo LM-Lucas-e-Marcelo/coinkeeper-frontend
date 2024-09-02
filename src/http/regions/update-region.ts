@@ -1,6 +1,6 @@
 import { api } from '../api-client'
 
-interface UpdateCustomerRequest {
+interface UpdateRegionRequest {
   id: string
   name: string
   document?: string | null
@@ -15,15 +15,14 @@ interface UpdateCustomerRequest {
   regionId?: string
 }
 
-export async function updateCustomer(props: UpdateCustomerRequest) {
-  const { id, ...rest } = props
-  const formData = new FormData()
-
-  Object.entries(rest).map(([key, value]) => formData.append(key, value!))
+export async function updateRegion(props: UpdateRegionRequest) {
+  const { id, name } = props
 
   const result = await api
-    .patch(`customers/${id}`, {
-      body: formData,
+    .patch(`regions/${id}`, {
+      json: {
+        name,
+      },
     })
     .json()
 

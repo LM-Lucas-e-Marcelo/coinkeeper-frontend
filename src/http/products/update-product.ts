@@ -5,6 +5,8 @@ interface UpdateProductRequest {
   value: number
   parcels: number
   id: string
+  companyExpense?: number | null
+  differenceBetweenParcels?: number | null
 }
 
 export async function updateProduct(props: UpdateProductRequest) {

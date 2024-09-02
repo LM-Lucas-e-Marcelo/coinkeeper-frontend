@@ -45,11 +45,21 @@ export const CreateTransactionModal = ({
         'totalParcels',
       ) as HTMLSelectElement
       const product = form?.elements.namedItem('products') as HTMLInputElement
+      const companyExpense = form?.elements.namedItem(
+        'companyExpense',
+      ) as HTMLInputElement
+      const differenceBetweenParcels = form?.elements.namedItem(
+        'differenceBetweenParcels',
+      ) as HTMLInputElement
 
       if (selectedProduct && formValue && parcel && product) {
         formValue.value = String(selectedProduct.value)
         parcel.value = String(selectedProduct.parcels)
         product.value = selectedProduct.name
+        companyExpense.value = String(selectedProduct.companyExpense)
+        differenceBetweenParcels.value = String(
+          selectedProduct.differenceBetweenParcels,
+        )
       }
     },
     [products.items],

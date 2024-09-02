@@ -5,6 +5,8 @@ export interface IProduct {
   name: string
   value: number
   parcels: number
+  companyExpense: number
+  differenceBetweenParcels: number
 }
 
 export interface IProducts {

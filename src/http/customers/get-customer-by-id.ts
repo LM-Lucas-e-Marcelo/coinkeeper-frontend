@@ -16,6 +16,7 @@ export interface ICustomerById {
   proofAddressFileUrl: string
   documentFile: Blob
   documentFileUrl: string
+  regionId: number
 }
 
 export interface IGetCustomerById {

@@ -4,6 +4,8 @@ interface CreateProductRequest {
   name: string
   parcels: number
   value: number
+  companyExpense?: number | null
+  differenceBetweenParcels?: number | null
 }
 
 export async function createProduct(props: CreateProductRequest) {
