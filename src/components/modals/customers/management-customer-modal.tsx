@@ -5,20 +5,26 @@ import { Modal } from '../modal'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
 import { toast } from 'react-toastify'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { createCustomerAction } from '@/actions/customers/create-customer-action'
 import { SUPPORTED_FILES } from '@/constants/files'
 import { ICustomerById } from '@/http/customers/get-customer-by-id'
 import { updateCustomerAction } from '@/actions/customers/update-customer-action'
+import { ModalButton } from '@/components/modal-button'
+import { IRegions } from '@/http/regions/get-regions'
+import { Select } from '@/components/form/select'
+import { RegionsModal } from '../regions/regions-modal/index'
 
 interface ManagementCustomerModalProps {
   customer?: ICustomerById | null
+  regions: IRegions
 }
 
 export const ManagementCustomerModal = ({
   customer,
+  regions,
 }: ManagementCustomerModalProps) => {
   const { removeParams, params } = useUrlParams()
   const isOpen = params.has('management_customer')
@@ -41,6 +47,15 @@ export const ManagementCustomerModal = ({
     onError,
     onSuccess,
   })
+
+  const regionOptions = useMemo(
+    () =>
+      regions.items.map((region) => ({
+        label: region.name,
+        value: region.id,
+      })),
+    [regions.items],
+  )
 
   useEffect(() => {
     if (isUpdate && isOpen) {
@@ -83,6 +98,20 @@ export const ManagementCustomerModal = ({
                 error={errors?.phoneWhatsapp}
                 defaultValue={customer?.phoneWhatsapp}
               />
+            </div>
+            <div className="flex gap-3 items-end">
+              <Select
+                options={regionOptions}
+                label="Região"
+                name="regionId"
+                error={errors?.regionId}
+                defaultValue={customer?.regionId}
+              />
+              <span className="mb-[1px] h-[46px] bg-primary rounded-md flex items-center">
+                <ModalButton params={{ regions: true }}>
+                  <Button type="button">Gerenciar</Button>
+                </ModalButton>
+              </span>
             </div>
             <Input
               label="Endereço residencial"
@@ -132,6 +161,7 @@ export const ManagementCustomerModal = ({
           </ButtonGroup>
         </Modal.Actions>
       </form>
+      <RegionsModal regions={regions} />
     </Modal.Root>
   )
 }

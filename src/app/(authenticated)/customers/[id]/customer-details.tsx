@@ -6,6 +6,7 @@ import { CustomerDocumentsModal } from '@/components/modals/customers/customer-d
 import { ManagementCustomerModal } from '@/components/modals/customers/management-customer-modal'
 import { ModalButton } from '@/components/modal-button'
 import { FiEdit } from '@/assets/icons'
+import { getRegions } from '@/http/regions/get-regions'
 
 const customerDeatils = tv({
   slots: {
@@ -24,6 +25,7 @@ interface CustomerDetailsProps {
 }
 
 export async function CustomerDetails({ customer }: CustomerDetailsProps) {
+  const { regions } = await getRegions()
   return (
     <>
       <aside className={aside()}>
@@ -84,7 +86,7 @@ export async function CustomerDetails({ customer }: CustomerDetailsProps) {
         documentUrl={customer?.documentFileUrl}
         proofAddressUrl={customer?.proofAddressFileUrl}
       />
-      <ManagementCustomerModal customer={customer} />
+      <ManagementCustomerModal customer={customer} regions={regions} />
     </>
   )
 }

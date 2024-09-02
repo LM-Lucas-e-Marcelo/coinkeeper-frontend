@@ -93,6 +93,20 @@ export const ManagementProductModal = ({
                 defaultValue={selectedProduct?.value}
               />
             </div>
+            <div className="flex gap-3 items-start">
+              <Input
+                label="Intervalo em dias entre os pagamentos"
+                name="differenceBetweenParcels"
+                error={errors?.differenceBetweenParcels}
+                defaultValue={selectedProduct?.differenceBetweenParcels}
+              />
+              <Input
+                label="Despesa"
+                name="companyExpense"
+                error={errors?.companyExpense}
+                defaultValue={selectedProduct?.companyExpense}
+              />
+            </div>
 
             <Input name="id" type="hidden" defaultValue={selectedProduct?.id} />
           </div>

@@ -22,6 +22,7 @@ export async function ProductsTable({ searchParams }: ProductsTableProps) {
             <Table.Cell sortBy="products.name">Nome</Table.Cell>
             <Table.Cell>Parcelas</Table.Cell>
             <Table.Cell>Valor</Table.Cell>
+            <Table.Cell>Depesas</Table.Cell>
             <Table.Cell>Ações</Table.Cell>
           </Table.Row>
         </Table.Head>
@@ -31,6 +32,7 @@ export async function ProductsTable({ searchParams }: ProductsTableProps) {
               <Table.Cell>{product.name}</Table.Cell>
               <Table.Cell>{product.parcels}</Table.Cell>
               <Table.Cell>{formatCurrency(product.value)}</Table.Cell>
+              <Table.Cell>{formatCurrency(product.companyExpense)}</Table.Cell>
               <Table.Cell>
                 <TableActions product={product} />
               </Table.Cell>
