@@ -5,6 +5,7 @@ import { formatCurrency } from '@/utils/format-currency'
 import { TableActions } from './customers-table-actions'
 
 import { ManagementCustomerModal } from '@/components/modals/customers/management-customer-modal'
+import { getRegions } from '@/http/regions/get-regions'
 
 interface CustomersTableProps {
   searchParams: {
@@ -14,6 +15,7 @@ interface CustomersTableProps {
 
 export async function CustomersTable({ searchParams }: CustomersTableProps) {
   const { customers } = await getCustomers(searchParams)
+  const { regions } = await getRegions()
 
   return (
     <>
@@ -39,7 +41,7 @@ export async function CustomersTable({ searchParams }: CustomersTableProps) {
           ))}
         </Table.Body>
       </Table.Root>
-      <ManagementCustomerModal />
+      <ManagementCustomerModal regions={regions} />
     </>
   )
 }

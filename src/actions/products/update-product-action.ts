@@ -7,6 +7,8 @@ import { z } from 'zod'
 
 const updateProductSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
+  companyExpense: z.coerce.number().nullish(),
+  differenceBetweenParcels: z.coerce.number().nullish(),
   parcels: z.coerce
     .number()
     .min(1, { message: 'Informe a quantidade de parcelas' }),
@@ -23,10 +25,18 @@ export async function updateProductAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { name, parcels, value, id } = result.data
+  const { name, parcels, value, id, companyExpense, differenceBetweenParcels } =
+    result.data
 
   try {
-    await updateProduct({ name, parcels, id, value })
+    await updateProduct({
+      name,
+      parcels,
+      id,
+      value,
+      companyExpense,
+      differenceBetweenParcels,
+    })
     revalidateTag('products')
   } catch (err) {
     if (err instanceof HTTPError) {

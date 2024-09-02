@@ -7,6 +7,8 @@ import { z } from 'zod'
 
 const createProductSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
+  companyExpense: z.coerce.number().nullish(),
+  differenceBetweenParcels: z.coerce.number().nullish(),
   parcels: z.coerce
     .number()
     .min(1, { message: 'Informe a quantidade de parcelas' }),
@@ -22,13 +24,16 @@ export async function createProductAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { name, parcels, value } = result.data
+  const { name, parcels, value, companyExpense, differenceBetweenParcels } =
+    result.data
 
   try {
     await createProduct({
       name,
       parcels,
       value,
+      companyExpense,
+      differenceBetweenParcels,
     })
 
     revalidateTag('products')
