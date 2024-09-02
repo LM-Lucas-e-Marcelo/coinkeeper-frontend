@@ -8,6 +8,7 @@ import { z } from 'zod'
 
 const updateCustomerSchema = z.object({
   id: z.string(),
+  regionId: z.string(),
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
   document: z.string().nullish(),
   phone: z.string().nullish(),
@@ -45,6 +46,7 @@ export async function updateCustomerAction(data: FormData) {
     documentFile,
     proofAddressFile,
     residentialAddress,
+    regionId,
   } = result.data
 
   try {
@@ -57,6 +59,7 @@ export async function updateCustomerAction(data: FormData) {
       phone,
       phoneWhatsapp,
       businessAddress,
+      regionId,
       ...(proofAddressFile?.name !== 'undefined' && { proofAddressFile }),
       ...(documentFile?.name !== 'undefined' && { documentFile }),
       residentialAddress,

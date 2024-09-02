@@ -8,6 +8,8 @@ export function createRandomProduct(): IProduct {
     name: faker.commerce.product(),
     value: faker.number.int({ min: 1, max: 10000 }),
     parcels: faker.number.int({ min: 1, max: 24 }),
+    companyExpense: faker.number.int({ min: 1, max: 10000 }),
+    differenceBetweenParcels: faker.number.int({ min: 1, max: 24 }),
   }
 }
 

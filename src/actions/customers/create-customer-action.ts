@@ -8,6 +8,7 @@ import { z } from 'zod'
 
 const createCustomerSchema = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório' }),
+  regionId: z.string().nullish(),
   document: z.string().nullish(),
   phone: z.string().nullish(),
   phoneWhatsapp: z.string().nullish(),
@@ -43,6 +44,7 @@ export async function createCustomerAction(data: FormData) {
     documentFile,
     proofAddressFile,
     residentialAddress,
+    regionId,
   } = result.data
 
   try {
@@ -54,6 +56,7 @@ export async function createCustomerAction(data: FormData) {
       phone,
       phoneWhatsapp,
       businessAddress,
+      regionId,
       ...(documentFile?.name !== 'undefined' && { documentFile }),
       ...(proofAddressFile?.name !== 'undefined' && { proofAddressFile }),
       residentialAddress,
