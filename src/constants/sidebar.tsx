@@ -5,6 +5,7 @@ import {
   BsBox2,
   LiaFileInvoiceDollarSolid,
   GoBell,
+  TbMailDollar,
 } from '@/assets/icons'
 
 export const SIDEBAR_ITEMS = {
@@ -15,6 +16,10 @@ export const SIDEBAR_ITEMS = {
   Pendências: {
     path: '/pending',
     icon: <GoBell size={20} />,
+  },
+  Cobrança: {
+    path: '/charge',
+    icon: <TbMailDollar size={20} />,
   },
   Clientes: {
     path: '/customers',

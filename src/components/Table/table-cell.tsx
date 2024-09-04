@@ -4,15 +4,29 @@ import { ReactNode } from 'react'
 import { IoIosArrowDown } from '@/assets/icons'
 import { tv } from 'tailwind-variants'
 
-const orderIcon = tv({
-  base: 'transition-all',
+const tdStyles = tv({
+  slots: {
+    td: 'py-2 last:w-[100px]',
+    orderIcon: 'transition-all',
+  },
   variants: {
     isAsc: {
-      true: 'rotate-180 ',
-      false: 'rotate-0',
+      true: {
+        orderIcon: 'rotate-180',
+      },
+      false: {
+        orderIcon: 'rotate-0',
+      },
     },
     isActive: {
-      true: 'text-primary',
+      true: {
+        orderIcon: 'text-primary',
+      },
+    },
+    isCheck: {
+      true: {
+        td: 'w-[120px] text-center',
+      },
     },
   },
 })
@@ -20,9 +34,12 @@ const orderIcon = tv({
 interface TableCellProps {
   children: ReactNode
   sortBy?: string
+  isCheck?: boolean
 }
 
-export const TableCell = ({ children, sortBy }: TableCellProps) => {
+const { orderIcon, td } = tdStyles()
+
+export const TableCell = ({ children, sortBy, isCheck }: TableCellProps) => {
   const { addParams, params } = useUrlParams()
 
   const sortDirection = params.get('sortDirection')
@@ -36,9 +53,12 @@ export const TableCell = ({ children, sortBy }: TableCellProps) => {
   }
 
   return (
-    <td className="py-2 last:w-[100px]">
+    <td className={td({ isCheck })}>
       {sortBy ? (
-        <button onClick={handleOrderBy} className="flex items-center gap-2">
+        <button
+          onClick={handleOrderBy}
+          className="flex items-center gap-2 text-nowrap"
+        >
           {children}
           <IoIosArrowDown
             className={orderIcon({

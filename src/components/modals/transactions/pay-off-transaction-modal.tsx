@@ -10,6 +10,7 @@ import { useFormState } from '@/hooks/use-form-state'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
 import { payOffTransactionAction } from '@/actions/transactions/pay-off-transaction.action'
+import { Checkbox } from '@/components/form/checkbox'
 
 interface PayOffTransactionModalProps {
   transaction: ITransactions
@@ -43,6 +44,7 @@ export const PayOffTransactionModal = ({
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
+            <Checkbox label="Enviar mensagem" value="true" name="sendMessage" />
             Você tem certeza de que quer efetuar o pagamento total desta
             transação?
             <div>

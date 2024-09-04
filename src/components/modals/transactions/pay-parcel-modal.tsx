@@ -10,6 +10,7 @@ import { useFormState } from '@/hooks/use-form-state'
 import { Textarea } from '@/components/form/textarea'
 import { payParcelAction } from '@/actions/transactions/pay-parcel-action'
 import { SUPPORTED_FILES } from '@/constants/files'
+import { Checkbox } from '@/components/form/checkbox'
 
 export const PayParcelModal = () => {
   const { removeParams, params } = useUrlParams()
@@ -42,6 +43,11 @@ export const PayParcelModal = () => {
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="flex gap-3 flex-col">
+            <Checkbox
+              label="Enviar mensagem"
+              name="sendMessage"
+              value={'true'}
+            />
             <Input
               label="Data do pagamento"
               name="paymentDate"
