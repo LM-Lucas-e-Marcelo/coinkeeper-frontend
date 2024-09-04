@@ -9,6 +9,7 @@ import { z } from 'zod'
 const payParcelSchema = z.object({
   paymentDate: z.string().min(1, { message: 'Data é obrigatório' }),
   id: z.string(),
+  sendMessage: z.string().nullish(),
   transactionId: z.string(),
   observation: z.string().nullish(),
   proofFile: z.any().refine((file) => {
@@ -25,7 +26,14 @@ export async function payParcelAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { id, transactionId, paymentDate, observation, proofFile } = result.data
+  const {
+    id,
+    transactionId,
+    paymentDate,
+    observation,
+    proofFile,
+    sendMessage,
+  } = result.data
 
   try {
     await payParcel({
@@ -33,6 +41,7 @@ export async function payParcelAction(data: FormData) {
       transactionId,
       paymentDate,
       observation,
+      sendMessage,
       ...(proofFile?.name !== 'undefined' && { proofFile }),
     })
     revalidateTag('transactions')

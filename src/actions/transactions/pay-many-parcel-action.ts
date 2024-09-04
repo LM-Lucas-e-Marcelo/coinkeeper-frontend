@@ -10,6 +10,7 @@ export async function payManyParcelAction(data: Record<number, number>) {
     revalidateTag('customer-by-id')
     revalidateTag('customers')
     revalidateTag('customers-with-debt')
+    revalidateTag('charges')
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()

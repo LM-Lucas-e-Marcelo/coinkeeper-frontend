@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 const payOffTransactionSchema = z.object({
   transactionId: z.string(),
+  sendMessage: z.string().nullish(),
 })
 
 export async function payOffTransactionAction(data: FormData) {
@@ -18,11 +19,12 @@ export async function payOffTransactionAction(data: FormData) {
     return { success: false, message: null, errors }
   }
 
-  const { transactionId } = result.data
+  const { transactionId, sendMessage } = result.data
 
   try {
     await payOffTransaction({
       transactionId,
+      sendMessage,
     })
     revalidateTag('transactions')
     revalidateTag('customers')
