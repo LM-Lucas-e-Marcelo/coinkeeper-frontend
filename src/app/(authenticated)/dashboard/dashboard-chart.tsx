@@ -1,6 +1,7 @@
 'use client'
 import { IDay } from '@/http/dashboard/get-month-data'
 import { formatCurrency } from '@/utils/format-currency'
+import { formatDate } from '@/utils/format-date'
 import { generateLabel } from '@/utils/generate-graph-label'
 import Chart from 'react-apexcharts'
 
@@ -17,7 +18,7 @@ export function DashboardChart({ days }: DashboardChartProps) {
   }>(
     (acc, { day, value }) => {
       acc.seriesData.push(value)
-      acc.categories.push(day)
+      acc.categories.push(day.split('-').reverse().join('/'))
       return acc
     },
     { seriesData: [], categories: [] },
