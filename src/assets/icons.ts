@@ -29,3 +29,4 @@ export { BsBox2 } from 'react-icons/bs'
 
 export { GoOrganization } from 'react-icons/go'
 export { ImSpinner11 } from 'react-icons/im'
+export { TbMailDollar } from 'react-icons/tb'

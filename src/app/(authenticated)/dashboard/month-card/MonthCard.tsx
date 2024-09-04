@@ -1,24 +1,18 @@
 'use client'
 import { IMonthData, getMonthData } from '@/http/dashboard/get-month-data'
 import { MonthCardHeader } from './month-card-header'
-
 import { formatCurrency } from '@/utils/format-currency'
 import { useEffect, useState } from 'react'
-
-interface MonthCardProps {
-  searchParams: {
-    [key: string]: string
-  }
-}
+import { MonthCardProps } from '.'
 
 export function MonthCard({ searchParams }: MonthCardProps) {
   const [monthData, setMonthData] = useState<IMonthData | null>(null)
 
   useEffect(() => {
-    getMonthData({ searchParams }).then(({ data }) => {
+    getMonthData(searchParams).then(({ data }) => {
       setMonthData(data)
     })
-  }, [searchParams])
+  }, [])
 
   return (
     <div className="flex flex-col gap-3">
