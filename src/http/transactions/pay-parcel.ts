@@ -6,11 +6,13 @@ interface PayParcelRequest {
   transactionId: string
   observation?: string | null
   proofFile?: File
+  sendMessage?: string | null
 }
 
 export async function payParcel({
   id,
   transactionId,
+  sendMessage,
   ...rest
 }: PayParcelRequest) {
   const formData = new FormData()
@@ -18,9 +20,12 @@ export async function payParcel({
   Object.entries(rest).map(([key, value]) => formData.append(key, value!))
 
   const result = api
-    .patch(`customer-transactions/${transactionId}/pay-parcel/${id}`, {
-      body: formData,
-    })
+    .patch(
+      `customer-transactions/${transactionId}/pay-parcel/${id}?sendMessage=${sendMessage}`,
+      {
+        body: formData,
+      },
+    )
     .json()
 
   return result

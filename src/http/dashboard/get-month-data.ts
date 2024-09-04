@@ -14,16 +14,21 @@ export interface IMonthData {
 }
 
 export interface IGetMonthData {
-  date: Date
+  searchParams: {
+    [key: string]: string
+  }
 }
 
-export async function getMonthData({
-  date,
-}: IGetMonthData): Promise<{ data: IMonthData | null }> {
-  const month = date.getMonth() + 1
-  const year = date.getFullYear()
+export async function getMonthData(
+  props: IGetMonthData,
+): Promise<{ data: IMonthData | null }> {
+  const queryParams = new URLSearchParams()
 
-  const result = await api.get(`dashboard/month?date=${year}-${month}`, {
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
+  }
+
+  const result = await api.get(`dashboard/month?${queryParams.toString()}`, {
     next: {
       tags: ['get-month-data'],
     },
