@@ -1,8 +1,10 @@
 import { getRegions } from '@/http/regions/get-regions'
-import { MonthCard } from './month-card/MonthCard'
-import { TotalCard } from './total-card'
 import { DashboardFilters } from './dashboard-filters'
 import { getCompanies } from '@/http/companies/get-companies'
+import { DashboardCards } from './dashboard-cards'
+import { DashboardChart } from './dashboard-chart'
+import { getMonthData } from '@/http/dashboard/get-month-data'
+import { getTotalData } from '@/http/dashboard/get-total-data'
 
 interface DashboardProps {
   searchParams: {
@@ -13,13 +15,14 @@ interface DashboardProps {
 export default async function Dashboard({ searchParams }: DashboardProps) {
   const { regions } = await getRegions()
   const { companies } = await getCompanies()
+  const { data } = await getMonthData({ searchParams })
+  const { total } = await getTotalData({ searchParams })
+
   return (
-    <div className="flex gap-3 flex-col w-full mt-10">
+    <div className="flex flex-col gap-3">
       <DashboardFilters regions={regions} companies={companies} />
-      <div className="flex flex-col gap-3 w-full items-center">
-        <TotalCard />
-        <MonthCard searchParams={searchParams} />
-      </div>
+      <DashboardCards data={data} total={total} />
+      <DashboardChart days={data?.sold.totalReceivedDays} />
     </div>
   )
 }

@@ -26,4 +26,18 @@ whatsappRoute.patch('/customers/send-pending-message', ({ set }) => {
   set.status = 200
 })
 
+whatsappRoute.get('/configurations/whatsapp-messages', ({ set }) => {
+  set.status = 200
+
+  return {
+    chargeMessage: faker.lorem.paragraph(),
+    payMessage: faker.lorem.paragraph(),
+    payOffMessage: faker.lorem.paragraph(),
+  }
+})
+
+whatsappRoute.patch('/configurations/whatsapp-messages', ({ set }) => {
+  set.status = 200
+})
+
 export { whatsappRoute }

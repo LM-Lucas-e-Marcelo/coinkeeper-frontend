@@ -1,12 +1,23 @@
 import { ComponentProps } from 'react'
+import { VariantProps, tv } from 'tailwind-variants'
 
-interface CheckboxProps extends ComponentProps<'input'> {
+const labelStyles = tv({
+  base: 'flex items-center gap-3 text-zinc-600',
+  variants: {
+    alignCenter: {
+      true: 'justify-center',
+    },
+  },
+})
+interface CheckboxProps
+  extends ComponentProps<'input'>,
+    VariantProps<typeof labelStyles> {
   label?: string
 }
 
-export function Checkbox({ label, name, ...rest }: CheckboxProps) {
+export function Checkbox({ label, name, alignCenter, ...rest }: CheckboxProps) {
   return (
-    <label htmlFor={name} className="flex items-center gap-3 text-zinc-600">
+    <label htmlFor={name} className={labelStyles({ alignCenter })}>
       <input
         id={name}
         type="checkbox"

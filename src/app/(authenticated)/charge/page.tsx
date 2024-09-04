@@ -10,6 +10,7 @@ import { ModalButton } from '@/components/modal-button'
 import { getBotStatus } from '@/http/whatsapp/get-bot-status'
 import { getConnectBot } from '@/http/whatsapp/get-connect-bot'
 import { ConnectBotModal } from '@/components/modals/whatsapp/connect-bot-modal'
+import { getWhatsappMessage } from '@/http/whatsapp/get-whatsapp-messages'
 
 interface ChargeProps {
   searchParams: {
@@ -21,6 +22,7 @@ export default async function Charge({ searchParams }: ChargeProps) {
   const { charges } = await getCharges(searchParams)
   const { status } = await getBotStatus()
   const { qrcode } = await getConnectBot()
+  const { messages } = await getWhatsappMessage()
 
   return (
     <Suspense fallback={<TableLoading />}>
@@ -45,7 +47,11 @@ export default async function Charge({ searchParams }: ChargeProps) {
           </ModalButton>
         </ButtonGroup>
       </PageHeader>
-      <ChargesTable customers={charges.customers} status={status} />
+      <ChargesTable
+        customers={charges.customers}
+        status={status}
+        messages={messages}
+      />
       <ConnectBotModal qrCode={qrcode.token} />
     </Suspense>
   )

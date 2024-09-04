@@ -1,15 +1,21 @@
 import { api } from '../api-client'
 
+export interface IDay {
+  day: string
+  value: number
+}
 export interface IMonthData {
   totalPeriod: number
   sold: {
     totalSold: number
     totalReceived: number
+    totalReceivedDays: IDay[]
   }
   expense: {
     totalExpense: number
     totalPaid: number
     totalCompanyExpense: number
+    totalExpenseWithCompany: number
   }
 }
 

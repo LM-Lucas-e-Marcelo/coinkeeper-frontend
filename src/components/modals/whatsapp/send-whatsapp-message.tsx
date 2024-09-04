@@ -120,9 +120,14 @@ export const SendWhatsappMessage = ({
                 <ImSpinner11 size={16} />
               </button>
             </div>
-            <ModalButton params={{ connect_bot: true }}>
-              <Button type="button">Conectar Whatsapp</Button>
-            </ModalButton>
+            <ButtonGroup>
+              <ModalButton params={{ connect_bot: true }}>
+                <Button type="button">Conectar Whatsapp</Button>
+              </ModalButton>
+              <ModalButton params={{ configure_whatsapp_message: true }}>
+                <Button type="button">Configurar mensagem</Button>
+              </ModalButton>
+            </ButtonGroup>
           </div>
           <div className="flex gap-3 py-5 px-2 ">
             <div className="border border-zinc-200 bg-zinc-50 p-3 flex-1 rounded-md flex flex-col gap-3  max-h-[70vh] overflow-auto">

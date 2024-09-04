@@ -5,14 +5,28 @@ export interface ITotalData {
   totalExpense: number
 }
 
-export async function getTotalData(): Promise<{ data: ITotalData }> {
-  const result = await api.get(`dashboard/total`, {
+export interface IGetTotalData {
+  searchParams: {
+    [key: string]: string
+  }
+}
+
+export async function getTotalData(
+  props: IGetTotalData,
+): Promise<{ total: ITotalData }> {
+  const queryParams = new URLSearchParams()
+
+  if (props) {
+    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
+  }
+
+  const result = await api.get(`dashboard/total?${queryParams.toString()}`, {
     next: {
       tags: ['get-total-data'],
     },
   })
 
-  const data = await result.json<ITotalData>()
+  const total = await result.json<ITotalData>()
 
-  return { data }
+  return { total }
 }

@@ -9,14 +9,25 @@ import { SendWhatsappCharge } from '@/components/modals/whatsapp/send-whatsapp-c
 import { IStatus } from '@/http/whatsapp/get-bot-status'
 import { PayManyParcelsCharge } from '@/components/modals/transactions/pay-many-parcels-charge'
 import { EmptyState } from '@/components/empty-state'
+import { ConfigureWhatsappMessageModal } from '@/components/modals/whatsapp/configure-whatsapp-message-modal'
+import { GetWhatsappMessageResponse } from '@/http/whatsapp/get-whatsapp-messages'
 
 interface ChargesTableProps {
   customers: ICharge[]
   status: IStatus
+  messages: GetWhatsappMessageResponse
 }
 
-export function ChargesTable({ customers, status }: ChargesTableProps) {
+export function ChargesTable({
+  customers,
+  status,
+  messages,
+}: ChargesTableProps) {
   const [selectedCustomers, setSelectedCustomers] = useState<number[]>([])
+
+  const handleSelectAllCustomers = useCallback(() => {
+    setSelectedCustomers(customers.map((customer) => customer.id))
+  }, [customers])
 
   const handleChange = useCallback((event: FormEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
@@ -33,7 +44,17 @@ export function ChargesTable({ customers, status }: ChargesTableProps) {
       <Table.Root>
         <Table.Head>
           <Table.Row>
-            <Table.Cell isCheck>Selecionar</Table.Cell>
+            <Table.Cell isCheck>
+              {selectedCustomers?.length ? (
+                <button onClick={() => setSelectedCustomers([])}>
+                  Remover todos
+                </button>
+              ) : (
+                <button onClick={handleSelectAllCustomers}>
+                  Selecionar todos
+                </button>
+              )}
+            </Table.Cell>
             <Table.Cell>Nome</Table.Cell>
             <Table.Cell>Parcela Atual</Table.Cell>
             <Table.Cell>Total de Parcelas</Table.Cell>
@@ -44,11 +65,12 @@ export function ChargesTable({ customers, status }: ChargesTableProps) {
           <Table.Body>
             {customers?.map((customer) => (
               <Table.Row key={customer.id}>
-                <Table.Cell isCheck>
+                <Table.Cell>
                   <Checkbox
                     value={customer.id}
                     onChange={handleChange}
                     checked={selectedCustomers.includes(customer.id)}
+                    alignCenter
                   />
                 </Table.Cell>
                 <Table.Cell>{customer.name}</Table.Cell>
@@ -74,6 +96,7 @@ export function ChargesTable({ customers, status }: ChargesTableProps) {
         selectedCustomers={selectedCustomers}
         setSelectedCustomers={setSelectedCustomers}
       />
+      <ConfigureWhatsappMessageModal messages={messages} />
     </>
   )
 }

@@ -12,6 +12,8 @@ import { SendWhatsappMessage } from '@/components/modals/whatsapp/send-whatsapp-
 import { getBotStatus } from '@/http/whatsapp/get-bot-status'
 import { ConnectBotModal } from '@/components/modals/whatsapp/connect-bot-modal'
 import { getConnectBot } from '@/http/whatsapp/get-connect-bot'
+import { ConfigureWhatsappMessageModal } from '@/components/modals/whatsapp/configure-whatsapp-message-modal'
+import { getWhatsappMessage } from '@/http/whatsapp/get-whatsapp-messages'
 
 export interface CustomersProps {
   searchParams: {
@@ -23,6 +25,7 @@ export default async function Customers({ searchParams }: CustomersProps) {
   const { customers } = await getCustomersWithDebt()
   const { status } = await getBotStatus()
   const { qrcode } = await getConnectBot()
+  const { messages } = await getWhatsappMessage()
   const filterOptions = [{ name: 'Nome', value: 'name' }]
 
   return (
@@ -45,6 +48,7 @@ export default async function Customers({ searchParams }: CustomersProps) {
         <CustomersTable searchParams={searchParams} />
         <PayManyParcels customers={customers} />
         <SendWhatsappMessage customers={customers} status={status} />
+        <ConfigureWhatsappMessageModal messages={messages} />
         <ConnectBotModal qrCode={qrcode.token} />
       </Suspense>
     </>

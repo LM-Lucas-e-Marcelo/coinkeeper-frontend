@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants'
 
 const tdStyles = tv({
   slots: {
-    td: 'py-2 last:w-[100px]',
+    td: 'py-2 last:w-[100px] text-nowrap',
     orderIcon: 'transition-all',
   },
   variants: {
@@ -25,7 +25,7 @@ const tdStyles = tv({
     },
     isCheck: {
       true: {
-        td: 'w-[120px] text-center',
+        td: 'w-[200px] text-center',
       },
     },
   },

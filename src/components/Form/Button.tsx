@@ -2,7 +2,7 @@ import { ComponentProps } from 'react'
 import { VariantProps, tv } from 'tailwind-variants'
 
 const button = tv({
-  base: 'p-[7px] px-4 bg-primary text-white rounded-md min-h-8 hover:enabled:opacity-85 disabled:bg-gray-400 disabled:cursor-not-allowed border-primary border',
+  base: 'p-[7px] px-4 bg-primary text-white rounded-md py-[10px] min-w-[100px] hover:enabled:opacity-85 disabled:bg-gray-400 disabled:cursor-not-allowed border-primary border',
   variants: {
     isIcon: {
       true: 'p-2',

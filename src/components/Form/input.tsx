@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants'
 const input = tv({
   slots: {
     inputStyles:
-      'flex-1 bg-secondary p-3 rounded-md border border-primary file:bg-primaryWithOpacity file:border-0 file:text-primary file:rounded-md file:mr-2',
+      'flex-1 bg-secondary p-3 rounded-md border border-primary file:bg-primaryWithOpacity file:border-0 file:text-primary file:rounded-md file:mr-2 max-h-[45px]',
     labelStyles: 'w-full text-sm flex flex-col text-gray-500',
     errorStyles: 'text-xs text-red mt-1 ml-1',
   },
