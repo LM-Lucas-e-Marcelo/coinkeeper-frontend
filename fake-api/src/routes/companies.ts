@@ -20,16 +20,4 @@ companiesRoute.post('/auth/sign-in/organization', ({ set }) => {
   }
 })
 
-// customersRoute.post('/customers', ({ set }) => {
-//   set.status = 201
-// })
-
-// customersRoute.patch('/customers/:id', ({ set }) => {
-//   set.status = 204
-// })
-
-// customersRoute.delete('/customers/:id', ({ set }) => {
-//   set.status = 204
-// })
-
 export { companiesRoute }

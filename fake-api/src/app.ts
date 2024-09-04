@@ -12,6 +12,7 @@ import { companiesRoute } from './routes/companies'
 import { dashboardRoutes } from './routes/dashboard'
 import { whatsappRoute } from './routes/whatsapp'
 import { regionsRoute } from './routes/regions'
+import { chargesRoute } from './routes/charges'
 
 const app = new Elysia()
 
@@ -28,5 +29,6 @@ app.use(companiesRoute)
 app.use(dashboardRoutes)
 app.use(whatsappRoute)
 app.use(regionsRoute)
+app.use(chargesRoute)
 
 export { app }
