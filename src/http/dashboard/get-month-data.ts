@@ -30,7 +30,7 @@ export async function getMonthData(
 ): Promise<{ data: IMonthData | null }> {
   const queryParams = new URLSearchParams()
 
-  if (props) {
+  if (props.searchParams) {
     Object.entries(props.searchParams).map(([key, value]) =>
       queryParams.append(key, value),
     )

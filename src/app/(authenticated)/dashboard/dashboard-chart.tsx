@@ -38,6 +38,9 @@ export function DashboardChart({ days }: DashboardChartProps) {
       },
     },
     dataLabels: {
+      style: {
+        colors: ['#212121'],
+      },
       formatter: (val: number) => {
         return formatCurrency(val)
       },

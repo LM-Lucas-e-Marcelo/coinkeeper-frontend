@@ -11,6 +11,7 @@ import { PayManyParcelsCharge } from '@/components/modals/transactions/pay-many-
 import { EmptyState } from '@/components/empty-state'
 import { ConfigureWhatsappMessageModal } from '@/components/modals/whatsapp/configure-whatsapp-message-modal'
 import { GetWhatsappMessageResponse } from '@/http/whatsapp/get-whatsapp-messages'
+import { TableActions } from './charges-table-actions'
 
 interface ChargesTableProps {
   customers: ICharge[]
@@ -59,6 +60,7 @@ export function ChargesTable({
             <Table.Cell>Parcela Atual</Table.Cell>
             <Table.Cell>Total de Parcelas</Table.Cell>
             <Table.Cell sortBy="customers.total_debt">Débito total</Table.Cell>
+            <Table.Cell>Ações</Table.Cell>
           </Table.Row>
         </Table.Head>
         {customers.length && (
@@ -77,6 +79,9 @@ export function ChargesTable({
                 <Table.Cell>{formatCurrency(customer.parcelActual)}</Table.Cell>
                 <Table.Cell>{customer.totalParcels}</Table.Cell>
                 <Table.Cell>{formatCurrency(customer.totalDebt)}</Table.Cell>
+                <Table.Cell>
+                  <TableActions customerId={customer.id} />
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

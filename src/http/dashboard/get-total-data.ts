@@ -16,8 +16,10 @@ export async function getTotalData(
 ): Promise<{ total: ITotalData }> {
   const queryParams = new URLSearchParams()
 
-  if (props) {
-    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
+  if (props.searchParams) {
+    Object.entries(props.searchParams).map(([key, value]) =>
+      queryParams.append(key, value),
+    )
   }
 
   const result = await api.get(`dashboard/total?${queryParams.toString()}`, {
