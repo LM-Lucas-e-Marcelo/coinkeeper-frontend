@@ -70,7 +70,7 @@ export function DashboardCards({ data, total }: IMonthDataProps) {
       </div>
       <div className="p-5 border border-primary rounded-md flex gap-6 flex-1 justify-center items-center">
         <span>
-          <p>Valor total</p>
+          <p>Lucro no período</p>
           <strong className="text-primary text-xl">
             {formatCurrency(data?.totalPeriod)}
           </strong>

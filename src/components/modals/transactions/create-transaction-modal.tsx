@@ -85,6 +85,10 @@ export const CreateTransactionModal = ({
     value: index + 1,
   }))
 
+  const currentDate = new Date()
+  const nextDay = new Date(currentDate).setDate(currentDate.getDate() + 1)
+  const formattedDate = new Date(nextDay).toISOString().split('T')[0]
+
   return (
     <Modal.Root isOpen={isOpen} onClose={handleCloseModal}>
       <Modal.Header>Cadastrar transação</Modal.Header>
@@ -113,7 +117,7 @@ export const CreateTransactionModal = ({
               label="Data da primeira parcela"
               name="firstDueDate"
               type="date"
-              defaultValue={new Date().toISOString().split('T')[0]}
+              defaultValue={formattedDate}
               error={errors?.firstDueDate}
             />
 

@@ -31,7 +31,9 @@ export async function getMonthData(
   const queryParams = new URLSearchParams()
 
   if (props) {
-    Object.entries(props).map(([key, value]) => queryParams.append(key, value))
+    Object.entries(props.searchParams).map(([key, value]) =>
+      queryParams.append(key, value),
+    )
   }
 
   const result = await api.get(`dashboard/month?${queryParams.toString()}`, {

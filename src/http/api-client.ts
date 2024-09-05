@@ -2,8 +2,11 @@ import { getCookie } from 'cookies-next'
 import { CookiesFn } from 'cookies-next/lib/types'
 import ky from 'ky'
 
+const timeoutInMilliseconds = 10 * 60 * 1000
+
 export const api = ky.create({
-  prefixUrl: 'http://localhost:5000',
+  prefixUrl: 'http://170.245.13.216:8090',
+  timeout: timeoutInMilliseconds,
   hooks: {
     beforeRequest: [
       async (request) => {
