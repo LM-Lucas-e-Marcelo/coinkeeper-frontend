@@ -58,6 +58,11 @@ export const ParcelsDetailsModal = ({
 
       <Modal.Content>
         {parcels.map((parcel) => {
+          const currentParcelDate = new Date(parcel.dueDate)
+          const adjustDate = new Date(
+            currentParcelDate.setDate(currentParcelDate.getDate() + 1),
+          ).toISOString()
+
           return (
             <div
               key={parcel.id}
@@ -77,7 +82,7 @@ export const ParcelsDetailsModal = ({
                 <section>
                   <span>
                     <strong>Vencimento</strong>
-                    <p>{formatDate(parcel.dueDate)}</p>
+                    <p>{formatDate(adjustDate)}</p>
                   </span>
                 </section>
                 <section className={section()}>

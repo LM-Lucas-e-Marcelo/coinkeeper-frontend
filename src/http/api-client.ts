@@ -5,7 +5,7 @@ import ky from 'ky'
 const timeoutInMilliseconds = 10 * 60 * 1000
 
 export const api = ky.create({
-  prefixUrl: 'http://170.245.13.216:8090',
+  prefixUrl: 'http://localhost:5000',
   timeout: timeoutInMilliseconds,
   hooks: {
     beforeRequest: [

@@ -8,6 +8,8 @@ import { Button } from '@/components/form/button'
 import { CreateTransactionModal } from '@/components/modals/transactions/create-transaction-modal'
 import { getProducts } from '@/http/products/get-products'
 import { getCustomerById } from '@/http/customers/get-customer-by-id'
+import { Suspense } from 'react'
+import { TableLoading } from '@/components/loadings/table-loading'
 
 const customerDeatils = tv({
   slots: {
@@ -29,7 +31,7 @@ export default async function CustomerDetailsPage({
   const { products } = await getProducts({ limit: 0 })
   const { customer } = await getCustomerById({ id: params?.id })
   return (
-    <>
+    <Suspense fallback={<TableLoading />}>
       <PageHeader>
         <ButtonGroup align="end">
           <ModalButton params={{ customer_documents: true }}>
@@ -45,6 +47,6 @@ export default async function CustomerDetailsPage({
         <CustomerTransactions params={params} customerScore={customer?.score} />
         <CreateTransactionModal params={params} products={products} />
       </div>
-    </>
+    </Suspense>
   )
 }
