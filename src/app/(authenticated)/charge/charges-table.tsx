@@ -12,6 +12,7 @@ import { EmptyState } from '@/components/empty-state'
 import { ConfigureWhatsappMessageModal } from '@/components/modals/whatsapp/configure-whatsapp-message-modal'
 import { GetWhatsappMessageResponse } from '@/http/whatsapp/get-whatsapp-messages'
 import { TableActions } from './charges-table-actions'
+import { ParcelsNotPaidModal } from '@/components/modals/transactions/parcels-not-paid-modal'
 
 interface ChargesTableProps {
   customers: ICharge[]
@@ -97,6 +98,12 @@ export function ChargesTable({
         setSelectedCustomers={setSelectedCustomers}
       />
       <PayManyParcelsCharge
+        customers={customers}
+        selectedCustomers={selectedCustomers}
+        setSelectedCustomers={setSelectedCustomers}
+      />
+
+      <ParcelsNotPaidModal
         customers={customers}
         selectedCustomers={selectedCustomers}
         setSelectedCustomers={setSelectedCustomers}

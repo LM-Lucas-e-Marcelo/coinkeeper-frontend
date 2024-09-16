@@ -1,11 +1,18 @@
 import { ModalButton } from '@/components/modal-button'
 import { tv } from 'tailwind-variants'
-import { FiEye, FiTrash2, LiaFileContractSolid, FiCheck } from '@/assets/icons'
+import {
+  FiEye,
+  FiTrash2,
+  LiaFileContractSolid,
+  FiCheck,
+  MdMoneyOff,
+} from '@/assets/icons'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
 import { formatDate } from '@/utils/format-date'
 import { ParcelsDetailsModal } from '@/components/modals/transactions/parcels-details-modal'
 import { PayOffTransactionModal } from '@/components/modals/transactions/pay-off-transaction-modal'
+import { FinancialLossModal } from '@/components/modals/transactions/financial-loss-modal'
 
 const transactionCard = tv({
   slots: {
@@ -71,14 +78,29 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <p>{formatCurrency(transaction.companyExpense) || '-'}</p>
         </span>
         <span className={cardActions()}>
+          <ModalButton params={{ [`financial_loss_${transaction.id}`]: true }}>
+            <MdMoneyOff
+              size={24}
+              className="text-red"
+              title="Marcar como prejuízo"
+            />
+          </ModalButton>
           <ModalButton
             params={{ [`pay_off_transaction_${transaction.id}`]: true }}
           >
-            <FiCheck size={24} className="text-green-500" />
+            <FiCheck
+              size={24}
+              className="text-green-500"
+              title="Efetuar quitação do empréstimo"
+            />
           </ModalButton>
           {transaction.contractFileUrl && (
             <a href={transaction.contractFileUrl} target="_blank">
-              <LiaFileContractSolid size={26} className="text-orange" />
+              <LiaFileContractSolid
+                size={26}
+                className="text-orange"
+                title="Ver comprovante"
+              />
             </a>
           )}
           <ModalButton params={{ [`parcels_details_${transaction.id}`]: true }}>
@@ -87,7 +109,11 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           <ModalButton
             params={{ delete_transaction: true, transaction: transaction.id }}
           >
-            <FiTrash2 size={24} className="text-red" />
+            <FiTrash2
+              size={24}
+              className="text-red"
+              title="Excluir empréstimo"
+            />
           </ModalButton>
         </span>
         <ParcelsDetailsModal
@@ -95,6 +121,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           transactionId={transaction.id}
         />
         <PayOffTransactionModal transaction={transaction} />
+        <FinancialLossModal transaction={transaction} />
       </div>
     </div>
   )

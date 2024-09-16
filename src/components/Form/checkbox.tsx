@@ -17,9 +17,8 @@ interface CheckboxProps
 
 export function Checkbox({ label, name, alignCenter, ...rest }: CheckboxProps) {
   return (
-    <label htmlFor={name} className={labelStyles({ alignCenter })}>
+    <label className={labelStyles({ alignCenter })}>
       <input
-        id={name}
         type="checkbox"
         className="accent-primary w-5 h-5"
         name={name}

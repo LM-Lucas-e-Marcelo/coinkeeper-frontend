@@ -5,6 +5,7 @@ export {
   MdLogout,
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
+  MdMoneyOff,
 } from 'react-icons/md'
 export { LuUsers, LuFilter } from 'react-icons/lu'
 export {

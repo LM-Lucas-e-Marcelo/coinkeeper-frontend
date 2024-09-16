@@ -45,6 +45,9 @@ export default async function Charge({ searchParams }: ChargeProps) {
           <ModalButton params={{ pay_many_parcels_charge: true }}>
             <Button>Pagar Parcelas</Button>
           </ModalButton>
+          <ModalButton params={{ parcels_not_paid: true }}>
+            <Button>Não Pagaram</Button>
+          </ModalButton>
         </ButtonGroup>
       </PageHeader>
       <ChargesTable

@@ -9,7 +9,6 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { createCustomerAction } from '@/actions/customers/create-customer-action'
-import { SUPPORTED_FILES } from '@/constants/files'
 import { ICustomerById } from '@/http/customers/get-customer-by-id'
 import { updateCustomerAction } from '@/actions/customers/update-customer-action'
 import { ModalButton } from '@/components/modal-button'
@@ -132,20 +131,6 @@ export const ManagementCustomerModal = ({
               error={errors?.email}
               defaultValue={customer?.email}
             />
-            <Input
-              type="file"
-              label="Documento"
-              name="documentFile"
-              error={errors?.documentFile}
-              accept={SUPPORTED_FILES.toString()}
-            />
-            <Input
-              type="file"
-              label="Comprovante de residencia"
-              name="proofAddressFile"
-              error={errors?.proofAddressFile}
-              accept={SUPPORTED_FILES.toString()}
-            />{' '}
             <Input name="id" type="hidden" defaultValue={customer?.id} />
           </div>
         </Modal.Content>

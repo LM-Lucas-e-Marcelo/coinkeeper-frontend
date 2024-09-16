@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { tv } from 'tailwind-variants'
-import { SearchInput } from './form/search-input'
-import { IoIosNotificationsOutline } from '@/assets/icons'
+
 import { getCompanyName, getUser } from '@/auth/auth'
 
 const header = tv({
@@ -17,15 +16,7 @@ const header = tv({
   },
 })
 
-const {
-  base,
-  profile,
-  userName,
-  time,
-  actions,
-  notificationButton,
-  profilePicture,
-} = header()
+const { base, profile, userName, time, actions, profilePicture } = header()
 
 export const Header = () => {
   return (
@@ -36,10 +27,6 @@ export const Header = () => {
         <time className={time()}>{new Date().toLocaleDateString()}</time>
       </div>
       <div className={actions()}>
-        <SearchInput />
-        <button className={notificationButton()}>
-          <IoIosNotificationsOutline size={28} />
-        </button>
         <img
           src="https://ui-avatars.com/api/?rounded=true&format=svg&background=F6F8FE&color=4DA6FF&name=Lucas&size=16"
           alt="profile picture with initias letter of name"

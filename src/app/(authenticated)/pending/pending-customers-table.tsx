@@ -1,20 +1,16 @@
 import { Table } from '@/components/table'
 import { formatCurrency } from '@/utils/format-currency'
-import { getPendingCustomers } from '@/http/pending/get-pending-customers'
+import { IPendingCustomers } from '@/http/pending/get-pending-customers'
 import { FiArrowRight } from '@/assets/icons'
 import Link from 'next/link'
 
 interface PendingCustomersTableProps {
-  searchParams: {
-    [key: string]: string
-  }
+  pendingCustomers: IPendingCustomers
 }
 
 export async function PendingCustomersTable({
-  searchParams,
+  pendingCustomers,
 }: PendingCustomersTableProps) {
-  const { pendingCustomers } = await getPendingCustomers(searchParams)
-
   return (
     <>
       <Table.Root>

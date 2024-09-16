@@ -6,33 +6,27 @@ import { Button } from '@/components/form/button'
 import { toast } from 'react-toastify'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
-import { payManyParcelAction } from '@/actions/transactions/pay-many-parcel-action'
+import { Dispatch, SetStateAction, useMemo } from 'react'
 import { ICharge } from '@/http/get-charges'
 import { EmptyState } from '@/components/empty-state'
-import { Checkbox } from '@/components/form/checkbox'
+import { parcelsNotPaidAction } from '@/actions/transactions/parcels-not-paid-action'
 
-interface PayManyParcelsChargeProps {
+interface ParcelsNotPaidModalProps {
   customers: ICharge[]
   selectedCustomers: number[]
   setSelectedCustomers: Dispatch<SetStateAction<number[]>>
 }
 
-export const PayManyParcelsCharge = ({
+export const ParcelsNotPaidModal = ({
   customers,
   selectedCustomers,
   setSelectedCustomers,
-}: PayManyParcelsChargeProps) => {
-  const [customerParcelValues, setCustomerParcelValues] = useState<
-    Record<number, { value: number; paidLate: boolean }>
-  >({})
-
+}: ParcelsNotPaidModalProps) => {
   const { removeParams, params } = useUrlParams()
-  const isOpen = params.has('pay_many_parcels_charge')
+  const isOpen = params.has('parcels_not_paid')
 
   const handleCloseModal = () => {
-    removeParams(['pay_many_parcels_charge'])
-    setCustomerParcelValues({})
+    removeParams(['parcels_not_paid'])
     setSelectedCustomers([])
   }
 
@@ -44,10 +38,10 @@ export const PayManyParcelsCharge = ({
     toast(message, { type: 'error' })
   }
   const [, handleSubmit, isPending] = useFormState({
-    action: payManyParcelAction,
+    action: parcelsNotPaidAction,
     onError,
     onSuccess,
-    payload: customerParcelValues,
+    payload: selectedCustomers,
   })
 
   const filterSelectedCustomers = useMemo(
@@ -56,29 +50,9 @@ export const PayManyParcelsCharge = ({
     [customers, selectedCustomers],
   )
 
-  const handleValueChange = (customerId: number, value: number) => {
-    setCustomerParcelValues((prevState) => ({
-      ...prevState,
-      [customerId]: {
-        ...prevState[customerId],
-        value,
-      },
-    }))
-  }
-
-  const handlePaidLateChange = (customerId: number, paidLate: boolean) => {
-    setCustomerParcelValues((prevState) => ({
-      ...prevState,
-      [customerId]: {
-        ...prevState[customerId],
-        paidLate,
-      },
-    }))
-  }
-
   return (
     <Modal.Root size="lg" isOpen={isOpen} onClose={handleCloseModal}>
-      <Modal.Header>Pagar parcelas</Modal.Header>
+      <Modal.Header>Não Pagaram</Modal.Header>
       <form onSubmit={handleSubmit}>
         <Modal.Content>
           <div className="border border-zinc-200 bg-zinc-50 p-3 flex-1 rounded-md flex flex-col gap-3  max-h-[70vh] overflow-auto">
@@ -89,32 +63,11 @@ export const PayManyParcelsCharge = ({
             {filterSelectedCustomers?.length ? (
               filterSelectedCustomers.map((customer) => (
                 <button
-                  className="flex justify-between items-center border border-primary bg-white px-2 py-2 rounded-md"
+                  className="flex border border-primary bg-white px-2 py-2 rounded-md"
                   key={customer.id}
                   type="button"
                 >
-                  <div className="flex flex-col gap-1 items-start">
-                    <Checkbox
-                      name="paidLate"
-                      label="Pagou atrasado"
-                      checked={
-                        customerParcelValues[customer.id]?.paidLate || false
-                      }
-                      onChange={(e) =>
-                        handlePaidLateChange(customer.id, e.target.checked)
-                      }
-                    />
-                    <p>{customer.name}</p>
-                  </div>
-                  <input
-                    type="number"
-                    defaultValue={1}
-                    className="w-[50px] border border-primary rounded-md px-2 py-1 text-center"
-                    min={1}
-                    onChange={(e) =>
-                      handleValueChange(customer.id, parseInt(e.target.value))
-                    }
-                  />
+                  <p>{customer.name}</p>
                 </button>
               ))
             ) : (
@@ -132,7 +85,7 @@ export const PayManyParcelsCharge = ({
               type="submit"
               disabled={isPending || !selectedCustomers?.length}
             >
-              Pagar parcela
+              Salvar
             </Button>
           </ButtonGroup>
         </Modal.Actions>

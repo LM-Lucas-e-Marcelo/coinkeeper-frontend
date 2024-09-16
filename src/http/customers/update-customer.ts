@@ -10,8 +10,6 @@ interface UpdateCustomerRequest {
   email?: string | null
   businessAddress?: string | null
   residentialAddress?: string | null
-  documentFile?: File
-  proofAddressFile?: File
   regionId?: string
 }
 

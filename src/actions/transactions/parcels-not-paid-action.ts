@@ -4,9 +4,7 @@ import { payManyParcels } from '@/http/transactions/pay-many-parcels'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
-export async function payManyParcelAction(
-  data: Record<number, { value: number; paidLate: boolean }>,
-) {
+export async function parcelsNotPaidAction(data: Record<number, number>) {
   try {
     await payManyParcels(data)
     revalidateTag('customer-by-id')
@@ -29,5 +27,5 @@ export async function payManyParcelAction(
     }
   }
 
-  return { success: true, message: 'Parcelas pagas com sucesso', errors: null }
+  return { success: true, message: 'Registro salvo com sucesso!', errors: null }
 }

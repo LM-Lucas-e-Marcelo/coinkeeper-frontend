@@ -2,19 +2,15 @@ import { Table } from '@/components/table'
 import { formatCurrency } from '@/utils/format-currency'
 import { FiArrowRight } from '@/assets/icons'
 import Link from 'next/link'
-import { getPendingExpenses } from '@/http/pending/get-pending-expenses'
+import { IPendingExpenses } from '@/http/pending/get-pending-expenses'
 
 interface PendingExpensesTableProps {
-  searchParams: {
-    [key: string]: string
-  }
+  pendingExpenses: IPendingExpenses
 }
 
 export async function PendingExpensesTable({
-  searchParams,
+  pendingExpenses,
 }: PendingExpensesTableProps) {
-  const { pendingExpenses } = await getPendingExpenses(searchParams)
-
   return (
     <>
       <Table.Root>
