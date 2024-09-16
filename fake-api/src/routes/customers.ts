@@ -27,6 +27,10 @@ customersRoute.post('/customers/pay-many-parcels', ({ set }) => {
   set.status = 201
 })
 
+customersRoute.patch('/customers/inform-parcels-not-paid', ({ set }) => {
+  set.status = 204
+})
+
 customersRoute.patch('/customers/:id', ({ set }) => {
   set.status = 204
 })

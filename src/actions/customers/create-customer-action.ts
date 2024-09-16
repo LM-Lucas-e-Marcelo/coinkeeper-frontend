@@ -1,6 +1,5 @@
 'use server'
 
-import { SUPPORTED_SIZE } from '@/constants/files'
 import { createCustomer } from '@/http/customers/create-customer'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
@@ -16,12 +15,6 @@ const createCustomerSchema = z.object({
   email: z.string().nullish(),
   businessAddress: z.string().nullish(),
   residentialAddress: z.string().nullish(),
-  documentFile: z.any().refine((file) => {
-    return !file || file?.size <= SUPPORTED_SIZE
-  }, 'O arquivo deve ser menor que 25mb'),
-  proofAddressFile: z.any().refine((file) => {
-    return file && file?.size <= SUPPORTED_SIZE
-  }, 'O arquivo deve ser menor que 25mb'),
 })
 
 export async function createCustomerAction(data: FormData) {
@@ -41,8 +34,6 @@ export async function createCustomerAction(data: FormData) {
     phone,
     phoneWhatsapp,
     businessAddress,
-    documentFile,
-    proofAddressFile,
     residentialAddress,
     regionId,
   } = result.data
@@ -57,8 +48,6 @@ export async function createCustomerAction(data: FormData) {
       phoneWhatsapp,
       businessAddress,
       regionId,
-      ...(documentFile?.name !== 'undefined' && { documentFile }),
-      ...(proofAddressFile?.name !== 'undefined' && { proofAddressFile }),
       residentialAddress,
     })
 
