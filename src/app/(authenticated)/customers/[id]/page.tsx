@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants'
-import { CustomerDetails } from './customer-details'
+
 import { CustomerTransactions } from './customer-transactions'
 import { PageHeader } from '@/components/page-header'
 import { ButtonGroup } from '@/components/form/button-group'
@@ -10,6 +10,8 @@ import { getProducts } from '@/http/products/get-products'
 import { getCustomerById } from '@/http/customers/get-customer-by-id'
 import { Suspense } from 'react'
 import { TableLoading } from '@/components/loadings/table-loading'
+import { CustomerScore } from './customer-score'
+import { formatCurrency } from '@/utils/format-currency'
 
 const customerDeatils = tv({
   slots: {
@@ -33,7 +35,16 @@ export default async function CustomerDetailsPage({
   return (
     <Suspense fallback={<TableLoading />}>
       <PageHeader>
-        <ButtonGroup align="end">
+        <section>
+          <strong>Nome</strong>
+          <p>{customer?.name}</p>
+        </section>
+        <section>
+          <strong>Valor total da dívida</strong>
+          <p>{formatCurrency(customer?.totalDebt)}</p>
+        </section>
+        <CustomerScore customerScore={customer?.score} />
+        <ButtonGroup>
           <ModalButton params={{ customer_documents: true }}>
             <Button>Documentos</Button>
           </ModalButton>
@@ -43,8 +54,7 @@ export default async function CustomerDetailsPage({
         </ButtonGroup>
       </PageHeader>
       <div className={container()}>
-        <CustomerDetails customer={customer} />
-        <CustomerTransactions params={params} customerScore={customer?.score} />
+        <CustomerTransactions params={params} />
         <CreateTransactionModal params={params} products={products} />
       </div>
     </Suspense>

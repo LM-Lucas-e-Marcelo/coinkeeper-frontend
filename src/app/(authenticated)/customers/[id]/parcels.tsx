@@ -10,7 +10,7 @@ import { tv } from 'tailwind-variants'
 const parcels = tv({
   slots: {
     container:
-      'flex flex-col px-4 p-2 gap-2 mb-4 border-l-4 border-red bg-secondary rounded-md last:mb-0 w-[90%] ml-auto',
+      'flex flex-col px-4 p-2 gap-2 mb-4 border-l-4 border-red bg-secondary rounded-md last:mb-0 w-[50%] ml-auto',
     wrapper: 'flex justify-between gap-2',
     parcelSection: 'flex flex-col gap-2',
     statusSpan: 'flex items-center gap-2',

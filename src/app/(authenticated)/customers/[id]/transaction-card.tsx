@@ -44,6 +44,10 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
       <div className={card({ paid: transaction.paymentDate !== null })}>
         <div className={cardSection()}>
           <span>
+            <strong>ID</strong>
+            <p>{transaction.id}</p>
+          </span>
+          <span>
             <strong>Descrição</strong>
             <p>{transaction.description}</p>
           </span>

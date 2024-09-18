@@ -4,16 +4,14 @@ import { DeleteTransactionModal } from '@/components/modals/transactions/delete-
 import { getTransactions } from '@/http/transactions/get-transactions'
 import { CustomerDetailsPageProps } from './page'
 import { PayParcelModal } from '@/components/modals/transactions/pay-parcel-modal'
-import { CustomerScore } from './customer-score'
 import { RollbackParcelModal } from '@/components/modals/transactions/rollback-parcel-modal'
 
 const customerTransactions = tv({
   slots: {
     container: 'w-full flex gap-4',
     section:
-      'w-full flex flex-col gap-4 overflow-auto max-h-[80vh] px-4 relative',
+      'w-full flex flex-col gap-4 overflow-auto max-h-[75vh] px-4 relative',
     headerTitle: 'sticky top-0 bg-white w-full py-2',
-    divider: 'w-1 bg-primary h-full',
   },
 
   variants: {
@@ -30,16 +28,11 @@ const customerTransactions = tv({
   },
 })
 
-const { container, section, headerTitle, divider } = customerTransactions()
-
-interface CustomerTransactionsProps extends CustomerDetailsPageProps {
-  customerScore?: number
-}
+const { container, section, headerTitle } = customerTransactions()
 
 export async function CustomerTransactions({
   params,
-  customerScore,
-}: CustomerTransactionsProps) {
+}: CustomerDetailsPageProps) {
   const { transactions } = await getTransactions({ customerId: params.id })
 
   return (
@@ -51,11 +44,6 @@ export async function CustomerTransactions({
             <TransactionCard key={transaction.id} transaction={transaction} />
           )
         })}
-      </section>
-      <div className={divider()} />
-      <section className={section({ isSmall: true })}>
-        <strong className={headerTitle({ isAbsolute: true })}>Pontuação</strong>
-        <CustomerScore customerScore={customerScore} />
       </section>
       <DeleteTransactionModal />
       <PayParcelModal />
