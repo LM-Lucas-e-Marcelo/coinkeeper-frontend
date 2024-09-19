@@ -12,6 +12,7 @@ import { Suspense } from 'react'
 import { TableLoading } from '@/components/loadings/table-loading'
 import { CustomerScore } from './customer-score'
 import { formatCurrency } from '@/utils/format-currency'
+import Link from 'next/link'
 
 const customerDeatils = tv({
   slots: {
@@ -45,6 +46,9 @@ export default async function CustomerDetailsPage({
         </section>
         <CustomerScore customerScore={customer?.score} />
         <ButtonGroup>
+          <Link href={`/registration/${customer?.id}`}>
+            <Button>Ficha Cadastral</Button>
+          </Link>
           <ModalButton params={{ customer_documents: true }}>
             <Button>Documentos</Button>
           </ModalButton>
