@@ -6,7 +6,7 @@ import { getCompanyName, getUser } from '@/auth/auth'
 const header = tv({
   slots: {
     base: 'flex justify-between bg-white items-center px-6',
-    profile: 'flex flex-col mt-5',
+    profile: 'flex flex-col',
     userName: 'text-2xl',
     time: 'text-zinc-300 mt-[0px]',
     actions: 'flex gap-4 items-center',
