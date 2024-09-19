@@ -7,7 +7,7 @@ export {
   MdOutlineArrowForwardIos,
   MdMoneyOff,
 } from 'react-icons/md'
-export { LuUsers, LuFilter } from 'react-icons/lu'
+export { LuUsers, LuFilter, LuClipboardList } from 'react-icons/lu'
 export {
   IoIosSearch,
   IoIosNotificationsOutline,
