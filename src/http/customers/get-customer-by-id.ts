@@ -12,10 +12,6 @@ export interface ICustomerById {
   email: string
   businessAddress: string
   residentialAddress: string
-  proofAddressFile: Blob
-  proofAddressFileUrl: string
-  documentFile: Blob
-  documentFileUrl: string
   regionId: number
 }
 
