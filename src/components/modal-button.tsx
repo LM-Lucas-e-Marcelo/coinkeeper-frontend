@@ -14,5 +14,14 @@ export const ModalButton = ({ params, ...rest }: ModalButtonProps) => {
 
   const handleOpenModal = () => addParams(params)
 
-  return <span className="cursor-pointer" onClick={handleOpenModal} {...rest} />
+  return (
+    <span
+      className="cursor-pointer"
+      onClick={(event) => {
+        event.stopPropagation()
+        handleOpenModal()
+      }}
+      {...rest}
+    />
+  )
 }

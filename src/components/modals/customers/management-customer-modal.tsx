@@ -104,7 +104,7 @@ export const ManagementCustomerModal = ({
                 label="Região"
                 name="regionId"
                 error={errors?.regionId}
-                defaultValue={customer?.regionId}
+                defaultValue={customer?.region.id}
               />
               <span className="mb-[1px] h-[46px] bg-primary rounded-md flex items-center">
                 <ModalButton params={{ regions: true }}>

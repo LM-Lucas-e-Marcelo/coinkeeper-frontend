@@ -34,6 +34,7 @@ export function useFormState<T>({
     const data = new FormData(form)
 
     startTransition(async () => {
+      console.log(payload)
       const state = await action(payload ?? data)
 
       if (state.success && onSuccess) {

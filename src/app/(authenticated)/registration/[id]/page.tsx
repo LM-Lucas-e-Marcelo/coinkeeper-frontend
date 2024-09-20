@@ -10,6 +10,9 @@ import { CustomerAddress } from './customer-address'
 import { ModalButton } from '@/components/modal-button'
 import { ManagementCustomerModal } from '@/components/modals/customers/management-customer-modal'
 import { getRegions } from '@/http/regions/get-regions'
+import { CustomerDocuments } from './customer-documents'
+import { AddCustomerDocumentsModal } from '@/components/modals/customers/add-customer-documents-modal'
+import { DeleteCustomerDocumentModal } from '@/components/modals/customers/delete-customer-document-modal'
 
 const registrationStyles = tv({
   slots: {
@@ -34,7 +37,11 @@ export default async function Registration({ params }: RegistrationProps) {
   return (
     <Suspense fallback={<TableLoading />}>
       <PageHeader>
-        <ButtonGroup align="end">
+        <h1 className="text-2xl">Ficha cadastral</h1>
+        <ButtonGroup>
+          <ModalButton params={{ add_file_modal: true }}>
+            <Button>Adicionar documentos</Button>
+          </ModalButton>
           <ModalButton params={{ management_customer: true, update: true }}>
             <Button>Editar</Button>
           </ModalButton>
@@ -44,10 +51,10 @@ export default async function Registration({ params }: RegistrationProps) {
         <CustomerData customer={customer} />
         <CustomerAddress customer={customer} />
       </div>
-      <div>
-        <h1>Documentos</h1>
-      </div>
+      <CustomerDocuments medias={customer.medias} customerId={customer.id} />
       <ManagementCustomerModal regions={regions} customer={customer} />
+      <AddCustomerDocumentsModal customerId={customer.id} />
+      <DeleteCustomerDocumentModal />
     </Suspense>
   )
 }

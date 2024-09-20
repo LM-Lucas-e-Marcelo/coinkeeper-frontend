@@ -1,7 +1,10 @@
 import { faker } from '@faker-js/faker'
 import { formatGenericPayload } from '../utils/format-generic-payload'
 import { ICustomer } from '../../../src/http/customers/get-customers'
-import { ICustomerById } from '../../../src/http/customers/get-customer-by-id'
+import {
+  ICustomerById,
+  IMedia,
+} from '../../../src/http/customers/get-customer-by-id'
 
 export function createRandomCustomer(): ICustomer {
   return {
@@ -12,9 +15,25 @@ export function createRandomCustomer(): ICustomer {
   }
 }
 
+function createRandomMedia(): IMedia {
+  return {
+    id: faker.number.int({ min: 1, max: 1000 }),
+    file: faker.lorem.word(),
+    fileUrl:
+      'https://img-cdn.pixlr.com/image-generator/history/65ba5701b4f4f4419f746bc3/806ecb58-167c-4d20-b658-a6a6b2f221e9/medium.webp',
+  }
+}
+
+const mediaList = faker.helpers.multiple(createRandomMedia, {
+  count: 10,
+})
+
 function createCustomerById(): ICustomerById {
   return {
-    regionId: faker.number.int({ min: 1, max: 1000 }),
+    region: {
+      id: faker.number.int({ min: 1, max: 1000 }),
+      name: faker.location.city(),
+    },
     id: faker.number.int({ min: 1, max: 1000 }),
     isActive: faker.datatype.boolean(),
     name: faker.person.fullName(),
@@ -26,12 +45,7 @@ function createCustomerById(): ICustomerById {
     email: faker.internet.email(),
     businessAddress: 'Rua Manoel Mariano Ferreira, 123 - Biguaçu - SC',
     residentialAddress: 'Rua Manoel Mariano Ferreira, 123 - Biguaçu - SC',
-    proofAddressFile: new Blob(),
-    proofAddressFileUrl:
-      'https://www.gov.br/servidor/pt-br/acesso-a-informacao/faq/sou-gov.br/comprovante-de-rendimentos/comprovantes-de-rendimentos-imagens/6-tela-b-5-1passo-downloadrendimentopdf.jpg/@@images/image',
-    documentFile: new Blob(),
-    documentFileUrl:
-      'https://www.gov.br/servidor/pt-br/acesso-a-informacao/faq/sou-gov.br/comprovante-de-rendimentos/comprovantes-de-rendimentos-imagens/6-tela-b-5-1passo-downloadrendimentopdf.jpg/@@images/image',
+    medias: mediaList,
   }
 }
 

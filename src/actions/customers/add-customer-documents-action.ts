@@ -1,18 +1,25 @@
 'use server'
 
-import { payManyParcels } from '@/http/transactions/pay-many-parcels'
+import { addCustomerDocuments } from '@/http/customers/add-customer-documents'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
-export async function parcelsNotPaidAction(
-  data: Record<number, { value: number; paidLate: boolean }>,
-) {
+interface addCustomerDocumentsAction {
+  files: FormData
+  customerId: number
+}
+
+export async function addCustomerDocumentsAction({
+  files,
+  customerId,
+}: addCustomerDocumentsAction) {
   try {
-    await payManyParcels(data)
+    await addCustomerDocuments({
+      files,
+      customerId,
+    })
+
     revalidateTag('customer-by-id')
-    revalidateTag('customers')
-    revalidateTag('customers-with-debt')
-    revalidateTag('charges')
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()
@@ -29,5 +36,9 @@ export async function parcelsNotPaidAction(
     }
   }
 
-  return { success: true, message: 'Registro salvo com sucesso!', errors: null }
+  return {
+    success: true,
+    message: 'Documentos adicionados com sucesso',
+    errors: null,
+  }
 }

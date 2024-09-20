@@ -28,6 +28,10 @@ export const CustomerAddress = ({ customer }: CustomerAddressProps) => {
           <strong>Endereço empresarial</strong>
           <p>{customer?.businessAddress}</p>
         </span>
+        <span className={span()}>
+          <strong>Região</strong>
+          <p>{customer?.region.name}</p>
+        </span>
       </div>
     </section>
   )

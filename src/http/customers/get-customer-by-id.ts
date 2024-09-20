@@ -1,5 +1,11 @@
 import { api } from '../api-client'
 
+export interface IMedia {
+  id: number
+  file: string
+  fileUrl: string
+}
+
 export interface ICustomerById {
   id: number
   isActive: boolean
@@ -12,7 +18,11 @@ export interface ICustomerById {
   email: string
   businessAddress: string
   residentialAddress: string
-  regionId: number
+  region: {
+    id: number
+    name: string
+  }
+  medias: IMedia[]
 }
 
 export interface IGetCustomerById {
