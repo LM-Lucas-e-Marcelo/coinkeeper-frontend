@@ -31,7 +31,7 @@ export const CustomerDocuments = ({
               <ModalButton
                 params={{
                   [`delete_file_${media.id}`]: true,
-                  file_name: media.file,
+                  file_name: media.fileName,
                   file_id: media.id,
                   customer_id: customerId,
                 }}
@@ -44,7 +44,7 @@ export const CustomerDocuments = ({
               src={media.fileUrl}
               alt="documentos"
             />
-            <p>{media.file}</p>
+            <p>{media.fileName}</p>
           </div>
         ))}
       </section>

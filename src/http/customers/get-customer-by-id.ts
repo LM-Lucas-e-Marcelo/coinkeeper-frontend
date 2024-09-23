@@ -2,6 +2,7 @@ import { api } from '../api-client'
 
 export interface IMedia {
   id: number
+  fileName: string
   file: string
   fileUrl: string
 }

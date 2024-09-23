@@ -18,6 +18,7 @@ export function createRandomCustomer(): ICustomer {
 function createRandomMedia(): IMedia {
   return {
     id: faker.number.int({ min: 1, max: 1000 }),
+    fileName: faker.lorem.word(),
     file: faker.lorem.word(),
     fileUrl:
       'https://img-cdn.pixlr.com/image-generator/history/65ba5701b4f4f4419f746bc3/806ecb58-167c-4d20-b658-a6a6b2f221e9/medium.webp',
