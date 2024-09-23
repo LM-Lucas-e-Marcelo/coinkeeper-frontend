@@ -11,6 +11,7 @@ import { getBotStatus } from '@/http/whatsapp/get-bot-status'
 import { getConnectBot } from '@/http/whatsapp/get-connect-bot'
 import { ConnectBotModal } from '@/components/modals/whatsapp/connect-bot-modal'
 import { getWhatsappMessage } from '@/http/whatsapp/get-whatsapp-messages'
+import { ChargeFilter } from './charge-filter'
 
 interface ChargeProps {
   searchParams: {
@@ -27,7 +28,8 @@ export default async function Charge({ searchParams }: ChargeProps) {
   return (
     <Suspense fallback={<TableLoading />}>
       <PageHeader>
-        <div className="flex gap-3 mt-5">
+        <div className="flex gap-3 mt-5 justify-between items-center w-full">
+          <ChargeFilter />
           <span>
             <p className="text-sm">Clientes com débito</p>
             <p className="text-lg">{charges.totalClientsInDebt}</p>
@@ -37,18 +39,18 @@ export default async function Charge({ searchParams }: ChargeProps) {
             <p className="text-sm">Total a receber</p>
             <p className="text-lg">{formatCurrency(charges.totalReceiver)}</p>
           </span>
+          <ButtonGroup>
+            <ModalButton params={{ send_whatsapp_charge: true }}>
+              <Button>Enviar Mensagem</Button>
+            </ModalButton>
+            <ModalButton params={{ pay_many_parcels_charge: true }}>
+              <Button>Pagar Parcelas</Button>
+            </ModalButton>
+            <ModalButton params={{ parcels_not_paid: true }}>
+              <Button>Não Pagaram</Button>
+            </ModalButton>
+          </ButtonGroup>
         </div>
-        <ButtonGroup>
-          <ModalButton params={{ send_whatsapp_charge: true }}>
-            <Button>Enviar Mensagem</Button>
-          </ModalButton>
-          <ModalButton params={{ pay_many_parcels_charge: true }}>
-            <Button>Pagar Parcelas</Button>
-          </ModalButton>
-          <ModalButton params={{ parcels_not_paid: true }}>
-            <Button>Não Pagaram</Button>
-          </ModalButton>
-        </ButtonGroup>
       </PageHeader>
       <ChargesTable
         customers={charges.customers}
