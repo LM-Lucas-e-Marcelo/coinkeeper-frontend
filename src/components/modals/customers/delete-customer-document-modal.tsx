@@ -69,7 +69,7 @@ export const DeleteCustomerDocumentModal = () => {
           />
           <Input
             type="hidden"
-            defaultValue={customerId}
+            defaultValue={fileId}
             name="fileId"
             error={errors?.fileId}
           />
