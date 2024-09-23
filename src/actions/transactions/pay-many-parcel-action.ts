@@ -7,6 +7,7 @@ import { revalidateTag } from 'next/cache'
 export async function payManyParcelAction(
   data: Record<number, { value: number; paidLate: boolean }>,
 ) {
+  console.log(data)
   try {
     await payManyParcels(data)
     revalidateTag('customer-by-id')

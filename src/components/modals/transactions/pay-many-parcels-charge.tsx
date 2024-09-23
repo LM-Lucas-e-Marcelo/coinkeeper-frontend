@@ -6,7 +6,7 @@ import { Button } from '@/components/form/button'
 import { toast } from 'react-toastify'
 import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { payManyParcelAction } from '@/actions/transactions/pay-many-parcel-action'
 import { ICharge } from '@/http/get-charges'
 import { EmptyState } from '@/components/empty-state'
@@ -75,6 +75,24 @@ export const PayManyParcelsCharge = ({
       },
     }))
   }
+
+  useEffect(() => {
+    const initialValues = selectedCustomers.reduce(
+      (acc, customerId) => {
+        acc[customerId] = {
+          value: 1,
+          paidLate: false,
+        }
+        return acc
+      },
+      {} as Record<number, { value: number; paidLate: boolean }>,
+    )
+
+    setCustomerParcelValues((prevValues) => ({
+      ...initialValues,
+      ...prevValues,
+    }))
+  }, [selectedCustomers])
 
   return (
     <Modal.Root size="lg" isOpen={isOpen} onClose={handleCloseModal}>
