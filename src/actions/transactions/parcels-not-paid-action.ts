@@ -1,14 +1,12 @@
 'use server'
 
-import { payManyParcels } from '@/http/transactions/pay-many-parcels'
+import { parcelsNotPaid } from '@/http/transactions/parcels-not-paid'
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 
-export async function parcelsNotPaidAction(
-  data: Record<number, { value: number; paidLate: boolean }>,
-) {
+export async function parcelsNotPaidAction(data: number[]) {
   try {
-    await payManyParcels(data)
+    await parcelsNotPaid(data)
     revalidateTag('customer-by-id')
     revalidateTag('customers')
     revalidateTag('customers-with-debt')
