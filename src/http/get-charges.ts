@@ -28,7 +28,7 @@ export async function getCharges(
   }
 
   const result = api.get(
-    `pendings/customers/charge/today?${queryParams.toString()}`,
+    `pendings/customers/charge?${queryParams.toString()}`,
     {
       next: {
         tags: ['charges'],

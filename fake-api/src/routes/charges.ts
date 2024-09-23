@@ -3,7 +3,7 @@ import { Charges } from '../schemas/charge'
 
 const chargesRoute = new Elysia()
 
-chargesRoute.get('/pendings/customers/charge/today', ({ set }) => {
+chargesRoute.get('/pendings/customers/charge', ({ set }) => {
   set.status = 200
 
   return Charges
