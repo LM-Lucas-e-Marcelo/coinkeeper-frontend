@@ -6,7 +6,9 @@ import { useUrlParams } from '@/hooks/use-params'
 import { FormEvent, useCallback } from 'react'
 
 export const ChargeFilter = () => {
-  const { addParams } = useUrlParams()
+  const { addParams, params } = useUrlParams()
+
+  const dateFilter = params.get('date')
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -29,7 +31,7 @@ export const ChargeFilter = () => {
       <Input
         type="date"
         label="Filtrar"
-        defaultValue={new Date().toISOString().split('T')[0]}
+        defaultValue={dateFilter || new Date().toISOString().split('T')[0]}
         name="date"
       />
       <Button type="submit">Filtrar</Button>
