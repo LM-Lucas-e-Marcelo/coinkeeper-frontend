@@ -27,8 +27,6 @@ export async function getCharges(
     Object.entries(props).map(([key, value]) => queryParams.append(key, value))
   }
 
-  console.log(`pendings/customers/charge?${queryParams.toString()}`)
-
   const result = api.get(
     `pendings/customers/charge?${queryParams.toString()}`,
     {

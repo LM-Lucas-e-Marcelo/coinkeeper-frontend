@@ -30,15 +30,17 @@ export default async function Charge({ searchParams }: ChargeProps) {
       <PageHeader>
         <div className="flex gap-3 mt-5 justify-between items-center w-full">
           <ChargeFilter />
-          <span>
-            <p className="text-sm">Clientes com débito</p>
-            <p className="text-lg">{charges.totalClientsInDebt}</p>
-          </span>
-          <div className="w-[1px] bg-primary" />
-          <span>
-            <p className="text-sm">Total a receber</p>
-            <p className="text-lg">{formatCurrency(charges.totalReceiver)}</p>
-          </span>
+          <div className="flex  gap-3">
+            <span>
+              <p className="text-sm">Clientes com débito</p>
+              <p className="text-lg">{charges.totalClientsInDebt}</p>
+            </span>
+            <div className="w-[1px] bg-primary" />
+            <span>
+              <p className="text-sm">Total a receber</p>
+              <p className="text-lg">{formatCurrency(charges.totalReceiver)}</p>
+            </span>
+          </div>
           <ButtonGroup>
             <ModalButton params={{ send_whatsapp_charge: true }}>
               <Button>Enviar Mensagem</Button>
