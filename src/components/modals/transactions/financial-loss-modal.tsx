@@ -9,7 +9,7 @@ import { useUrlParams } from '@/hooks/use-params'
 import { useFormState } from '@/hooks/use-form-state'
 import { ITransactions } from '@/http/transactions/get-transactions'
 import { formatCurrency } from '@/utils/format-currency'
-import { payOffTransactionAction } from '@/actions/transactions/pay-off-transaction.action'
+import { FinancialLossAction } from '@/actions/transactions/financial-loss-action'
 
 interface FinancialLossProps {
   transaction: ITransactions
@@ -30,7 +30,7 @@ export const FinancialLossModal = ({ transaction }: FinancialLossProps) => {
     toast(message, { type: 'error' })
   }
   const [{ errors }, handleSubmit, isPending] = useFormState({
-    action: payOffTransactionAction,
+    action: FinancialLossAction,
     onError,
     onSuccess,
   })

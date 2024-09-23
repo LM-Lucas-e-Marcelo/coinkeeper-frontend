@@ -21,6 +21,13 @@ transactionsRoute.patch(
   },
 )
 
+transactionsRoute.patch(
+  '/customer-transactions/:id/mark-prejudice',
+  ({ set }) => {
+    set.status = 200
+  },
+)
+
 transactionsRoute.delete('/customer-transactions/:customerId', ({ set }) => {
   set.status = 204
 })
